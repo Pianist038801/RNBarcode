@@ -160,6 +160,10 @@ class LoginScreen extends Component {
     )
   }
 
+  _onSelect=(id, data)=>{
+    console.log('Data=', data);
+    this.props.setLang(data);
+  }
   renderTimeBar(){
     return(
       <ImageBackground resizeMode='stretch' source={Images.bottomBar} style={styles.bottomBar}>
@@ -190,7 +194,7 @@ class LoginScreen extends Component {
         </View>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <View style={{flex:1}}/>
-          <ModalDropdown options={dropOptions} renderRow={this._renderDropRow}
+          <ModalDropdown options={dropOptions} onSelect={this._onSelect} renderRow={this._renderDropRow}
             dropdownStyle={styles.dropDown} onDropdownWillHide={()=>{  return true;}}>
             <Image style={{width: Metrics.WIDTH(15), height: Metrics.HEIGHT(10), marginTop: Metrics.HEIGHT(10), marginRight: Metrics.WIDTH(15)}} resizeMode='stretch' source={Images.triangle}/>
           </ModalDropdown>
