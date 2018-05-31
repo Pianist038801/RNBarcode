@@ -34,6 +34,11 @@ export default StyleSheet.create({
     width: Metrics.screenWidth,
     height: Metrics.screenHeight * 405 / 970,
   },
+  numberButton: {
+    width: Metrics.WIDTH(421),
+    height: Metrics.HEIGHT(73),
+    marginLeft: Metrics.WIDTH(110)
+  },
   whiteContent: {
     backgroundColor: '#f9fafa',
     flex:1,

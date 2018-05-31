@@ -28,7 +28,8 @@ class LoginScreen extends Component {
     passcode: number,
     loading: boolean,
     error: string,
-    editable: boolean
+    editable: boolean,
+    number: string,
   }
 
   isAttempting: boolean
@@ -41,7 +42,8 @@ class LoginScreen extends Component {
       passcode : '',
       loading: false,
       error: '',
-      editable: true
+      editable: true,
+      number: ''
   },
 
   this.isAttempting = false
@@ -126,6 +128,9 @@ class LoginScreen extends Component {
     </View>)
   }
 
+  onChangeNumber = number => {
+    this.setState({number})
+  }
   renderForm() {
     const flag = Images[`flag_${this.props.lang}`];
     const dropOptions = ['ru', 'de', 'eng', 'esp', 'fr', 'he', 'it'].filter(x=>x!=this.props.lang);
@@ -151,7 +156,29 @@ class LoginScreen extends Component {
         </Text>
         <Text style={[Fonts.style.h3, {marginTop: -10, textAlign: 'right', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
           телефона
+        </Text> 
+        <View style={{height: Metrics.HEIGHT(30)}}/>
+        <Text style={[Fonts.style.description, { textAlign: 'right', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
+          такого телефона нет в нашей базe
         </Text>
+        <ImageBackground resizeMode='stretch' source={Images.button} style={styles.numberButton}>
+          <Input
+            maxLength={12}
+            placeholder={'Enter Phone Number'}
+            style={{marginLeft: 30}}
+            textAlign={'left'}
+            value={this.state.number}
+            onChangeText={this.onChangeNumber}
+            fontSize={Fonts.size.regular}
+            fontFamily={Fonts.type.emphasis}
+            placeholderTextColor='gray'                     
+            returnKeyType='done'                
+            autoCapitalize='none'
+            autoCorrect={false}
+            underlineColorAndroid='transparent'
+            onSubmitEditing={() => {}}
+          />
+        </ImageBackground>
       </ImageBackground>
     )
   }
