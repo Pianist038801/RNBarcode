@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { View, ImageBackground, Image, SafeAreaView, Text } from 'react-native'
+import { View, ImageBackground, Image, SafeAreaView, Text, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import { Images, Colors, Metrics, Fonts } from '../Themes'
 import { Container, Content, Form, Item, Input, Spinner, Toast } from 'native-base';
 import AuthActions from '../Redux/AuthRedux'
 import FullButton from '../Components/FullButton'
+import ModalDropdown from 'react-native-modal-dropdown';
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 
@@ -41,11 +42,11 @@ class LoginScreen extends Component {
       loading: false,
       error: '',
       editable: true
-    },
+  },
 
-    this.isAttempting = false
+  this.isAttempting = false
 
-  }
+}
 
   componentWillReceiveProps(nextProps) {
     this.forceUpdate();
@@ -109,6 +110,7 @@ class LoginScreen extends Component {
       </View>
     )
   }
+
   _renderDropRow= (rowData, sectionID, rowID, highlightRow)=>
   {
     console.log('Render' + rowData.toString());
@@ -118,39 +120,39 @@ class LoginScreen extends Component {
     return( 
     <View style={{flexDirection:'column'}}>
       <View style={{padding: Metrics.defaultMargin, backgroundColor: Colors.white, flexDirection: 'row', alignItems: 'center'}}>
-        {this.renderAvatar(userUri, socialType)}
-        <Text style={{ ...Fonts.style.h5,   marginLeft: 10 , color: Colors.textPrimary }}>{'Timeline'}</Text>
-        <View style ={{ position: 'absolute', right: Metrics.defaultMargin,  }}>
-
-        </View>  
-      </View> 
-      {this.renderSpacer(1, Colors.colGray)}
+        <Image resizeMode='stretch' style={{width: Metrics.WIDTH(30), height: Metrics.HEIGHT(20)}} source={Images.flag2}/>
+        <Text style={[Fonts.style.h6, {color: Colors.textSecondary, textAlign: 'center', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
+          Sds
+        </Text>
+      </View>
+      <View style={{height:1, backgroundColor: '#e9eef5'}}/>
     </View>)
   }
+
   renderForm() {
     return (
       <ImageBackground resizeMode='stretch' source={Images.loginForm} style={styles.loginForm}>
-        {/* <Icon type='font-awesome' name='angle-down' size={25} color={Colors.txtPink}/> */}
-        {/* <ModalDropdown options={['option 1', 'option 2']} renderRow={this._renderDropRow}
-          dropdownStyle={styles.dropDown} onDropdownWillHide={()=>{  return true;}}>
-          <View style={{padding: Metrics.defaultMargin, backgroundColor: Colors.white, flexDirection: 'row', alignItems: 'center', borderBottomColor: Colors.colGray,
-          borderBottomWidth: 1,}}>
-          <ScrollView horizontal style={{width: Metrics.screenWidth*2/3}} contentContainerStyle={{alignItems:'center'}}>
-            {CommonWidgets.renderAvatarPlaceholder( )}
-            <Text style={{ ...Fonts.style.h5,  marginLeft:10, color: Colors.textPrimary }}>Select Account</Text>
-          </ScrollView>
-          <View style ={{ position: 'absolute', right: Metrics.defaultMargin,  }}>
-          <Icon type='font-awesome' name='angle-down' color={Colors.txtPink}/>
-          </View>  
-          </View>  
-        </ModalDropdown> */}
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View style={{flex:1}}/>
+          <Image resizeMode='stretch' style={{width: Metrics.screenWidth*30/460, height: Metrics.screenHeight * 20 / 970}} source={Images.flag3}/>
+          <Text style={[Fonts.style.h6, {color: Colors.textSecondary, textAlign: 'center', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
+            RU
+          </Text>
+        </View>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View style={{flex:1}}/>
+          <ModalDropdown options={['option 1', 'option 2']} renderRow={this._renderDropRow}
+            dropdownStyle={styles.dropDown} onDropdownWillHide={()=>{  return true;}}>
+            <Image style={{width: Metrics.WIDTH(15), height: Metrics.HEIGHT(10), marginRight: Metrics.WIDTH(15)}} resizeMode='stretch' source={Images.triangle}/>
+          </ModalDropdown>
+        </View>
       </ImageBackground>
     )
   }
 
   render () {
     return (
-    <SafeAreaView style={styles.whiteContent}>  
+    <SafeAreaView style={styles.whiteContent}>
       <Container>
         <View style={{ height: Metrics.screenHeight * 143 / 964 }}>
           {this.renderHeader()}

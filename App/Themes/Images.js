@@ -6,13 +6,13 @@ const images = {
   button: require('../Images/btn.png'),
   bottomBar: require('../Images/bottomBar.png'),
   triangle: require('../Images/triangle.png'),
-  flag1: require('../Images/flag1.png'),
-  flag2: require('../Images/flag2.png'),
-  flag3: require('../Images/flag3.png'),
-  flag4: require('../Images/flag4.png'),
-  flag5: require('../Images/flag5.png'),
-  flag6: require('../Images/flag6.png'),
-  flag7: require('../Images/flag7.png'),
+  flag1: require('../Images/ru.png'),
+  flag2: require('../Images/eng.png'),
+  flag3: require('../Images/he.png'),
+  flag4: require('../Images/esp.png'),
+  flag5: require('../Images/fr.png'),
+  flag6: require('../Images/it.png'),
+  flag7: require('../Images/de.png'),
 }
 
 export default images
