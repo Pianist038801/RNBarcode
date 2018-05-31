@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { Images, Colors, Metrics, Fonts } from '../Themes'
 import { Container, Content, Form, Item, Input, Spinner, Toast } from 'native-base';
 import AuthActions from '../Redux/AuthRedux'
-// import Icon from 'react-native-vector-icons/FontAwesome'; 
 import FullButton from '../Components/FullButton'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
@@ -130,7 +129,7 @@ class LoginScreen extends Component {
   }
   renderForm() {
     return (
-      <ImageBackground resizeMode='stretch' source={Images.flag} style={styles.loginForm}>
+      <ImageBackground resizeMode='stretch' source={Images.loginForm} style={styles.loginForm}>
         {/* <Icon type='font-awesome' name='angle-down' size={25} color={Colors.txtPink}/> */}
         {/* <ModalDropdown options={['option 1', 'option 2']} renderRow={this._renderDropRow}
           dropdownStyle={styles.dropDown} onDropdownWillHide={()=>{  return true;}}>

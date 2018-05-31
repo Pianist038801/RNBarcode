@@ -5,6 +5,7 @@ const images = {
   loginForm: require('../Images/bg.png'),
   button: require('../Images/btn.png'),
   bottomBar: require('../Images/bottomBar.png'),
+  triangle: require('../Images/triangle.png'),
   flag1: require('../Images/flag1.png'),
   flag2: require('../Images/flag2.png'),
   flag3: require('../Images/flag3.png'),
