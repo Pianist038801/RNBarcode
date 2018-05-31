@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { View, Image, SafeAreaView, Text } from 'react-native'
+import { View, ImageBackground, Image, SafeAreaView, Text } from 'react-native'
 import { connect } from 'react-redux'
 import { Images, Colors, Metrics, Fonts } from '../Themes'
 import { Container, Content, Form, Item, Input, Spinner, Toast } from 'native-base';
 import AuthActions from '../Redux/AuthRedux'
+import Icon from 'react-native-vector-icons/FontAwesome'; 
 import FullButton from '../Components/FullButton'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
@@ -97,15 +98,54 @@ class LoginScreen extends Component {
           WWW.BARCODE2STORE.com
         </Text>
         <View style={{flex:1}}/>
-        <View style={{backgroundColor: 'yellow'}}>
+        <View>
           <Text style={[Fonts.style.h6, {textAlign: 'center', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
             BARCODE - ONLINE
           </Text>
           <Text style={[Fonts.style.description, {textAlign: 'center', fontFamily: Fonts.type.emphasis, marginHorizontal: 10, marginBottom: 3 }]}>
             загрузка товаров в магазин
           </Text>
+          <View style={{height:1, backgroundColor: '#e9eef5'}}/>
         </View>
       </View>
+    )
+  }
+  _renderDropRow= (rowData, sectionID, rowID, highlightRow)=>
+  {
+    console.log('Render' + rowData.toString());
+    let userUri='item.userUri';
+    let socialType = 'facebook'
+    let username='item.username';
+    return( 
+    <View style={{flexDirection:'column'}}>
+      <View style={{padding: Metrics.defaultMargin, backgroundColor: Colors.white, flexDirection: 'row', alignItems: 'center'}}>
+        {this.renderAvatar(userUri, socialType)}
+        <Text style={{ ...Fonts.style.h5,   marginLeft: 10 , color: Colors.textPrimary }}>{'Timeline'}</Text>
+        <View style ={{ position: 'absolute', right: Metrics.defaultMargin,  }}>
+
+        </View>  
+      </View> 
+      {this.renderSpacer(1, Colors.colGray)}
+    </View>)
+  }
+  renderForm() {
+    return (
+      <ImageBackground resizeMode='stretch' source={Images.flag} style={styles.loginForm}>
+        <Icon type='font-awesome' name='angle-down' size={25} color={Colors.txtPink}/>
+        {/* <ModalDropdown options={['option 1', 'option 2']} renderRow={this._renderDropRow}
+          dropdownStyle={styles.dropDown} onDropdownWillHide={()=>{  return true;}}>
+          <View style={{padding: Metrics.defaultMargin, backgroundColor: Colors.white, flexDirection: 'row', alignItems: 'center', borderBottomColor: Colors.colGray,
+          borderBottomWidth: 1,}}>
+          <ScrollView horizontal style={{width: Metrics.screenWidth*2/3}} contentContainerStyle={{alignItems:'center'}}>
+            {CommonWidgets.renderAvatarPlaceholder( )}
+            <Text style={{ ...Fonts.style.h5,  marginLeft:10, color: Colors.textPrimary }}>Select Account</Text>
+          </ScrollView>
+          <View style ={{ position: 'absolute', right: Metrics.defaultMargin,  }}>
+          <Icon type='font-awesome' name='angle-down' color={Colors.txtPink}/>
+          </View>  
+          </View>  
+        </ModalDropdown> */}
+      </ImageBackground>
     )
   }
 
@@ -114,7 +154,10 @@ class LoginScreen extends Component {
     <SafeAreaView style={styles.whiteContent}>  
       <Container>
         <View style={{ height: Metrics.screenHeight * 143 / 964 }}>
-          {this.renderHeader()} 
+          {this.renderHeader()}
+        </View>
+        <View style={{ height: Metrics.screenHeight * 405 / 964 }}>
+          {this.renderForm()}
         </View>  
       </Container>
     </SafeAreaView>

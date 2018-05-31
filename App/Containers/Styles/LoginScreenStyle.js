@@ -26,11 +26,16 @@ export default StyleSheet.create({
     height:204,
     width:180,
   },
-  hseaderView: {
-    backgroundColor: '#f9fafa'
-  },
   headerView: {
     flex:1,
-    backgroundColor: 'blue'
+    backgroundColor: '#f9fafa',
+  },
+  loginForm: {
+    width: Metrics.screenWidth,
+    height: Metrics.screenHeight * 405 / 970,
+  },
+  whiteContent: {
+    backgroundColor: '#f9fafa',
+    flex:1,
   }
 })
