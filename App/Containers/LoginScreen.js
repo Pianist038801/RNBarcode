@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, ImageBackground, Image, SafeAreaView, Text, ScrollView } from 'react-native'
+import { View, ImageBackground, Image, SafeAreaView, Text, ScrollView, TouchableOpacity} from 'react-native'
 import { connect } from 'react-redux'
 import { Images, Colors, Metrics, Fonts } from '../Themes'
 import { Container, Content, Form, Item, Input, Spinner, Toast } from 'native-base';
@@ -70,6 +70,19 @@ class LoginScreen extends Component {
     }
   }
 
+  componentDidMount() {
+    setInterval( () => {
+      const _hour = new Date().getHours();
+      const _minute = new Date().getMinutes();
+      const _second = new Date().getSeconds();
+      function f(value){return value<10?('0'+value):value}
+      const curTime=f(_hour) + ':' + f(_minute) + ':' + f(_second)
+      this.setState({
+        curTime
+      })
+    },1000)
+  }
+
   handleChangePasscode = value => this.setState({ passcode: value });
 
   handleLogin = () => {
@@ -131,6 +144,37 @@ class LoginScreen extends Component {
   onChangeNumber = number => {
     this.setState({number})
   }
+
+  renderSend(){
+    return(
+      <ImageBackground resizeMode='stretch' source={Images.button} style={styles.sendButton}>
+        <TouchableOpacity onPress={()=>alert()}>
+          <View style={{flexDirection:'row', alignItems: 'center'}}>
+            <Text style={[Fonts.style.h6, { fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
+              Отправить
+            </Text>
+            <Image resizeMode='stretch' style={{marginRight: Metrics.WIDTH(20), width: Metrics.WIDTH(23), height: Metrics.HEIGHT(18)}} source={Images.check}/>
+          </View>
+        </TouchableOpacity>
+      </ImageBackground>
+    )
+  }
+
+  renderTimeBar(){
+    return(
+      <ImageBackground resizeMode='stretch' source={Images.bottomBar} style={styles.bottomBar}>
+         <View style={{height: Metrics.HEIGHT(70)}}/>
+         
+          <Text style={[Fonts.style.description, {textAlign: 'center', fontFamily: Fonts.type.emphasis, marginHorizontal: 10, marginBottom: 3 }]}>
+            время
+          </Text>
+          <Text style={[Fonts.style.h6, {textAlign: 'center', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
+            {this.state.curTime}
+          </Text>
+      </ImageBackground>
+    )
+  }
+
   renderForm() {
     const flag = Images[`flag_${this.props.lang}`];
     const dropOptions = ['ru', 'de', 'eng', 'esp', 'fr', 'he', 'it'].filter(x=>x!=this.props.lang);
@@ -178,7 +222,7 @@ class LoginScreen extends Component {
             underlineColorAndroid='transparent'
             onSubmitEditing={() => {}}
           />
-        </ImageBackground>
+        </ImageBackground> 
       </ImageBackground>
     )
   }
@@ -192,7 +236,12 @@ class LoginScreen extends Component {
         </View>
         <View style={{ height: Metrics.screenHeight * 405 / 964 }}>
           {this.renderForm()}
-        </View>  
+        </View>
+        {this.renderSend()}
+        <View style={{flex: 1}}/>
+        <View style={{ height: Metrics.HEIGHT(115)}}>
+          {this.renderTimeBar()}
+        </View>
       </Container>
     </SafeAreaView>
     )

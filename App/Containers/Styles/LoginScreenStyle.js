@@ -39,8 +39,23 @@ export default StyleSheet.create({
     height: Metrics.HEIGHT(73),
     marginLeft: Metrics.WIDTH(110)
   },
+  sendButton: {
+    width: Metrics.WIDTH(421),
+    height: Metrics.HEIGHT(73),
+    marginLeft: Metrics.WIDTH(-190),
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center'
+  },
   whiteContent: {
-    backgroundColor: '#f9fafa',
+    backgroundColor: '#ffffff',
     flex:1,
+  },
+  bottomBar: {
+    width: Metrics.WIDTH(980),
+    height: Metrics.HEIGHT(689),
+    alignSelf: 'center',
+    alignItems: 'center',
+    marginBottom: 0,
   }
 })
