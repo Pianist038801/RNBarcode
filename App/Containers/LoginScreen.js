@@ -113,16 +113,13 @@ class LoginScreen extends Component {
 
   _renderDropRow= (rowData, sectionID, rowID, highlightRow)=>
   {
-    console.log('Render' + rowData.toString());
-    let userUri='item.userUri';
-    let socialType = 'facebook'
-    let username='item.username';
+    const flag = Images[`flag_${rowData}`];
     return( 
     <View style={{flexDirection:'column'}}>
       <View style={{padding: Metrics.defaultMargin, backgroundColor: Colors.white, flexDirection: 'row', alignItems: 'center'}}>
-        <Image resizeMode='stretch' style={{width: Metrics.WIDTH(30), height: Metrics.HEIGHT(20)}} source={Images.flag2}/>
+        <Image resizeMode='stretch' style={{marginLeft: Metrics.WIDTH(10), width: Metrics.WIDTH(30), height: Metrics.HEIGHT(20)}} source={flag}/>
         <Text style={[Fonts.style.h6, {color: Colors.textSecondary, textAlign: 'center', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
-          Sds
+          {rowData.toUpperCase()}
         </Text>
       </View>
       <View style={{height:1, backgroundColor: '#e9eef5'}}/>
@@ -130,20 +127,23 @@ class LoginScreen extends Component {
   }
 
   renderForm() {
+    const flag = Images[`flag_${this.props.lang}`];
+    const dropOptions = ['ru', 'de', 'eng', 'esp', 'fr', 'he', 'it'].filter(x=>x!=this.props.lang);
+    // const dropOptions = ['ru', 'de', 'eng']
     return (
       <ImageBackground resizeMode='stretch' source={Images.loginForm} style={styles.loginForm}>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: Metrics.HEIGHT(18) }}>
           <View style={{flex:1}}/>
-          <Image resizeMode='stretch' style={{width: Metrics.screenWidth*30/460, height: Metrics.screenHeight * 20 / 970}} source={Images.flag3}/>
+          <Image resizeMode='stretch' style={{width: Metrics.screenWidth*30/460, height: Metrics.screenHeight * 20 / 970}} source={flag}/>
           <Text style={[Fonts.style.h6, {color: Colors.textSecondary, textAlign: 'center', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
-            RU
+            {this.props.lang.toUpperCase()}
           </Text>
         </View>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <View style={{flex:1}}/>
-          <ModalDropdown options={['option 1', 'option 2']} renderRow={this._renderDropRow}
+          <ModalDropdown options={dropOptions} renderRow={this._renderDropRow}
             dropdownStyle={styles.dropDown} onDropdownWillHide={()=>{  return true;}}>
-            <Image style={{width: Metrics.WIDTH(15), height: Metrics.HEIGHT(10), marginRight: Metrics.WIDTH(15)}} resizeMode='stretch' source={Images.triangle}/>
+            <Image style={{width: Metrics.WIDTH(15), height: Metrics.HEIGHT(10), marginTop: Metrics.HEIGHT(10), marginRight: Metrics.WIDTH(15)}} resizeMode='stretch' source={Images.triangle}/>
           </ModalDropdown>
         </View>
       </ImageBackground>
@@ -171,12 +171,14 @@ const mapStateToProps = (state) => {
     fetching:state.auth.fetching,
     error:state.auth.error,
     passcode:state.auth.passcode,
+    lang: state.auth.lang,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     attemptLogin: (passcode) => dispatch(AuthActions.authRequest(passcode)),
+    setLang: lang => dispatch(AuthActions.setLang(lang))
   }
 }
 

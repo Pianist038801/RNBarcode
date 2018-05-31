@@ -6,7 +6,8 @@ import Immutable from 'seamless-immutable'
 const { Types, Creators } = createActions({
   authRequest: ['passcode'],
   authSuccess: ['passcode'],
-  authFailure: ['error']
+  authFailure: ['error'],
+  setLang: ['lang'],
 })
 
 export const AuthTypes = Types
@@ -18,6 +19,7 @@ export const INITIAL_STATE = Immutable({
   passcode: null,
   fetching: null,
   error: null,
+  lang: 'ru'
 })
 
 /* ------------- Selectors ------------- */
@@ -44,10 +46,15 @@ export const success = (state, action) => {
 export const failure = (state, { error }) =>
   state.merge({ fetching: false, error: error, passcode: null })
 
+// change language option
+export const setLang = (state, action) => {
+  return state.merge({ lang: action.lang })
+} 
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.AUTH_REQUEST]: request,
   [Types.AUTH_SUCCESS]: success,
-  [Types.AUTH_FAILURE]: failure
+  [Types.AUTH_FAILURE]: failure,
+  [Types.SET_LANG]: setLang
 })
