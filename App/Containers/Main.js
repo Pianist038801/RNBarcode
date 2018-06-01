@@ -28,9 +28,7 @@ class LoginScreen extends Component {
     passcode: number,
     loading: boolean,
     error: string,
-    editable: boolean,
-    number: string,
-    code: string,
+    editable: boolean
   }
 
   isAttempting: boolean
@@ -43,9 +41,7 @@ class LoginScreen extends Component {
       passcode : '',
       loading: false,
       error: '',
-      editable: true,
-      number: '',
-      code: '',
+      editable: true
   },
 
   this.isAttempting = false
@@ -114,16 +110,6 @@ class LoginScreen extends Component {
         <Text style={[Fonts.style.description, { fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
           WWW.BARCODE2STORE.com
         </Text>
-        <View style={{flex:1}}/>
-        <View>
-          <Text style={[Fonts.style.h6, {textAlign: 'center', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
-            BARCODE - ONLINE
-          </Text>
-          <Text style={[Fonts.style.description, {textAlign: 'center', fontFamily: Fonts.type.emphasis, marginHorizontal: 10, marginBottom: 3 }]}>
-            загрузка товаров в магазин
-          </Text>
-          <View style={{height:1, backgroundColor: '#e9eef5'}}/>
-        </View>
       </View>
     )
   }
@@ -154,7 +140,7 @@ class LoginScreen extends Component {
   renderSend(){
     return(
       <ImageBackground resizeMode='stretch' source={Images.button} style={styles.sendButton}>
-        <TouchableOpacity onPress={()=>this.props.navigation.navigate('Main')}>
+        <TouchableOpacity onPress={()=>alert()}>
           <View style={{flexDirection:'row', alignItems: 'center'}}>
             <Text style={[Fonts.style.h6, { fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
               войти
@@ -185,6 +171,26 @@ class LoginScreen extends Component {
     )
   }
 
+  renderMenus() {
+    const string = ['“русское интернет ТВ”', '“super demo”', '“русское интернет ТВ”', '“super demo”'];
+    let result = [];
+    for(var i=1; i<5; i++)
+    {
+      result.push(
+      <View style={{flexDirection: 'column',}}>
+        <View style={{backgroundColor: '#e9e9e9', flexDirection: 'row',  alignItems: 'center'}}>
+          <Image resizeMode='stretch' style={styles.menuicon} source={Images[`icon${i}`]}/>
+          <Text style={[Fonts.style.h6, {flex:2, textAlign: 'left', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, color: Colors.textSecondary, marginHorizontal: 10 }]}>
+            {string[i-1]}
+          </Text>
+        </View>
+        <View style={{height: Metrics.HEIGHT(4), backgroundColor: 'white'}}/>
+      </View>
+      );
+    }
+    return result;
+  }
+
   renderForm() {
     const flag = Images[`flag_${this.props.lang}`];
     const dropOptions = ['ru', 'de', 'eng', 'esp', 'fr', 'he', 'it'].filter(x=>x!=this.props.lang);
@@ -205,52 +211,17 @@ class LoginScreen extends Component {
             <Image style={{width: Metrics.WIDTH(15), height: Metrics.HEIGHT(10), marginTop: Metrics.HEIGHT(10), marginRight: Metrics.WIDTH(15)}} resizeMode='stretch' source={Images.triangle}/>
           </ModalDropdown>
         </View>
-        <Text style={[Fonts.style.h3, { textAlign: 'right', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
-          ваш номер
+        <Text style={[Fonts.style.h3, {marginLeft: Metrics.WIDTH(64), textAlign: 'left', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
+          Привет 
         </Text>
-        <Text style={[Fonts.style.h3, {marginTop: -10, textAlign: 'right', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
-          телефона
-        </Text> 
+        <Text style={[Fonts.style.h3, {marginLeft: Metrics.WIDTH(64), textAlign: 'left', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
+          SLAVA!
+        </Text>
+        <Image style={styles.dog} source={Images.dog}>
+        </Image>
         <View style={{height: Metrics.HEIGHT(30)}}/>
-        <Text style={[Fonts.style.description, { textAlign: 'right', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
-          такого телефона нет в нашей базe
-        </Text>
-        <ImageBackground resizeMode='stretch' source={Images.button} style={styles.numberButton}>
-          <Input
-            maxLength={12}
-            placeholder={'Enter Phone Number'}
-            style={{marginLeft: 30}}
-            textAlign={'left'}
-            value={this.state.number}
-            onChangeText={this.onChangeNumber}
-            fontSize={Fonts.size.regular}
-            fontFamily={Fonts.type.emphasis}
-            placeholderTextColor='gray'                     
-            returnKeyType='done'                
-            autoCapitalize='none'
-            autoCorrect={false}
-            underlineColorAndroid='transparent'
-            onSubmitEditing={() => {}}
-          />
-        </ImageBackground>
-        <ImageBackground resizeMode='stretch' source={Images.button} style={styles.codeButton}>
-          <Input
-            maxLength={12}
-            placeholder={'Enter Code'}
-            style={{marginLeft: 30}}
-            textAlign={'left'}
-            value={this.state.code}
-            onChangeText={this.onChangeCode}
-            fontSize={Fonts.size.regular}
-            fontFamily={Fonts.type.emphasis}
-            placeholderTextColor='gray'                     
-            returnKeyType='done'                
-            autoCapitalize='none'
-            autoCorrect={false}
-            underlineColorAndroid='transparent'
-            onSubmitEditing={() => {}}
-          />
-        </ImageBackground> 
+         
+         
       </ImageBackground>
     )
   }
@@ -265,7 +236,7 @@ class LoginScreen extends Component {
         <View style={{ height: Metrics.screenHeight * 405 / 964 }}>
           {this.renderForm()}
         </View>
-        {this.renderSend()}
+        {this.renderMenus()}
         <View style={{flex: 1}}/>
         <View style={{ height: Metrics.HEIGHT(115)}}>
           {this.renderTimeBar()}

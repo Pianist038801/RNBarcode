@@ -1,14 +1,19 @@
 import { StackNavigator } from 'react-navigation'
 import TeamScreen from '../Containers/TeamScreen'
 import LoginScreen from '../Containers/LoginScreen'
+import SendCode from '../Containers/SendCode'
+import Main from '../Containers/Main'
 
 const LoginStack = StackNavigator({
   LoginScreen: { screen: LoginScreen },
+  SendCode: { screen: SendCode },
+  Main: {screen: Main},
 }, {
   headerMode: 'none',
   navigationOptions: {
     headerVisible: false,
   },
+  initialRouteName: 'SendCode'
 });
 
 const MainStack = StackNavigator({

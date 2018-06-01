@@ -30,7 +30,6 @@ class LoginScreen extends Component {
     error: string,
     editable: boolean,
     number: string,
-    code: string,
   }
 
   isAttempting: boolean
@@ -44,8 +43,7 @@ class LoginScreen extends Component {
       loading: false,
       error: '',
       editable: true,
-      number: '',
-      code: '',
+      number: ''
   },
 
   this.isAttempting = false
@@ -147,17 +145,17 @@ class LoginScreen extends Component {
     this.setState({number})
   }
 
-  onChangeCode = code => {
-    this.setState({code})
+  gotoLogin = () => {
+    this.props.navigation.navigate('LoginScreen');
   }
 
   renderSend(){
     return(
       <ImageBackground resizeMode='stretch' source={Images.button} style={styles.sendButton}>
-        <TouchableOpacity onPress={()=>this.props.navigation.navigate('Main')}>
+        <TouchableOpacity onPress={this.gotoLogin}>
           <View style={{flexDirection:'row', alignItems: 'center'}}>
             <Text style={[Fonts.style.h6, { fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
-              войти
+              Отправить
             </Text>
             <Image resizeMode='stretch' style={{marginRight: Metrics.WIDTH(20), width: Metrics.WIDTH(23), height: Metrics.HEIGHT(18)}} source={Images.check}/>
           </View>
@@ -223,24 +221,6 @@ class LoginScreen extends Component {
             textAlign={'left'}
             value={this.state.number}
             onChangeText={this.onChangeNumber}
-            fontSize={Fonts.size.regular}
-            fontFamily={Fonts.type.emphasis}
-            placeholderTextColor='gray'                     
-            returnKeyType='done'                
-            autoCapitalize='none'
-            autoCorrect={false}
-            underlineColorAndroid='transparent'
-            onSubmitEditing={() => {}}
-          />
-        </ImageBackground>
-        <ImageBackground resizeMode='stretch' source={Images.button} style={styles.codeButton}>
-          <Input
-            maxLength={12}
-            placeholder={'Enter Code'}
-            style={{marginLeft: 30}}
-            textAlign={'left'}
-            value={this.state.code}
-            onChangeText={this.onChangeCode}
             fontSize={Fonts.size.regular}
             fontFamily={Fonts.type.emphasis}
             placeholderTextColor='gray'                     

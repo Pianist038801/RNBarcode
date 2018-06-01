@@ -14,7 +14,11 @@ const images = {
   flag_fr: require('../Images/fr.png'),
   flag_it: require('../Images/it.png'),
   flag_de: require('../Images/de.png'),
-
+  icon1: require('../Images/icon1.png'),
+  icon2: require('../Images/icon2.png'),
+  icon3: require('../Images/icon3.png'),
+  icon4: require('../Images/icon4.png'),
+  dog: require('../Images/dog.png'),
 }
 
 export default images
