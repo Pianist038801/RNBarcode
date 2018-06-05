@@ -25,3 +25,24 @@ export function * checkPasscode (api, action) {
     }
   }
 }
+
+export function * verifyPhoneNumber (api, action) {
+  const { lang, phone_number } = action
+  // make the call to the api
+  const response = yield call(api.verifyPhoneNumber, lang, phone_number)
+  if (response.status === 200 && response.result === 'done') {
+    // do data conversion here if needed
+    
+    yield put(AuthActions.authSuccess(3))
+  } 
+  else 
+  {
+    if (response.status === 200 && response.result === 'error') {
+      alert(response.errors.not_exists);
+    }
+    else{
+      alert('Error occured while connecting to server');
+    }
+
+  }
+}

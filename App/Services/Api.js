@@ -37,7 +37,7 @@ const create = (baseURL = requestUrl.url) => {
   // way at this level.
   //
   const checkPasscode = (passcode) => api.post('passcode', {passcode: passcode})
-
+  const verifyPhoneNumber = (lang, phone_number) => api.post('', {table: 'customers', action: 'loader_phone_send', lang, phone_number})
   // ------
   // STEP 3
   // ------
@@ -52,7 +52,8 @@ const create = (baseURL = requestUrl.url) => {
   //
   return {
     // a list of the API functions from step 2
-    checkPasscode
+    checkPasscode,
+    verifyPhoneNumber
   }
 }
 

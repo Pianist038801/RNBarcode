@@ -8,6 +8,8 @@ const { Types, Creators } = createActions({
   authSuccess: ['passcode'],
   authFailure: ['error'],
   setLang: ['lang'],
+  verifyRequest: ['lang', 'phone_number'],
+  verifyFailure: [],
 })
 
 export const AuthTypes = Types
@@ -19,7 +21,8 @@ export const INITIAL_STATE = Immutable({
   passcode: null,
   fetching: null,
   error: null,
-  lang: 'ru'
+  lang: 'ru',
+  phone_number: ''
 })
 
 /* ------------- Selectors ------------- */
@@ -49,12 +52,19 @@ export const failure = (state, { error }) =>
 // change language option
 export const setLang = (state, action) => {
   return state.merge({ lang: action.lang })
-} 
+}
+
+export const verifyRequest = (state, { lang, phone_number }) =>
+  state.merge({ fetching: true, lang, phone_number })
+ 
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.AUTH_REQUEST]: request,
   [Types.AUTH_SUCCESS]: success,
   [Types.AUTH_FAILURE]: failure,
-  [Types.SET_LANG]: setLang
+  [Types.SET_LANG]: setLang,
+  [Types.VERIFY_REQUEST]: verifyRequest,
+  [Types.VERIFY_FAILURE]: failure,
 })

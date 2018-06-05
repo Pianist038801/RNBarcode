@@ -7,7 +7,7 @@ import Main from '../Containers/Main'
 const LoginStack = StackNavigator({
   LoginScreen: { screen: LoginScreen },
   SendCode: { screen: SendCode },
-  Main: {screen: Main},
+  Main: {screen: Main}, 
 }, {
   headerMode: 'none',
   navigationOptions: {
