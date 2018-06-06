@@ -28,21 +28,46 @@ export function * checkPasscode (api, action) {
 
 export function * verifyPhoneNumber (api, action) {
   const { lang, phone_number } = action
+  console.log('Action=', action);
   // make the call to the api
   const response = yield call(api.verifyPhoneNumber, lang, phone_number)
-  if (response.status === 200 && response.result === 'done') {
+  console.log('Response=', response);
+  if (response.status === 200 && response.data.result === 'done') {
     // do data conversion here if needed
     
-    yield put(AuthActions.authSuccess(3))
+    yield put(AuthActions.verifySuccess())
   } 
-  else 
+  else
   {
-    if (response.status === 200 && response.result === 'error') {
-      alert(response.errors.not_exists);
+    if (response.status === 200 && response.data.result === 'error') {
+      yield put(AuthActions.verifyFailure(response.data.errors.phone_number))
     }
     else{
-      alert('Error occured while connecting to server');
+      yield put(AuthActions.verifyFailure('Error occured while connecting to server'))
     }
-
   }
 }
+
+export function * logIn (api, action) {
+  const { lang, code, phone_number } = action
+  console.log('Action=', action);
+  // make the call to the api
+  const response = yield call(api.logIn, lang, phone_number, code)
+  console.log('Response=', response);
+  if (response.status === 200 && response.data.result === 'done') {
+    // do data conversion here if needed
+    
+    yield put(AuthActions.loginSuccess())
+  } 
+  else
+  {
+    if (response.status === 200 && response.data.result === 'error') {
+      yield put(AuthActions.verifyFailure(response.data.errors.code))
+    }
+    else{
+      yield put(AuthActions.verifyFailure('Error occured while connecting to server'))
+    }
+  }
+}
+
+

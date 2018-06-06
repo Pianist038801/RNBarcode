@@ -47,26 +47,7 @@ class LoginScreen extends Component {
   this.isAttempting = false
 
 }
-
-  componentWillReceiveProps(nextProps) {
-    this.forceUpdate();
-
-    if(this.isAttempting && !nextProps.fetching){
-      if(!nextProps.error){
-        this.props.navigation.navigate('TeamScreen');
-      }else{
-        this.setState({ loading: false, passcode: '', editable: true}, () => {
-          Toast.show({
-            text: nextProps.error,
-            position: 'bottom',
-            buttonText: 'Okay',
-            type: 'warning',
-            duration: 5000
-          })
-        })
-      }
-    }
-  }
+ 
 
   componentDidMount() {
     setInterval( () => {

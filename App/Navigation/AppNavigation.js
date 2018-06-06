@@ -7,7 +7,6 @@ import Main from '../Containers/Main'
 const LoginStack = StackNavigator({
   LoginScreen: { screen: LoginScreen },
   SendCode: { screen: SendCode },
-  Main: {screen: Main}, 
 }, {
   headerMode: 'none',
   navigationOptions: {
@@ -17,7 +16,7 @@ const LoginStack = StackNavigator({
 });
 
 const MainStack = StackNavigator({
-  TeamScreen: { screen: TeamScreen },
+  TeamScreen: { screen: Main },
 }, {
   headerMode: 'none',
   navigationOptions: {
@@ -27,7 +26,7 @@ const MainStack = StackNavigator({
 
 // Manifest of possible screens
 const PrimaryNav = StackNavigator({
-  mainStack: { screen: MainStack },
+  Main: { screen: MainStack },
   loginStack: { screen: LoginStack },
 }, {
   // Default config for all screens

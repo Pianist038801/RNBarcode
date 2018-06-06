@@ -51,22 +51,20 @@ class LoginScreen extends Component {
 }
 
   componentWillReceiveProps(nextProps) {
-    this.forceUpdate();
 
-    if(this.isAttempting && !nextProps.fetching){
-      if(!nextProps.error){
-        this.props.navigation.navigate('TeamScreen');
-      }else{
-        this.setState({ loading: false, passcode: '', editable: true}, () => {
-          Toast.show({
-            text: nextProps.error,
-            position: 'bottom',
-            buttonText: 'Okay',
-            type: 'warning',
-            duration: 5000
-          })
-        })
-      }
+    if(this.props.fetching === true && nextProps.fetching === false && nextProps.error === null)
+    {
+      this.props.navigation.navigate('LoginScreen');
+    }
+    if(this.props.fetching === true && nextProps.fetching === false && nextProps.error !== null)
+    {
+      Toast.show({
+        text: nextProps.error,
+        position: 'bottom',
+        buttonText: 'Okay',
+        type: 'danger',
+        duration: 5000
+      });
     }
   }
 
@@ -152,7 +150,7 @@ class LoginScreen extends Component {
   renderSend(){
     return(
       <ImageBackground resizeMode='stretch' source={Images.button} style={styles.sendButton}>
-        <TouchableOpacity onPress={this.gotoLogin}>
+        <TouchableOpacity onPress={this.onPressSend}>
           <View style={{flexDirection:'row', alignItems: 'center'}}>
             <Text style={[Fonts.style.h6, { fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
               Отправить
@@ -181,6 +179,11 @@ class LoginScreen extends Component {
           </Text>
       </ImageBackground>
     )
+  }
+
+  onPressSend = () => {
+    this.props.verifyPhoneNumber(this.props.lang, this.state.number);
+    console.log(this.props.lang, this.state.number)
   }
 
   renderForm() {
@@ -247,7 +250,7 @@ class LoginScreen extends Component {
         </View>
         {this.renderSend()}
         <View style={{flex: 1}}/>
-        <View style={{ height: Metrics.HEIGHT(115)}}>
+        <View style={{ height: Metrics.HEIGHT(115)}}>           
           {this.renderTimeBar()}
         </View>
       </Container>
@@ -267,7 +270,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    attemptLogin: (passcode) => dispatch(AuthActions.authRequest(passcode)),
+    verifyPhoneNumber: (lang, number) => dispatch(AuthActions.verifyRequest(lang, number)),
     setLang: lang => dispatch(AuthActions.setLang(lang))
   }
 }

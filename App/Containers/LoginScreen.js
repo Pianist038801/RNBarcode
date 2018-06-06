@@ -38,37 +38,35 @@ class LoginScreen extends Component {
   constructor (props: LoginScreenProps) {
 
     super(props)
-
+    console.log('uhaha');
     this.state = {
       passcode : '',
       loading: false,
       error: '',
       editable: true,
-      number: '',
+      number: props.phone_number,
       code: '',
   },
 
   this.isAttempting = false
 
-}
+  }
 
   componentWillReceiveProps(nextProps) {
-    this.forceUpdate();
 
-    if(this.isAttempting && !nextProps.fetching){
-      if(!nextProps.error){
-        this.props.navigation.navigate('TeamScreen');
-      }else{
-        this.setState({ loading: false, passcode: '', editable: true}, () => {
-          Toast.show({
-            text: nextProps.error,
-            position: 'bottom',
-            buttonText: 'Okay',
-            type: 'warning',
-            duration: 5000
-          })
-        })
-      }
+    if(this.props.fetching === true && nextProps.fetching === false && nextProps.error === null)
+    {
+      this.props.navigation.navigate('Main');
+    }
+    if(this.props.fetching === true && nextProps.fetching === false && nextProps.error !== null)
+    {
+      Toast.show({
+        text: nextProps.error,
+        position: 'bottom',
+        buttonText: 'Okay',
+        type: 'danger',
+        duration: 5000
+      });
     }
   }
 
@@ -107,7 +105,7 @@ class LoginScreen extends Component {
 
   renderHeader() {
     return (
-      <View style={styles.headerView}> 
+      <View style={styles.headerView}>
         <Text style={[Fonts.style.description, { fontWeight: 'bold', fontFamily: Fonts.type.emphasis, margin: 10, marginBottom: 6 }]}>
           shop-online loader 2.4
         </Text>
@@ -151,10 +149,14 @@ class LoginScreen extends Component {
     this.setState({code})
   }
 
+  onLogin = () => {
+    this.props.logIn(this.props.lang, this.state.number, this.state.code);
+  }
+
   renderSend(){
     return(
       <ImageBackground resizeMode='stretch' source={Images.button} style={styles.sendButton}>
-        <TouchableOpacity onPress={()=>this.props.navigation.navigate('Main')}>
+        <TouchableOpacity onPress={this.onLogin}>
           <View style={{flexDirection:'row', alignItems: 'center'}}>
             <Text style={[Fonts.style.h6, { fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
               войти
@@ -282,12 +284,13 @@ const mapStateToProps = (state) => {
     error:state.auth.error,
     passcode:state.auth.passcode,
     lang: state.auth.lang,
+    phone_number: state.auth.phone_number,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    attemptLogin: (passcode) => dispatch(AuthActions.authRequest(passcode)),
+    logIn: (lang, phone_number, code) => dispatch(AuthActions.loginRequest(lang, phone_number, code)),
     setLang: lang => dispatch(AuthActions.setLang(lang))
   }
 }

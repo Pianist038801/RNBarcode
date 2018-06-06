@@ -10,7 +10,7 @@ import { AuthTypes } from '../Redux/AuthRedux'
 /* ------------- Sagas ------------- */
 
 
-import { checkPasscode } from './AuthSagas'
+import { checkPasscode, verifyPhoneNumber, logIn } from './AuthSagas'
 
 /* ------------- API ------------- */
 
@@ -22,6 +22,8 @@ const api = DebugConfig.useFixtures ? FixtureAPI : API.create()
 
 export default function * root () {
   yield all([
-    takeLatest(AuthTypes.AUTH_REQUEST, checkPasscode, api)
+    takeLatest(AuthTypes.AUTH_REQUEST, checkPasscode, api),
+    takeLatest(AuthTypes.VERIFY_REQUEST, verifyPhoneNumber, api),
+    takeLatest(AuthTypes.LOGIN_REQUEST, logIn, api)
   ])
 }
