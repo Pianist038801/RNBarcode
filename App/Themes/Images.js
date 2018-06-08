@@ -19,6 +19,7 @@ const images = {
   icon3: require('../Images/icon3.png'),
   icon4: require('../Images/icon4.png'),
   dog: require('../Images/dog.png'),
+  exit: require('../Images/Exit.png')
 }
 
 export default images

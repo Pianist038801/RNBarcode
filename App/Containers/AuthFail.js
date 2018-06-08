@@ -30,7 +30,6 @@ class LoginScreen extends Component {
     error: string,
     editable: boolean,
     number: string,
-    code: string,
   }
 
   isAttempting: boolean
@@ -38,36 +37,34 @@ class LoginScreen extends Component {
   constructor (props: LoginScreenProps) {
 
     super(props)
-    console.log('uhaha');
+
     this.state = {
       passcode : '',
       loading: false,
       error: '',
       editable: true,
-      number: props.phone_number,
-      code: '',
+      number: ''
   },
 
   this.isAttempting = false
 
-  }
+}
 
   componentWillReceiveProps(nextProps) {
 
     if(this.props.fetching === true && nextProps.fetching === false && nextProps.error === null)
     {
-      this.props.navigation.navigate('Main');
+      this.props.navigation.navigate('LoginScreen');
     }
     if(this.props.fetching === true && nextProps.fetching === false && nextProps.error !== null)
     {
-      // Toast.show({
-      //   text: nextProps.error,
-      //   position: 'bottom',
-      //   buttonText: 'Okay',
-      //   type: 'danger',
-      //   duration: 5000
-      // });
-      this.props.navigation.navigate('AuthFail');
+      Toast.show({
+        text: nextProps.error,
+        position: 'bottom',
+        buttonText: 'Okay',
+        type: 'danger',
+        duration: 5000
+      });
     }
   }
 
@@ -106,7 +103,7 @@ class LoginScreen extends Component {
 
   renderHeader() {
     return (
-      <View style={styles.headerView}>
+      <View style={styles.headerView}> 
         <Text style={[Fonts.style.description, { fontWeight: 'bold', fontFamily: Fonts.type.emphasis, margin: 10, marginBottom: 6 }]}>
           shop-online loader 2.4
         </Text>
@@ -146,23 +143,19 @@ class LoginScreen extends Component {
     this.setState({number})
   }
 
-  onChangeCode = code => {
-    this.setState({code})
-  }
-
-  onLogin = () => {
-    this.props.logIn(this.props.lang, this.state.number, this.state.code);
+  gotoLogin = () => {
+    this.props.navigation.navigate('LoginScreen');
   }
 
   renderSend(){
     return(
       <ImageBackground resizeMode='stretch' source={Images.button} style={styles.sendButton}>
-        <TouchableOpacity onPress={this.onLogin}>
+        <TouchableOpacity onPress={this.onPressBack}>
           <View style={{flexDirection:'row', alignItems: 'center'}}>
-            <Text style={[Fonts.style.h6, { fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
-              войти
+            <Text style={[Fonts.style.h6, { color: 'black', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
+              выход
             </Text>
-            <Image resizeMode='stretch' style={{marginRight: Metrics.WIDTH(20), width: Metrics.WIDTH(23), height: Metrics.HEIGHT(18)}} source={Images.check}/>
+            <Image resizeMode='stretch' style={{marginRight: Metrics.WIDTH(20), width: Metrics.WIDTH(23), height: Metrics.HEIGHT(18)}} source={Images.exit}/>
           </View>
         </TouchableOpacity>
       </ImageBackground>
@@ -188,6 +181,10 @@ class LoginScreen extends Component {
     )
   }
 
+  onPressBack = () => {
+    this.props.navigation.goBack();
+  }
+
   renderForm() {
     const flag = Images[`flag_${this.props.lang}`];
     const dropOptions = ['ru', 'de', 'eng', 'esp', 'fr', 'he', 'it'].filter(x=>x!=this.props.lang);
@@ -208,52 +205,17 @@ class LoginScreen extends Component {
             <Image style={{width: Metrics.WIDTH(15), height: Metrics.HEIGHT(10), marginTop: Metrics.HEIGHT(10), marginRight: Metrics.WIDTH(15)}} resizeMode='stretch' source={Images.triangle}/>
           </ModalDropdown>
         </View>
-        <Text style={[Fonts.style.h3, { textAlign: 'right', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
-          ваш номер
+        <Text style={[Fonts.style.h3, { color: 'black', textAlign: 'right', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
+          У Вас нет доступа {'\n'} к этой аппликации
         </Text>
-        <Text style={[Fonts.style.h3, {marginTop: -10, textAlign: 'right', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
-          телефона
+        <Text style={[Fonts.style.h6, {color: 'black', marginTop: -10, textAlign: 'right', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
+        по всем вопросам обращайтесь {'\n'} на сайт-платформу {'\n'} www.barcode2store.com {'\n'}
+        </Text>
+        <Text style={[Fonts.style.h4, {color: 'black', marginTop: -10, textAlign: 'right', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
+        с уважением {'\n'} компания {'\n'} shop-online  {'\n'}
         </Text> 
         <View style={{height: Metrics.HEIGHT(30)}}/>
-        <Text style={[Fonts.style.description, { textAlign: 'right', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
-          такого телефона нет в нашей базe
-        </Text>
-        <ImageBackground resizeMode='stretch' source={Images.button} style={styles.numberButton}>
-          <Input
-            maxLength={12}
-            placeholder={'Enter Phone Number'}
-            style={{marginLeft: 30}}
-            textAlign={'left'}
-            value={this.state.number}
-            onChangeText={this.onChangeNumber}
-            fontSize={Fonts.size.regular}
-            fontFamily={Fonts.type.emphasis}
-            placeholderTextColor='gray'                     
-            returnKeyType='done'                
-            autoCapitalize='none'
-            autoCorrect={false}
-            underlineColorAndroid='transparent'
-            onSubmitEditing={() => {}}
-          />
-        </ImageBackground>
-        <ImageBackground resizeMode='stretch' source={Images.button} style={styles.codeButton}>
-          <Input
-            maxLength={12}
-            placeholder={'Enter Code'}
-            style={{marginLeft: 30}}
-            textAlign={'left'}
-            value={this.state.code}
-            onChangeText={this.onChangeCode}
-            fontSize={Fonts.size.regular}
-            fontFamily={Fonts.type.emphasis}
-            placeholderTextColor='gray'                     
-            returnKeyType='done'                
-            autoCapitalize='none'
-            autoCorrect={false}
-            underlineColorAndroid='transparent'
-            onSubmitEditing={() => {}}
-          />
-        </ImageBackground> 
+        
       </ImageBackground>
     )
   }
@@ -270,7 +232,7 @@ class LoginScreen extends Component {
         </View>
         {this.renderSend()}
         <View style={{flex: 1}}/>
-        <View style={{ height: Metrics.HEIGHT(115)}}>
+        <View style={{ height: Metrics.HEIGHT(115)}}>           
           {this.renderTimeBar()}
         </View>
       </Container>
@@ -285,13 +247,12 @@ const mapStateToProps = (state) => {
     error:state.auth.error,
     passcode:state.auth.passcode,
     lang: state.auth.lang,
-    phone_number: state.auth.phone_number,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    logIn: (lang, phone_number, code) => dispatch(AuthActions.loginRequest(lang, phone_number, code)),
+    verifyPhoneNumber: (lang, number) => dispatch(AuthActions.verifyRequest(lang, number)),
     setLang: lang => dispatch(AuthActions.setLang(lang))
   }
 }
