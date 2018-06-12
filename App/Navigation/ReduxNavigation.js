@@ -10,7 +10,7 @@ function ReduxNavigation (props) {
     dispatch,
     state: nav
   })
-
+ 
   return <AppNavigation navigation={navigation} />
 }
 
