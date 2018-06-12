@@ -43,7 +43,8 @@ class LoginScreen extends Component {
       loading: false,
       error: '',
       editable: true,
-      number: ''
+      number: '',
+      typing: false
   },
 
   this.isAttempting = false
@@ -56,7 +57,10 @@ class LoginScreen extends Component {
     {
       this.props.navigation.navigate('LoginScreen');
     }
-   
+    if(this.props.fetching === true && nextProps.fetching === false && nextProps.error !== null)
+    {
+      this.setState({typing: false})
+    }
   }
 
   componentDidMount() {
@@ -112,7 +116,7 @@ class LoginScreen extends Component {
   }
 
   onChangeNumber = number => {
-    this.setState({number})
+    this.setState({number, typing: true})
   }
 
   gotoLogin = () => {
@@ -190,7 +194,7 @@ class LoginScreen extends Component {
         </Text>
         <View style={{height: Metrics.HEIGHT(20)}}/>
         <Text style={[Fonts.style.description, { textAlign: 'right', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
-          {this.props.error === null ? '' : 'такого телефона нет в нашей базe'}
+          {this.props.error !== null && this.state.typing===false ? 'такого телефона нет в нашей базe' : ''}
         </Text>
         <ImageBackground resizeMode='stretch' source={Images.button} style={styles.numberButton}>
           <Input
@@ -211,7 +215,7 @@ class LoginScreen extends Component {
           />
         </ImageBackground> 
         <Text style={[Fonts.style.description, { textAlign: 'right', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
-          {this.props.error !== null ? this.props.error : ''}
+          {this.props.error !== null && this.state.typing===false ? this.props.error : ''}
         </Text>
       </ImageBackground>
     )
@@ -220,7 +224,8 @@ class LoginScreen extends Component {
   render () {
     return (
     <SafeAreaView style={styles.whiteContent}>
-      <Container>  
+      <Container>
+        <ScrollView>
           <View style={{ height: Metrics.screenHeight * 143 / 964 }}>
             {this.renderHeader()}
           </View>
@@ -230,6 +235,7 @@ class LoginScreen extends Component {
           {this.renderSend()}
            
           {this.renderTimeBar()}  
+          </ScrollView>  
       </Container>
     </SafeAreaView>
     )
