@@ -56,16 +56,7 @@ class LoginScreen extends Component {
     {
       this.props.navigation.navigate('LoginScreen');
     }
-    if(this.props.fetching === true && nextProps.fetching === false && nextProps.error !== null)
-    {
-      Toast.show({
-        text: nextProps.error,
-        position: 'bottom',
-        buttonText: 'Okay',
-        type: 'danger',
-        duration: 5000
-      });
-    }
+   
   }
 
   componentDidMount() {
@@ -79,26 +70,6 @@ class LoginScreen extends Component {
         curTime
       })
     },1000)
-  }
-
-  handleChangePasscode = value => this.setState({ passcode: value });
-
-  handleLogin = () => {
-
-    if(this.state.passcode.length < 4 || this.state.passcode === ''){
-      Toast.show({
-        text: 'Enter valid passcode',
-        position: 'bottom',
-        buttonText: 'Okay',
-        type: 'danger',
-        duration: 5000
-      });
-    }else{
-      this.setState({ loading: true , editable: false}, () => {
-        this.isAttempting = true;
-        this.props.attemptLogin(this.state.passcode);
-      })
-    }
   }
 
   renderHeader() {
@@ -186,13 +157,14 @@ class LoginScreen extends Component {
     console.log(this.props.lang, this.state.number)
   }
 
-  renderForm() {
+  renderForm = () => {
     const flag = Images[`flag_${this.props.lang}`];
     const dropOptions = ['ru', 'de', 'eng', 'esp', 'fr', 'he', 'it'].filter(x=>x!=this.props.lang);
+    console.log(this.props)
     // const dropOptions = ['ru', 'de', 'eng']
     return (
       <ImageBackground resizeMode='stretch' source={Images.loginForm} style={styles.loginForm}>
-        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: Metrics.HEIGHT(18) }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: Metrics.HEIGHT(8) }}>
           <View style={{flex:1}}/>
           <TouchableOpacity onPress={()=>this.modal.show()}>
             <Image resizeMode='stretch' style={{width: Metrics.screenWidth*30/460, height: Metrics.screenHeight * 20 / 970}} source={flag}/>
@@ -216,9 +188,9 @@ class LoginScreen extends Component {
         <Text style={[Fonts.style.h3, {marginTop: -10, textAlign: 'right', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
           телефона
         </Text>
-        <View style={{height: Metrics.HEIGHT(30)}}/>
+        <View style={{height: Metrics.HEIGHT(20)}}/>
         <Text style={[Fonts.style.description, { textAlign: 'right', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
-          такого телефона нет в нашей базe
+          {this.props.error === null ? '' : 'такого телефона нет в нашей базe'}
         </Text>
         <ImageBackground resizeMode='stretch' source={Images.button} style={styles.numberButton}>
           <Input
@@ -238,6 +210,9 @@ class LoginScreen extends Component {
             onSubmitEditing={() => {}}
           />
         </ImageBackground> 
+        <Text style={[Fonts.style.description, { textAlign: 'right', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
+          {this.props.error !== null ? this.props.error : ''}
+        </Text>
       </ImageBackground>
     )
   }
@@ -245,9 +220,7 @@ class LoginScreen extends Component {
   render () {
     return (
     <SafeAreaView style={styles.whiteContent}>
-      <Container>
-        <KeyboardAvoidingView behavior='position'>
-          
+      <Container>  
           <View style={{ height: Metrics.screenHeight * 143 / 964 }}>
             {this.renderHeader()}
           </View>
@@ -255,9 +228,8 @@ class LoginScreen extends Component {
             {this.renderForm()}
           </View>
           {this.renderSend()}
-              
-          {this.renderTimeBar()} 
-        </KeyboardAvoidingView>
+           
+          {this.renderTimeBar()}  
       </Container>
     </SafeAreaView>
     )

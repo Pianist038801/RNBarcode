@@ -194,7 +194,7 @@ class LoginScreen extends Component {
     // const dropOptions = ['ru', 'de', 'eng']
     return (
       <ImageBackground resizeMode='stretch' source={Images.loginForm} style={styles.loginForm}>
-        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: Metrics.HEIGHT(18) }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: Metrics.HEIGHT(8) }}>
           <View style={{flex:1}}/>
           <Image resizeMode='stretch' style={{width: Metrics.screenWidth*30/460, height: Metrics.screenHeight * 20 / 970}} source={flag}/>
           <Text style={[Fonts.style.h6, {color: Colors.textSecondary, textAlign: 'center', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
@@ -214,9 +214,9 @@ class LoginScreen extends Component {
         <Text style={[Fonts.style.h3, {marginTop: -10, textAlign: 'right', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
           телефона
         </Text> 
-        <View style={{height: Metrics.HEIGHT(30)}}/>
+        <View style={{height: Metrics.HEIGHT(20)}}/>
         <Text style={[Fonts.style.description, { textAlign: 'right', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
-          такого телефона нет в нашей базe
+          {''}
         </Text>
         <ImageBackground resizeMode='stretch' source={Images.button} style={styles.numberButton}>
           <Input

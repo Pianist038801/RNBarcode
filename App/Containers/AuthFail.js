@@ -103,7 +103,7 @@ class LoginScreen extends Component {
 
   renderHeader() {
     return (
-      <View style={styles.headerView}> 
+      <View style={styles.headerView}>
         <Text style={[Fonts.style.description, { fontWeight: 'bold', fontFamily: Fonts.type.emphasis, margin: 10, marginBottom: 6 }]}>
           shop-online loader 2.4
         </Text>
@@ -191,7 +191,7 @@ class LoginScreen extends Component {
     // const dropOptions = ['ru', 'de', 'eng']
     return (
       <ImageBackground resizeMode='stretch' source={Images.loginForm} style={styles.loginForm}>
-        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: Metrics.HEIGHT(18) }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: Metrics.HEIGHT(8) }}>
           <View style={{flex:1}}/>
           <Image resizeMode='stretch' style={{width: Metrics.screenWidth*30/460, height: Metrics.screenHeight * 20 / 970}} source={flag}/>
           <Text style={[Fonts.style.h6, {color: Colors.textSecondary, textAlign: 'center', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
@@ -214,7 +214,7 @@ class LoginScreen extends Component {
         <Text style={[Fonts.style.h4, {color: 'black', marginTop: -10, textAlign: 'right', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
         с уважением {'\n'} компания {'\n'} shop-online  {'\n'}
         </Text> 
-        <View style={{height: Metrics.HEIGHT(30)}}/>
+        <View style={{height: Metrics.HEIGHT(20)}}/>
         
       </ImageBackground>
     )

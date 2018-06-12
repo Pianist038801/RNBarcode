@@ -32,12 +32,12 @@ export default StyleSheet.create({
   },
   loginForm: {
     width: Metrics.screenWidth,
-    height: Metrics.screenHeight * 405 / 970,
+    height: Metrics.screenHeight * 435 / 970,
   },
   numberButton: {
     width: Metrics.WIDTH(421),
     height: Metrics.HEIGHT(73),
-    marginLeft: Metrics.WIDTH(110)
+    marginLeft: Metrics.WIDTH(130)
   },
   codeButton: {
     width: Metrics.WIDTH(421),
