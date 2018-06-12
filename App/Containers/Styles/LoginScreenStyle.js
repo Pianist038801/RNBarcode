@@ -62,6 +62,8 @@ export default StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
     marginBottom: 0,
+    position: 'absolute',
+    top: Metrics.HEIGHT(800),
   },
   dog: {
     position: 'absolute',

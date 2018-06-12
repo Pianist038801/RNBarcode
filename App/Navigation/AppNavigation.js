@@ -8,7 +8,8 @@ import AuthFail from '../Containers/AuthFail'
 const LoginStack = StackNavigator({
   LoginScreen: { screen: LoginScreen },
   SendCode: { screen: SendCode },
-  AuthFail: { screen: AuthFail }
+  AuthFail: { screen: AuthFail },
+  Main: {screen: Main}
 }, {
   headerMode: 'none',
   navigationOptions: {
@@ -17,26 +18,7 @@ const LoginStack = StackNavigator({
   initialRouteName: 'SendCode'
 });
 
-const MainStack = StackNavigator({
-  TeamScreen: { screen: Main },
-}, {
-  headerMode: 'none',
-  navigationOptions: {
-    headerVisible: false,
-  },
-});
+ 
+ 
 
-// Manifest of possible screens
-const PrimaryNav = StackNavigator({
-  Main: { screen: MainStack },
-  loginStack: { screen: LoginStack },
-}, {
-  // Default config for all screens
-  headerMode: 'none',
-  navigationOptions: {
-    headerVisible: false,
-  },
-  initialRouteName: 'loginStack'
-})
-
-export default PrimaryNav
+export default LoginStack

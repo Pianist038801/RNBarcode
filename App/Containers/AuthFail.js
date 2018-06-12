@@ -230,11 +230,8 @@ class LoginScreen extends Component {
         <View style={{ height: Metrics.screenHeight * 405 / 964 }}>
           {this.renderForm()}
         </View>
-        {this.renderSend()}
-        <View style={{flex: 1}}/>
-        <View style={{ height: Metrics.HEIGHT(115)}}>           
-          {this.renderTimeBar()}
-        </View>
+        {this.renderSend()}     
+        {this.renderTimeBar()}
       </Container>
     </SafeAreaView>
     )

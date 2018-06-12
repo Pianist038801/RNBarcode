@@ -18,7 +18,7 @@ export function * checkPasscode (api, action) {
         break;
       case 'CONNECTION_ERROR':
         yield put(AuthActions.authFailure("Server is not available"));
-        break;
+        break;                                                           
       default:
         yield put(AuthActions.authFailure(response.data.message));
         break;
@@ -56,16 +56,15 @@ export function * logIn (api, action) {
   console.log('Response=', response);
   if (response.status === 200 && response.data.result === 'done') {
     // do data conversion here if needed
-    
     yield put(AuthActions.loginSuccess())
   } 
   else
   {
     if (response.status === 200 && response.data.result === 'error') {
-      yield put(AuthActions.verifyFailure(response.data.errors.code))
+      yield put(AuthActions.loginFailure(response.data.errors.code))
     }
     else{
-      yield put(AuthActions.verifyFailure('Error occured while connecting to server'))
+      yield put(AuthActions.loginFailure('Error occured while connecting to server'))
     }
   }
 }
