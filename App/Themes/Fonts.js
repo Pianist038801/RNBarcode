@@ -1,9 +1,9 @@
 import COLOR from './Colors';
 
 const type = {
-  base: 'Avenir-Book',
-  bold: 'Avenir-Black',
-  emphasis: 'HelveticaNeue-Italic'
+  base: 'FuturePTBook',
+  bold: 'FuturaPTBold',
+  emphasis: 'FuturaPTBookOblique'
 }
 
 const size = {

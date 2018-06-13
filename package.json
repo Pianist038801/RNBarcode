@@ -95,6 +95,11 @@
     "preset": "react-native"
   },
   "config": {},
+  "rnpm": {
+      "assets": [
+        "./App/Fonts/"
+      ]
+  },
   "standard": {
     "parser": "babel-eslint",
     "globals": [
