@@ -13,7 +13,7 @@ const { Types, Creators } = createActions({
   verifySuccess: [],
   loginRequest: ['lang', 'phone_number', 'code'],
   loginFailure: ['error'],
-  loginSuccess: [],
+  loginSuccess: ['token'],
 })
 
 export const AuthTypes = Types
@@ -28,6 +28,7 @@ export const INITIAL_STATE = Immutable({
   lang: 'ru',
   phone_number: '',
   code: '',
+  token: null,
 })
 
 /* ------------- Selectors ------------- */
@@ -72,7 +73,7 @@ export const loginRequest = (state, { lang, phone_number, code }) =>
 
 // successful verify number
 export const loginSuccess = (state, action) => {
-  return state.merge({ fetching: false, error: null })
+  return state.merge({ fetching: false, error: null, token: action.token })
 }
 
 /* ------------- Hookup Reducers To Types ------------- */

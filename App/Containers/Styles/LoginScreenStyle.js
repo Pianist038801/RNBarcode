@@ -62,7 +62,13 @@ export default StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
     marginTop: Metrics.HEIGHT(200),
-    
+  },
+  bottomMainBar: {
+    width: Metrics.WIDTH(980),
+    height: Metrics.HEIGHT(689),
+    alignSelf: 'center',
+    alignItems: 'center',
+    marginTop: Metrics.HEIGHT(20),
   },
   dog: {
     position: 'absolute',

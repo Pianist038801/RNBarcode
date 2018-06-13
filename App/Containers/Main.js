@@ -139,7 +139,7 @@ class LoginScreen extends Component {
   }
   renderTimeBar(){
     return(
-      <ImageBackground resizeMode='stretch' source={Images.bottomBar} style={styles.bottomBar}>
+      <ImageBackground resizeMode='stretch' source={Images.bottomBar} style={styles.bottomMainBar}>
          <View style={{height: Metrics.HEIGHT(70)}}/>
          
           <Text style={[Fonts.style.description, {textAlign: 'center', fontFamily: Fonts.type.emphasis, marginHorizontal: 10, marginBottom: 3 }]}>
@@ -154,7 +154,7 @@ class LoginScreen extends Component {
 
   renderMenus() {
     const string = ['“русское интернет ТВ”', '“super demo”', '“русское интернет ТВ”', '“super demo”'];
-    let result = [];
+    let result = [<View style={{height: 30}}/>];
     for(var i=1; i<5; i++)
     {
       result.push(

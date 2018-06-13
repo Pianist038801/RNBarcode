@@ -56,7 +56,7 @@ export function * logIn (api, action) {
   console.log('Response=', response);
   if (response.status === 200 && response.data.result === 'done') {
     // do data conversion here if needed
-    yield put(AuthActions.loginSuccess())
+    yield put(AuthActions.loginSuccess(response.data.token))
   } 
   else
   {
