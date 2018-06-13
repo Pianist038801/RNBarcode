@@ -30,17 +30,17 @@ class App extends Component {
 
   componentWillMount() {
 
-    AsyncStorage.getItem('@irate-passcode', (err, result) => {
-      this.setState({ loading: true }, () => {
-        if (result) {
-          const navigateAction = NavigationActions.navigate({
-            routeName: 'mainStack',
-            index: 0,
-          });
-          store.dispatch(navigateAction);
-        }
-      })
-    });
+    // AsyncStorage.getItem('@irate-passcode', (err, result) => {
+    //   this.setState({ loading: true }, () => {
+    //     if (result) {
+    //       const navigateAction = NavigationActions.navigate({
+    //         routeName: 'mainStack',
+    //         index: 0,
+    //       });
+    //       store.dispatch(navigateAction);
+    //     }
+    //   })
+    // });
   }
 
   render () {

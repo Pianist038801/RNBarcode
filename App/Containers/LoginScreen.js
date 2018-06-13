@@ -262,7 +262,7 @@ class LoginScreen extends Component {
     return (
     <SafeAreaView style={styles.whiteContent}>
       <Container>
-        <ScrollView>
+        <ScrollView scrollEnabled={false}>
           <View style={{ height: Metrics.screenHeight * 143 / 964 }}>
             {this.renderHeader()}
           </View>

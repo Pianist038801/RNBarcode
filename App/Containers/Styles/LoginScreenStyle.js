@@ -61,9 +61,8 @@ export default StyleSheet.create({
     height: Metrics.HEIGHT(689),
     alignSelf: 'center',
     alignItems: 'center',
-    marginBottom: 0,
-    position: 'absolute',
-    top: Metrics.HEIGHT(800),
+    marginTop: Metrics.HEIGHT(200),
+    
   },
   dog: {
     position: 'absolute',
