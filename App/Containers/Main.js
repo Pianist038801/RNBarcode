@@ -62,6 +62,10 @@ class LoginScreen extends Component {
     },1000)
   }
 
+  componentWillMount(){
+    this.props.getStoreList(this.props.lang, this.props.token);
+  }
+
   handleChangePasscode = value => this.setState({ passcode: value });
 
   handleLogin = () => {
@@ -109,34 +113,14 @@ class LoginScreen extends Component {
       <View style={{height:1, backgroundColor: '#e9eef5'}}/>
     </View>)
   }
-
-  onChangeNumber = number => {
-    this.setState({number})
-  }
-
-  onChangeCode = code => {
-    this.setState({code})
-  }
-
-  renderSend(){
-    return(
-      <ImageBackground resizeMode='stretch' source={Images.button} style={styles.sendButton}>
-        <TouchableOpacity onPress={()=>alert()}>
-          <View style={{flexDirection:'row', alignItems: 'center'}}>
-            <Text style={[Fonts.style.h6, { fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
-              войти
-            </Text>
-            <Image resizeMode='stretch' style={{marginRight: Metrics.WIDTH(20), width: Metrics.WIDTH(23), height: Metrics.HEIGHT(18)}} source={Images.check}/>
-          </View>
-        </TouchableOpacity>
-      </ImageBackground>
-    )
-  }
+ 
+ 
 
   _onSelect=(id, data)=>{
     console.log('Data=', data);
     this.props.setLang(data);
   }
+
   renderTimeBar(){
     return(
       <ImageBackground resizeMode='stretch' source={Images.bottomBar} style={styles.bottomMainBar}>
@@ -152,17 +136,17 @@ class LoginScreen extends Component {
     )
   }
 
-  renderMenus() {
+  renderMenus = () => {
     const string = ['“русское интернет ТВ”', '“super demo”', '“русское интернет ТВ”', '“super demo”'];
     let result = [<View style={{height: 30}}/>];
-    for(var i=1; i<5; i++)
+    for(var i=0; i<this.props.stores.length; i++)
     {
       result.push(
       <View style={{flexDirection: 'column',}}>
         <View style={{backgroundColor: '#e9e9e9', flexDirection: 'row',  alignItems: 'center'}}>
-          <Image resizeMode='stretch' style={styles.menuicon} source={Images[`icon${i}`]}/>
+          <Image resizeMode='stretch' style={styles.menuicon} source={{uri: `https://api.barcode2store.com${this.props.stores[i].logo}`}}/>
           <Text style={[Fonts.style.h6, {flex:2, textAlign: 'left', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, color: Colors.textSecondary, marginHorizontal: 10 }]}>
-            {string[i-1]}
+            {this.props.stores[i].title}
           </Text>
         </View>
         <View style={{height: Metrics.HEIGHT(4), backgroundColor: 'white'}}/>
@@ -192,11 +176,11 @@ class LoginScreen extends Component {
             <Image style={{width: Metrics.WIDTH(15), height: Metrics.HEIGHT(10), marginTop: Metrics.HEIGHT(10), marginRight: Metrics.WIDTH(15)}} resizeMode='stretch' source={Images.triangle}/>
           </ModalDropdown>
         </View>
-        <Text style={[Fonts.style.h3, {marginLeft: Metrics.WIDTH(64), textAlign: 'left', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
+        <Text style={[Fonts.style.h3, {marginLeft: Metrics.WIDTH(44), textAlign: 'left', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
           Привет 
         </Text>
-        <Text style={[Fonts.style.h3, {marginLeft: Metrics.WIDTH(64), textAlign: 'left', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
-          SLAVA!
+        <Text style={[Fonts.style.h3, {marginLeft: Metrics.WIDTH(44), textAlign: 'left', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
+          {this.props.name}
         </Text>
         <Image style={styles.dog} source={Images.dog}>
         </Image>
@@ -233,13 +217,15 @@ const mapStateToProps = (state) => {
     error:state.auth.error,
     passcode:state.auth.passcode,
     lang: state.auth.lang,
+    token: state.auth.token,
+    stores: state.auth.stores,
+    name: state.auth.name
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    attemptLogin: (passcode) => dispatch(AuthActions.authRequest(passcode)),
-    setLang: lang => dispatch(AuthActions.setLang(lang))
+    getStoreList: (lang, token) => dispatch(AuthActions.storeRequest(lang, token))
   }
 }
 

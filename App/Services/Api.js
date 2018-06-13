@@ -39,6 +39,7 @@ const create = (baseURL = requestUrl.url) => {
   const checkPasscode = (passcode) => api.post('passcode', {passcode: passcode})
   const verifyPhoneNumber = (lang, phone_number) => api.post('', {table: 'customers', action: 'loader_phone_send', lang, phone_number})
   const logIn = (lang, phone_number, code) => api.post('', {table: "customers", action: "loader_phone_confirm", lang, phone_number, code})
+  const getStoreList = (lang, token) => api.post('', {table: "stores", action: "loader_list", lang, token})
 
   // ------
   // STEP 3
@@ -56,7 +57,8 @@ const create = (baseURL = requestUrl.url) => {
     // a list of the API functions from step 2
     checkPasscode,
     verifyPhoneNumber,
-    logIn
+    logIn,
+    getStoreList
   }
 }
 

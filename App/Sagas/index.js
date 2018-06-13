@@ -10,7 +10,7 @@ import { AuthTypes } from '../Redux/AuthRedux'
 /* ------------- Sagas ------------- */
 
 
-import { checkPasscode, verifyPhoneNumber, logIn } from './AuthSagas'
+import { checkPasscode, verifyPhoneNumber, logIn, getStoreList } from './AuthSagas'
 
 /* ------------- API ------------- */
 
@@ -24,6 +24,7 @@ export default function * root () {
   yield all([
     takeLatest(AuthTypes.AUTH_REQUEST, checkPasscode, api),
     takeLatest(AuthTypes.VERIFY_REQUEST, verifyPhoneNumber, api),
-    takeLatest(AuthTypes.LOGIN_REQUEST, logIn, api)
+    takeLatest(AuthTypes.LOGIN_REQUEST, logIn, api),
+    takeLatest(AuthTypes.STORE_REQUEST, getStoreList, api)
   ])
 }

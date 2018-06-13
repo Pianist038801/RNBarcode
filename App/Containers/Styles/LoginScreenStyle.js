@@ -61,7 +61,7 @@ export default StyleSheet.create({
     height: Metrics.HEIGHT(689),
     alignSelf: 'center',
     alignItems: 'center',
-    marginTop: Metrics.HEIGHT(200),
+    marginTop: Metrics.HEIGHT(180),
   },
   bottomMainBar: {
     width: Metrics.WIDTH(980),

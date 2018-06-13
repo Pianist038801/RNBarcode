@@ -56,18 +56,17 @@ class LoginScreen extends Component {
 
     if(this.props.fetching === true && nextProps.fetching === false && nextProps.error === null)
     {
-      this.props.navigation.navigate('Main');
+      this.props.navigation.dispatch({
+        type: 'ReplaceCurrentScreen',
+        routeName: 'Main',
+      }); 
     }
     if(this.props.fetching === true && nextProps.fetching === false && nextProps.error !== null)
     {
-      // Toast.show({
-      //   text: nextProps.error,
-      //   position: 'bottom',
-      //   buttonText: 'Okay',
-      //   type: 'danger',
-      //   duration: 5000
-      // });
-      this.props.navigation.navigate('AuthFail');
+      this.props.navigation.dispatch({
+        type: 'ReplaceCurrentScreen',
+        routeName: 'AuthFail',
+      }); 
     }
   }
 

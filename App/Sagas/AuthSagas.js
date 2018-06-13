@@ -69,4 +69,23 @@ export function * logIn (api, action) {
   }
 }
 
-
+export function * getStoreList (api, action) {
+  const { lang, token } = action
+  console.log('Action=', action);
+  // make the call to the api
+  const response = yield call(api.getStoreList, lang, token)
+  console.log('Response=', response);
+  if (response.status === 200 && response.data.result === 'done') {
+    // do data conversion here if needed
+    yield put(AuthActions.storeSuccess(response.data.name, response.data.stores))
+  } 
+  else
+  {
+    if (response.status === 200 && response.data.result === 'error') {
+      yield put(AuthActions.storeFailure(response.data.report))
+    }
+    else{
+      yield put(AuthActions.storeFailure('Error occured while connecting to server'))
+    }
+  }
+}

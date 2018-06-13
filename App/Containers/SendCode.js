@@ -52,10 +52,14 @@ class LoginScreen extends Component {
 }
 
   componentWillReceiveProps(nextProps) {
-    console.log('NextProps=', nextProps);
+    console.log('SendCodeNextProps=', nextProps);
     if(this.props.fetching === true && nextProps.fetching === false && nextProps.error === null)
     {
-      this.props.navigation.navigate('LoginScreen');
+      this.props.navigation.dispatch({
+        type: 'ReplaceCurrentScreen',
+        routeName: 'LoginScreen',
+      });
+      //this.props.navigation.navigate('LoginScreen');
     }
     if(this.props.fetching === true && nextProps.fetching === false && nextProps.error !== null)
     {

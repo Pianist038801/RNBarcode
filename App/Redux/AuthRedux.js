@@ -14,6 +14,9 @@ const { Types, Creators } = createActions({
   loginRequest: ['lang', 'phone_number', 'code'],
   loginFailure: ['error'],
   loginSuccess: ['token'],
+  storeRequest: ['lang', 'token'], 
+  storeFailure: ['error'],
+  storeSuccess: ['name', 'stores'],
 })
 
 export const AuthTypes = Types
@@ -29,6 +32,8 @@ export const INITIAL_STATE = Immutable({
   phone_number: '',
   code: '',
   token: null,
+  name: '',
+  stores: [],
 })
 
 /* ------------- Selectors ------------- */
@@ -71,9 +76,16 @@ export const verifySuccess = (state, action) => {
 export const loginRequest = (state, { lang, phone_number, code }) =>
   state.merge({ fetching: true, lang, code, phone_number })
 
-// successful verify number
+// successful login number
 export const loginSuccess = (state, action) => {
   return state.merge({ fetching: false, error: null, token: action.token })
+}
+
+export const storeRequest = (state, { lang, token }) =>
+  state.merge({ fetching: true, lang, token })
+
+export const storeSuccess = (state, action) => {
+  return state.merge({ fetching: false, error: null, name: action.name, stores: action.stores })
 }
 
 /* ------------- Hookup Reducers To Types ------------- */
@@ -89,4 +101,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.LOGIN_REQUEST]: loginRequest,
   [Types.LOGIN_FAILURE]: failure,
   [Types.LOGIN_SUCCESS]: loginSuccess,
+  [Types.STORE_SUCCESS]: storeSuccess,
+  [Types.STORE_REQUEST]: storeRequest,
 })
