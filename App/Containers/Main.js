@@ -185,8 +185,6 @@ class LoginScreen extends Component {
         <Image style={styles.dog} source={Images.dog}>
         </Image>
         <View style={{height: Metrics.HEIGHT(30)}}/>
-         
-         
       </ImageBackground>
     )
   }
