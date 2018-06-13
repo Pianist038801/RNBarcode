@@ -152,7 +152,7 @@ class LoginScreen extends Component {
       <ImageBackground resizeMode='stretch' source={Images.button} style={styles.sendButton}>
         <TouchableOpacity onPress={this.onPressBack}>
           <View style={{flexDirection:'row', alignItems: 'center'}}>
-            <Text style={[Fonts.style.h6, { color: 'black', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
+            <Text style={[Fonts.style.h6, { color: 'black', fontFamily: Fonts.type.bigItalic, marginHorizontal: 10 }]}>
               выход
             </Text>
             <Image resizeMode='stretch' style={{marginRight: Metrics.WIDTH(20), width: Metrics.WIDTH(23), height: Metrics.HEIGHT(18)}} source={Images.exit}/>
@@ -205,13 +205,13 @@ class LoginScreen extends Component {
             <Image style={{width: Metrics.WIDTH(15), height: Metrics.HEIGHT(10), marginTop: Metrics.HEIGHT(10), marginRight: Metrics.WIDTH(15)}} resizeMode='stretch' source={Images.triangle}/>
           </ModalDropdown>
         </View>
-        <Text style={[Fonts.style.h3, { color: 'black', textAlign: 'right', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
+        <Text style={[Fonts.style.h3, { color: 'black', textAlign: 'right',  fontFamily: Fonts.type.bigItalic, marginHorizontal: 20 }]}>
           У Вас нет доступа {'\n'} к этой аппликации
         </Text>
-        <Text style={[Fonts.style.h6, {color: 'black', marginTop: -10, textAlign: 'right', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
+        <Text style={[Fonts.style.h6, {color: 'black', marginTop: -10, textAlign: 'right', fontFamily: Fonts.type.lightItalic, marginHorizontal: 20 }]}>
         по всем вопросам обращайтесь {'\n'} на сайт-платформу {'\n'} www.barcode2store.com {'\n'}
         </Text>
-        <Text style={[Fonts.style.h4, {color: 'black', marginTop: -10, textAlign: 'right', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
+        <Text style={[Fonts.style.h4, {color: 'black', marginTop: -10, textAlign: 'right', fontFamily: Fonts.type.bigItalic, marginHorizontal: 20 }]}>
         с уважением {'\n'} компания {'\n'} shop-online  {'\n'}
         </Text> 
         <View style={{height: Metrics.HEIGHT(20)}}/>
