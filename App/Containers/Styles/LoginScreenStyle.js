@@ -78,8 +78,9 @@ export default StyleSheet.create({
     top: Metrics.HEIGHT(103)
   },
   menuicon: {
-    width: Metrics.WIDTH(79),
+    width: Metrics.WIDTH(56),
     height: Metrics.HEIGHT(56),
+    resizeMode: 'stretch',
     marginLeft: Metrics.WIDTH(46),
   }
 })
