@@ -1,11 +1,11 @@
 import COLOR from './Colors';
 
 const type = {
-  base: 'FuturePTBook',
-  bold: 'FuturaPTBold',
-  emphasis: 'FuturaPTBookOblique',
-  bigItalic: 'FuturaPTExtraBoldOblique',
-  lightItalic: 'FuturaPTLightOblique'
+  base: 'FuturePT-Book',
+  bold: 'FuturaPT-Bold',
+  emphasis: 'FuturaPT-BookObl',
+  bigItalic: 'FuturaPT-ExtraBoldObl',
+  lightItalic: 'FuturaPT-LightObl'
 }
 
 const size = {
