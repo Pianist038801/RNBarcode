@@ -155,18 +155,20 @@ class ProductsUploader extends Component {
     this.props.logIn(this.props.lang, this.state.number, this.state.code);
   }
 
-  renderSend(){
+  renderCameraButtons(){
     return(
-      <ImageBackground resizeMode='stretch' source={Images.button} style={styles.sendButton}>
-        <TouchableOpacity onPress={this.onLogin}>
-          <View style={{flexDirection:'row', alignItems: 'center'}}>
-            <Text style={[Fonts.style.h6, { fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
-              войти
-            </Text>
-            <Image resizeMode='stretch' style={{marginRight: Metrics.WIDTH(20), width: Metrics.WIDTH(23), height: Metrics.HEIGHT(18)}} source={Images.check}/>
-          </View>
+      <View style={styles.cameraButtons}>
+        <TouchableOpacity onPress={()=>alert('Barcode')}>
+          <ImageBackground resizeMode='stretch' source={Images.big_shop_ellipse} style={styles.barcodeButtonView}>
+            <ImageBackground resizeMode='stretch' source={Images.barcode_icon} style={styles.barcodeButton}>
+            </ImageBackground>
+          </ImageBackground>
         </TouchableOpacity>
-      </ImageBackground>
+        <ImageBackground resizeMode='stretch' source={Images.big_shop_ellipse} style={styles.cameraButtonView}>
+          <Image style={styles.latestImage} source={Images.placeholder}/>
+          <Image style={styles.latestImage} source={Images.placeholder}/>
+        </ImageBackground>
+      </View>
     )
   }
 
@@ -190,16 +192,14 @@ class ProductsUploader extends Component {
   }
 
   renderCamera() {
-    const flag = Images[`flag_${this.props.lang}`];
-    const dropOptions = ['ru', 'de', 'eng', 'esp', 'fr', 'he', 'it'].filter(x=>x!=this.props.lang);
-    // const dropOptions = ['ru', 'de', 'eng']
+    
     return (
       <Camera
+      style={{ flex:1 }}
       ref={(cam) => {
         this.camera = cam;
       }}
       aspect={Camera.constants.Aspect.fill}
-      
     />
     )
   }
@@ -212,10 +212,11 @@ class ProductsUploader extends Component {
           <View style={{ height: Metrics.screenHeight * 143 / 964 }}>
             {this.renderHeader()}
           </View>
-          <View style={{ height: Metrics.HEIGHT(381) }}>
+          <View style={styles.cameraView}> 
             {this.renderCamera()}
           </View>
-          {this.renderSend()}
+          {this.renderCameraButtons()}
+
           {this.renderTimeBar()}
         </ScrollView>
       </Container>

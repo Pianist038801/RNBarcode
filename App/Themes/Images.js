@@ -19,7 +19,19 @@ const images = {
   icon3: require('../Images/icon3.png'),
   icon4: require('../Images/icon4.png'),
   dog: require('../Images/dog.png'),
-  exit: require('../Images/Exit.png')
+  exit: require('../Images/Exit.png'),
+  arrow_sjop: require('../Images/ArrowSjop.png'),
+  back_arrow: require('../Images/BackArrow.png'),
+  big_shop_ellipse: require('../Images/BigShopEllipse.png'),
+  button_scan_code: require('../Images/ButtonScanCode.png'),
+  coil_back_arrow: require('../Images/CoilBackArrow.png'),
+  ear_right: require('../Images/EarRight-2.png'),
+  ear_left: require('../Images/EarRight.png'),
+  photo_button: require('../Images/PhotoButton.png'),
+  photo_icon: require('../Images/PhotoIcon.png'),
+  barcode_icon: require('../Images/ScanCodeIcon.png'),
+  shop_ellipse: require('../Images/ShopEllipse.png'),
+  placeholder: require('../Images/placeholder.png'),
 }
 
 export default images

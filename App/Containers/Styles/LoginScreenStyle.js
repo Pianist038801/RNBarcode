@@ -8,6 +8,17 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: 'green'
   },
+  cameraButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: Metrics.HEIGHT(8)
+  },
+  cameraView: {
+    width: Metrics.screenWidth-4,
+    height: Metrics.HEIGHT(381)-4,
+    borderWidth: 2,
+    borderColor: '#f77717'
+  },
   inputContainer: {
     backgroundColor: Colors.snow,
   },
@@ -51,6 +62,34 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'center'
+  },
+  barcodeButtonView: {
+    width: Metrics.WIDTH(421),
+    height: Metrics.HEIGHT(77), 
+    marginLeft: Metrics.WIDTH(-340),
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center'
+  },
+  barcodeButton: {
+    width: Metrics.WIDTH(34),
+    height: Metrics.HEIGHT(34),
+    marginRight: Metrics.WIDTH(20), 
+  },
+  cameraButtonView: {
+    width: Metrics.WIDTH(421),
+    height: Metrics.HEIGHT(77), 
+    marginRight: Metrics.WIDTH(-140),
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  latestImage: {
+    borderRadius: Metrics.HEIGHT(34), 
+    borderWidth: 1, 
+    borderColor: '#f77717', 
+    width: Metrics.HEIGHT(68), 
+    height: Metrics.HEIGHT(68),
+    marginLeft: Metrics.WIDTH(20),
   },
   whiteContent: {
     backgroundColor: '#ffffff',
