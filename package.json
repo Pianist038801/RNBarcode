@@ -35,6 +35,7 @@
     "react": "16.2.0",
     "react-native": "0.52.2",
     "react-native-animatable": "^1.2.4",
+    "react-native-camera": "^1.1.4",
     "react-native-config": "^0.10.0",
     "react-native-i18n": "1.0.0",
     "react-native-modal-dropdown": "^0.6.2",
@@ -96,9 +97,9 @@
   },
   "config": {},
   "rnpm": {
-      "assets": [
-        "./App/Fonts/"
-      ]
+    "assets": [
+      "./App/Fonts/"
+    ]
   },
   "standard": {
     "parser": "babel-eslint",

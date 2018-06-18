@@ -4,12 +4,14 @@ import LoginScreen from '../Containers/LoginScreen'
 import SendCode from '../Containers/SendCode'
 import Main from '../Containers/Main'
 import AuthFail from '../Containers/AuthFail'
+import ProductsUploader from '../Containers/ProductsUploader';
 
 const HomeStack = StackNavigator({
   LoginScreen: { screen: LoginScreen },
   SendCode: { screen: SendCode },
   AuthFail: { screen: AuthFail },
-  Main: {screen: Main}
+  Main: {screen: Main},
+  ProductsUploader: {screen: ProductsUploader}
 }, {
   headerMode: 'none',
   navigationOptions: {

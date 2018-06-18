@@ -34,18 +34,14 @@ class LoginScreen extends Component {
   isAttempting: boolean
 
   constructor (props: LoginScreenProps) {
-
     super(props)
-
     this.state = {
       passcode : '',
       loading: false,
       error: '',
       editable: true
   },
-
   this.isAttempting = false
-
 }
  
 
@@ -113,8 +109,6 @@ class LoginScreen extends Component {
       <View style={{height:1, backgroundColor: '#e9eef5'}}/>
     </View>)
   }
- 
- 
 
   _onSelect=(id, data)=>{
     console.log('Data=', data);
@@ -136,12 +130,21 @@ class LoginScreen extends Component {
     )
   }
 
+  uploadProducts = () => {
+    this.props.navigation.dispatch({
+      type: 'ReplaceCurrentScreen',
+      routeName: 'ProductsUploader',
+    }); 
+  }
+
   renderMenus = () => {
     const string = ['“русское интернет ТВ”', '“super demo”', '“русское интернет ТВ”', '“super demo”'];
-    let result = [<View style={{height: 30}}/>];
+    let result = [<View key={0} style={{height: 30}}/>];
     for(var i=0; i<this.props.stores.length; i++)
     {
+      let index = i+1
       result.push(
+      <TouchableOpacity key={index} onPress={this.uploadProducts}>
       <View style={{flexDirection: 'column',}}>
         <View style={{backgroundColor: '#e9e9e9', flexDirection: 'row',  alignItems: 'center'}}>
           <Image resizeMode='stretch' style={styles.menuicon} source={{uri: `https://api.barcode2store.com${this.props.stores[i].logo}`}}/>
@@ -151,6 +154,7 @@ class LoginScreen extends Component {
         </View>
         <View style={{height: Metrics.HEIGHT(4), backgroundColor: 'white'}}/>
       </View>
+      </TouchableOpacity>
       );
     }
     return result;
@@ -177,7 +181,7 @@ class LoginScreen extends Component {
           </ModalDropdown>
         </View>
         <Text style={[Fonts.style.h3, {marginLeft: Metrics.WIDTH(44), textAlign: 'left', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
-          Привет 
+          Привет
         </Text>
         <Text style={[Fonts.style.h3, {marginLeft: Metrics.WIDTH(44), textAlign: 'left', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
           {this.props.name}
