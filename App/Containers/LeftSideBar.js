@@ -6,8 +6,6 @@ import { Container, Content, Form, Item, Input, Spinner, Toast } from 'native-ba
 import AuthActions from '../Redux/AuthRedux'
 import FullButton from '../Components/FullButton'
 import ModalDropdown from 'react-native-modal-dropdown';
-import Camera from 'react-native-camera'
-
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 
@@ -22,7 +20,7 @@ type LoginScreenProps = {
   error: string
 }
 
-class ProductsUploader extends Component {
+class LoginScreen extends Component {
 
   props: LoginScreenProps
 
@@ -155,26 +153,18 @@ class ProductsUploader extends Component {
     this.props.logIn(this.props.lang, this.state.number, this.state.code);
   }
 
-  renderCameraButtons(){
+  renderSend(){
     return(
-      <View style={styles.cameraButtons}>
-        <TouchableOpacity onPress={()=>alert('Barcode')}>
-          <ImageBackground resizeMode='stretch' source={Images.big_shop_ellipse} style={styles.barcodeButtonView}>
-            <ImageBackground resizeMode='stretch' source={Images.barcode_icon} style={styles.barcodeButton}>
-            </ImageBackground>
-          </ImageBackground>
+      <ImageBackground resizeMode='stretch' source={Images.button} style={styles.sendButton}>
+        <TouchableOpacity onPress={this.onLogin}>
+          <View style={{flexDirection:'row', alignItems: 'center'}}>
+            <Text style={[Fonts.style.h6, { fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
+              войти
+            </Text>
+            <Image resizeMode='stretch' style={{marginRight: Metrics.WIDTH(20), width: Metrics.WIDTH(23), height: Metrics.HEIGHT(18)}} source={Images.check}/>
+          </View>
         </TouchableOpacity>
-        <ImageBackground resizeMode='stretch' source={Images.big_shop_ellipse} style={styles.cameraButtonView}>
-          <Image style={styles.latestImage} source={Images.placeholder}/>
-          <Image style={styles.latestImage} source={Images.placeholder}/>
-          <TouchableOpacity onPress={()=>alert('PHOTO')}>
-            <ImageBackground resizeMode='stretch' source={Images.big_shop_ellipse} style={styles.cameraBtnWrapper}>
-              <ImageBackground resizeMode='stretch' source={Images.photo_icon} style={styles.barcodeButton}>
-              </ImageBackground>
-            </ImageBackground>
-          </TouchableOpacity>
-        </ImageBackground>
-      </View>
+      </ImageBackground>
     )
   }
 
@@ -197,84 +187,73 @@ class ProductsUploader extends Component {
     )
   }
 
-  renderCamera() {
-    
+  renderForm() {
+    const flag = Images[`flag_${this.props.lang}`];
+    const dropOptions = ['ru', 'de', 'eng', 'esp', 'fr', 'he', 'it'].filter(x=>x!=this.props.lang);
+    // const dropOptions = ['ru', 'de', 'eng']
     return (
-      <Camera
-      style={{ flex:1 }}
-      ref={(cam) => {
-        this.camera = cam;
-      }}
-      aspect={Camera.constants.Aspect.fill}
-    />
-    )
-  }
-
-  renderSideButtons() {
-    return (
-      <View style={styles.sideButtons}>
-        <TouchableOpacity onPress={()=>alert('Left_Pane')}>
-          <ImageBackground resizeMode='stretch' source={Images.ear_left} style={styles.ear_left}>
-            <ImageBackground resizeMode='stretch' source={Images.cog_black} style={styles.cog_icon}>
-            </ImageBackground>
-          </ImageBackground>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={()=>alert('Right_Pane')}>
-          <ImageBackground resizeMode='stretch' source={Images.ear_right} style={styles.ear_left}>
-            <ImageBackground resizeMode='stretch' source={Images.cog_green} style={styles.cog_icon}>
-            </ImageBackground>
-          </ImageBackground>
-        </TouchableOpacity> 
-      </View>
-    )
-  }
-
-  renderBottomBar() {  
-    return (
-      <TouchableOpacity onPress={()=>alert('Right_Pane')}  style={styles.bottomProductView}>
-        <ImageBackground resizeMode='stretch' source={Images.big_shop_ellipse} style={styles.bottomProductBar}>
-          <View style={styles.back_btn_wrapper}>
-            <ImageBackground resizeMode='stretch' source={Images.back_arrow} style={styles.back_btn}>
-            </ImageBackground>
-          </View>
-          <ImageBackground resizeMode='stretch' source={Images.big_shop_ellipse} style={styles.bottomProductRightBtn}>
-            <Text style={[Fonts.style.h6, { width: Metrics.WIDTH(200), fontWeight: 'bold', fontFamily: Fonts.type.emphasis }]}>
-            добавьте товар {'\n'} в магазин
-            </Text>
-            <ImageBackground resizeMode='stretch' source={Images.arrow_sjop} style={styles.back_btn}/>  
-          </ImageBackground>
+      <ImageBackground resizeMode='stretch' source={Images.loginForm} style={styles.loginForm}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: Metrics.HEIGHT(8) }}>
+          <View style={{flex:1}}/>
+          <Image resizeMode='stretch' style={{width: Metrics.screenWidth*30/460, height: Metrics.screenHeight * 20 / 970}} source={flag}/>
+          <Text style={[Fonts.style.h6, {color: Colors.textSecondary, textAlign: 'center', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
+            {this.props.lang.toUpperCase()}
+          </Text>
+        </View>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View style={{flex:1}}/>
+          <ModalDropdown options={dropOptions} onSelect={this._onSelect} renderRow={this._renderDropRow}
+            dropdownStyle={styles.dropDown} onDropdownWillHide={()=>{  return true;}}>
+            <Image style={{width: Metrics.WIDTH(15), height: Metrics.HEIGHT(10), marginTop: Metrics.HEIGHT(10), marginRight: Metrics.WIDTH(15)}} resizeMode='stretch' source={Images.triangle}/>
+          </ModalDropdown>
+        </View>
+        <Text style={[Fonts.style.h3, { textAlign: 'right', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
+          ваш номер
+        </Text>
+        <Text style={[Fonts.style.h3, {marginTop: -10, textAlign: 'right', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
+          телефона
+        </Text> 
+        <View style={{height: Metrics.HEIGHT(20)}}/>
+        <Text style={[Fonts.style.description, { textAlign: 'right', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
+          {''}
+        </Text>
+        <ImageBackground resizeMode='stretch' source={Images.button} style={styles.numberButton}>
+          <Input
+            maxLength={12}
+            placeholder={'Enter Phone Number'}
+            style={{marginLeft: 30}}
+            textAlign={'left'}
+            value={this.state.number}
+            onChangeText={this.onChangeNumber}
+            fontSize={Fonts.size.regular}
+            fontFamily={Fonts.type.emphasis}
+            placeholderTextColor='gray'                     
+            returnKeyType='done'                
+            autoCapitalize='none'
+            autoCorrect={false}
+            underlineColorAndroid='transparent'
+            onSubmitEditing={() => {}}
+          />
         </ImageBackground>
-      </TouchableOpacity>
-    )
-  }
-  renderProductNames() {
-    return (
-      <View style={{ height: Metrics.HEIGHT(140), marginTop: Metrics.HEIGHT(-35), marginBottom: Metrics.HEIGHT(10)}}>
-        <ImageBackground resizeMode='stretch' source={Images.button} style={styles.product_name}>
-          <Text style={[Fonts.style.description, { fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
-          название товара: 
-          </Text>
-          <Text>
-          TEKCT TEKCT TEKCT
-          </Text>
-        </ImageBackground>
-        <ImageBackground resizeMode='stretch' source={Images.button} style={styles.product_name}>
-          <Text style={[Fonts.style.description, { fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
-          название товара: 
-          </Text>
-          <Text>
-          TEKCT TEKCT TEKCT
-          </Text>
-        </ImageBackground>
-        <ImageBackground resizeMode='stretch' source={Images.button} style={styles.product_name}>
-          <Text style={[Fonts.style.description, { fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
-          название товара: 
-          </Text>
-          <Text>
-          TEKCT TEKCT TEKCT
-          </Text>
-        </ImageBackground>
-      </View>
+        <ImageBackground resizeMode='stretch' source={Images.button} style={styles.codeButton}>
+          <Input
+            maxLength={12}
+            placeholder={'Enter Code'}
+            style={{marginLeft: 30}}
+            textAlign={'left'}
+            value={this.state.code}
+            onChangeText={this.onChangeCode}
+            fontSize={Fonts.size.regular}
+            fontFamily={Fonts.type.emphasis}
+            placeholderTextColor='gray'                     
+            returnKeyType='done'                
+            autoCapitalize='none'
+            autoCorrect={false}
+            underlineColorAndroid='transparent'
+            onSubmitEditing={() => {}}
+          />
+        </ImageBackground> 
+      </ImageBackground>
     )
   }
 
@@ -282,17 +261,15 @@ class ProductsUploader extends Component {
     return (
     <SafeAreaView style={styles.whiteContent}>
       <Container>
-        <ScrollView style={{height: Metrics.screenHeight}} scrollEnabled={false}>
+        <ScrollView scrollEnabled={false}>
           <View style={{ height: Metrics.screenHeight * 143 / 964 }}>
             {this.renderHeader()}
           </View>
-          <View style={styles.cameraView}>
-            {this.renderCamera()}
+          <View style={{ height: Metrics.screenHeight * 405 / 964 }}>
+            {this.renderForm()}
           </View>
-          {this.renderCameraButtons()}
-          {this.renderSideButtons()}
-          {this.renderProductNames()}
-          {this.renderBottomBar()}
+          {this.renderSend()}
+          {this.renderTimeBar()}
         </ScrollView>
       </Container>
     </SafeAreaView>
@@ -317,4 +294,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductsUploader)
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
