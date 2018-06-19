@@ -8,6 +8,70 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: 'green'
   },
+  bottomProductBar: {
+    flexDirection: 'row',
+    width: Metrics.WIDTH(421),
+    height: Metrics.HEIGHT(77),
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    alignSelf: 'center',
+    paddingHorizontal: Metrics.WIDTH(20),
+    
+  },
+  bottomProductView: {
+    flexDirection: 'row',
+    width: Metrics.screenWidth,
+    height: Metrics.HEIGHT(77),
+    alignItems: 'center', 
+    alignSelf: 'center',
+    paddingHorizontal: Metrics.WIDTH(20),
+    
+  },
+  bottomProductRightBtn: {
+    flexDirection: 'row',
+    width: Metrics.WIDTH(310),
+    height: Metrics.HEIGHT(60),
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: Metrics.WIDTH(20),
+  },
+  back_btn_wrapper: {
+    width: Metrics.WIDTH(60),
+    height: Metrics.WIDTH(60),
+    borderRadius: Metrics.WIDTH(30),
+    backgroundColor: '#f77717',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  back_btn: {
+    width: Metrics.WIDTH(40),
+    height: Metrics.WIDTH(40),
+  },
+  ear_left: {
+    width: Metrics.WIDTH(74),
+    height: Metrics.HEIGHT(164),
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  cog_icon: {
+    width: Metrics.WIDTH(27),
+    height: Metrics.WIDTH(27),
+  },
+  product_name: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: Metrics.WIDTH(430),
+    height: Metrics.HEIGHT(40),
+    paddingHorizontal: Metrics.WIDTH(20),
+    alignSelf: 'center',
+    flex: 1,
+  },
+  sideButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: Metrics.HEIGHT(-28)
+  },
   cameraButtons: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -74,7 +138,8 @@ export default StyleSheet.create({
   barcodeButton: {
     width: Metrics.WIDTH(34),
     height: Metrics.HEIGHT(34),
-    marginRight: Metrics.WIDTH(20), 
+    marginRight: Metrics.WIDTH(20),
+    marginLeft: Metrics.WIDTH(30),
   },
   cameraButtonView: {
     width: Metrics.WIDTH(421),
@@ -82,6 +147,14 @@ export default StyleSheet.create({
     marginRight: Metrics.WIDTH(-140),
     flexDirection: 'row',
     alignItems: 'center'
+  },
+  cameraBtnWrapper: {
+    width: Metrics.WIDTH(421),
+    height: Metrics.HEIGHT(77), 
+    marginRight: Metrics.WIDTH(-140),
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginLeft: Metrics.WIDTH(20),
   },
   latestImage: {
     borderRadius: Metrics.HEIGHT(34), 
@@ -95,6 +168,7 @@ export default StyleSheet.create({
     backgroundColor: '#ffffff',
     flex:1,
   },
+
   bottomBar: {
     width: Metrics.WIDTH(980),
     height: Metrics.HEIGHT(689),

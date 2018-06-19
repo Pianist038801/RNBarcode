@@ -32,6 +32,8 @@ const images = {
   barcode_icon: require('../Images/ScanCodeIcon.png'),
   shop_ellipse: require('../Images/ShopEllipse.png'),
   placeholder: require('../Images/placeholder.png'),
+  cog_black: require('../Images/GajkaBlack.png'),
+  cog_green: require('../Images/GajkaGreen.png'),
 }
 
 export default images

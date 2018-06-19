@@ -167,6 +167,12 @@ class ProductsUploader extends Component {
         <ImageBackground resizeMode='stretch' source={Images.big_shop_ellipse} style={styles.cameraButtonView}>
           <Image style={styles.latestImage} source={Images.placeholder}/>
           <Image style={styles.latestImage} source={Images.placeholder}/>
+          <TouchableOpacity onPress={()=>alert('PHOTO')}>
+            <ImageBackground resizeMode='stretch' source={Images.big_shop_ellipse} style={styles.cameraBtnWrapper}>
+              <ImageBackground resizeMode='stretch' source={Images.photo_icon} style={styles.barcodeButton}>
+              </ImageBackground>
+            </ImageBackground>
+          </TouchableOpacity>
         </ImageBackground>
       </View>
     )
@@ -204,20 +210,89 @@ class ProductsUploader extends Component {
     )
   }
 
+  renderSideButtons() {
+    return (
+      <View style={styles.sideButtons}>
+        <TouchableOpacity onPress={()=>alert('Left_Pane')}>
+          <ImageBackground resizeMode='stretch' source={Images.ear_left} style={styles.ear_left}>
+            <ImageBackground resizeMode='stretch' source={Images.cog_black} style={styles.cog_icon}>
+            </ImageBackground>
+          </ImageBackground>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={()=>alert('Right_Pane')}>
+          <ImageBackground resizeMode='stretch' source={Images.ear_right} style={styles.ear_left}>
+            <ImageBackground resizeMode='stretch' source={Images.cog_green} style={styles.cog_icon}>
+            </ImageBackground>
+          </ImageBackground>
+        </TouchableOpacity> 
+      </View>
+    )
+  }
+
+  renderBottomBar() {  
+    return (
+      <TouchableOpacity onPress={()=>alert('Right_Pane')}  style={styles.bottomProductView}>
+        <ImageBackground resizeMode='stretch' source={Images.big_shop_ellipse} style={styles.bottomProductBar}>
+          <View style={styles.back_btn_wrapper}>
+            <ImageBackground resizeMode='stretch' source={Images.back_arrow} style={styles.back_btn}>
+            </ImageBackground>
+          </View>
+          <ImageBackground resizeMode='stretch' source={Images.big_shop_ellipse} style={styles.bottomProductRightBtn}>
+            <Text style={[Fonts.style.h6, { width: Metrics.WIDTH(200), fontWeight: 'bold', fontFamily: Fonts.type.emphasis }]}>
+            добавьте товар {'\n'} в магазин
+            </Text>
+            <ImageBackground resizeMode='stretch' source={Images.arrow_sjop} style={styles.back_btn}/>  
+          </ImageBackground>
+        </ImageBackground>
+      </TouchableOpacity>
+    )
+  }
+  renderProductNames() {
+    return (
+      <View style={{ height: Metrics.HEIGHT(140), marginTop: Metrics.HEIGHT(-35), marginBottom: Metrics.HEIGHT(10)}}>
+        <ImageBackground resizeMode='stretch' source={Images.button} style={styles.product_name}>
+          <Text style={[Fonts.style.description, { fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
+          название товара: 
+          </Text>
+          <Text>
+          TEKCT TEKCT TEKCT
+          </Text>
+        </ImageBackground>
+        <ImageBackground resizeMode='stretch' source={Images.button} style={styles.product_name}>
+          <Text>
+          название товара: 
+          </Text>
+          <Text>
+          TEKCT TEKCT TEKCT
+          </Text>
+        </ImageBackground>
+        <ImageBackground resizeMode='stretch' source={Images.button} style={styles.product_name}>
+          <Text>
+          название товара: 
+          </Text>
+          <Text>
+          TEKCT TEKCT TEKCT
+          </Text>
+        </ImageBackground>
+      </View>
+    )
+  }
+
   render () {
     return (
     <SafeAreaView style={styles.whiteContent}>
       <Container>
-        <ScrollView scrollEnabled={false}>
+        <ScrollView style={{height: Metrics.screenHeight}} scrollEnabled={false}>
           <View style={{ height: Metrics.screenHeight * 143 / 964 }}>
             {this.renderHeader()}
           </View>
-          <View style={styles.cameraView}> 
+          <View style={styles.cameraView}>
             {this.renderCamera()}
           </View>
           {this.renderCameraButtons()}
-
-          {this.renderTimeBar()}
+          {this.renderSideButtons()}
+          {this.renderProductNames()}
+          {this.renderBottomBar()}
         </ScrollView>
       </Container>
     </SafeAreaView>
