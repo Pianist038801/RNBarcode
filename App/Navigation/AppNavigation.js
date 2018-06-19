@@ -1,10 +1,14 @@
-import { StackNavigator } from 'react-navigation'
+
+import React, { Component } from 'react'
+import { StackNavigator, DrawerNavigator } from 'react-navigation'
+import { Images, Colors, Metrics, Fonts } from '../Themes'
 import TeamScreen from '../Containers/TeamScreen'
 import LoginScreen from '../Containers/LoginScreen'
 import SendCode from '../Containers/SendCode'
 import Main from '../Containers/Main'
 import AuthFail from '../Containers/AuthFail'
 import ProductsUploader from '../Containers/ProductsUploader';
+import LeftSideMenu from '../Containers/LeftSideBar';
 
 const HomeStack = StackNavigator({
   LoginScreen: { screen: LoginScreen },
@@ -34,4 +38,39 @@ HomeStack.router.getStateForAction = (action, state) => {
     return prevGetStateForActionHomeStack(action, state);
   }
 
-export default HomeStack
+const MainDrawer = DrawerNavigator(
+  {
+    HomeStack:{
+      screen: HomeStack
+    }
+  },
+  {
+    initialRouteName: 'HomeStack',
+    drawerWidth: Metrics.screenWidth * 36 / 46,
+    drawerPosition: 'left',
+    contentComponent: props => <LeftSideMenu {...props} />,
+    drawerOpenRoute: 'LeftSideMenu',
+    drawerCloseRoute: 'LeftSideMenuClose',
+    drawerToggleRoute: 'LeftSideMenuToggle',
+  },
+);
+
+const AppRoute = DrawerNavigator(
+  {
+    MainDrawer: {
+      screen: MainDrawer,
+    },
+  },
+  {
+    navigationOptions: {
+    },
+    drawerPosition: 'right',
+    drawerWidth: Metrics.screenWidth * 36 / 46,
+    contentComponent: props => <LeftSideMenu {...props} />,
+    drawerOpenRoute: 'RightSideMenu',
+    drawerCloseRoute: 'RightSideMenuClose',
+    drawerToggleRoute: 'RightSideMenuToggle',
+  },
+);
+
+export default AppRoute;

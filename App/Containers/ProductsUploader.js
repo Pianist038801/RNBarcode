@@ -213,13 +213,13 @@ class ProductsUploader extends Component {
   renderSideButtons() {
     return (
       <View style={styles.sideButtons}>
-        <TouchableOpacity onPress={()=>alert('Left_Pane')}>
+        <TouchableOpacity onPress={()=>this.props.navigation.navigate('LeftSideMenu')}>
           <ImageBackground resizeMode='stretch' source={Images.ear_left} style={styles.ear_left}>
             <ImageBackground resizeMode='stretch' source={Images.cog_black} style={styles.cog_icon}>
             </ImageBackground>
           </ImageBackground>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=>alert('Right_Pane')}>
+        <TouchableOpacity onPress={()=>this.props.navigation.navigate('RightSideMenu')}>
           <ImageBackground resizeMode='stretch' source={Images.ear_right} style={styles.ear_left}>
             <ImageBackground resizeMode='stretch' source={Images.cog_green} style={styles.cog_icon}>
             </ImageBackground>

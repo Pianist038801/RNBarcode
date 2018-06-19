@@ -67,6 +67,24 @@ export default StyleSheet.create({
     alignSelf: 'center',
     flex: 1,
   },
+  product_input: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: Metrics.WIDTH(330),
+    height: Metrics.HEIGHT(60),
+    paddingHorizontal: Metrics.WIDTH(20),
+    marginVertical: Metrics.HEIGHT(15),
+    alignSelf: 'center',
+    flex: 1,
+  },
+  confirm_button: {
+    width: Metrics.WIDTH(258),
+    height: Metrics.HEIGHT(135),
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+  },
   sideButtons: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -168,7 +186,10 @@ export default StyleSheet.create({
     backgroundColor: '#ffffff',
     flex:1,
   },
-
+  leftSideView: {
+    width: Metrics.sideBarWidth,
+    flex: 1
+  },
   bottomBar: {
     width: Metrics.WIDTH(980),
     height: Metrics.HEIGHT(689),

@@ -105,23 +105,48 @@ class LoginScreen extends Component {
 
   renderHeader() {
     return (
-      <View style={styles.headerView}>
-        <Text style={[Fonts.style.description, { fontWeight: 'bold', fontFamily: Fonts.type.emphasis, margin: 10, marginBottom: 6 }]}>
-          shop-online loader 2.4
-        </Text>
-        <Text style={[Fonts.style.description, { fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
-          WWW.BARCODE2STORE.com
-        </Text>
-        <View style={{flex:1}}/>
-        <View>
-          <Text style={[Fonts.style.h6, {textAlign: 'center', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
-            BARCODE - ONLINE
-          </Text>
-          <Text style={[Fonts.style.description, {textAlign: 'center', fontFamily: Fonts.type.emphasis, marginHorizontal: 10, marginBottom: 3 }]}>
-            загрузка товаров в магазин
-          </Text>
-          <View style={{height:1, backgroundColor: '#e9eef5'}}/>
+      <View style={{width: Metrics.sideBarWidth,  borderWidth: 2, borderRadius: Metrics.WIDTH(30), borderColor: '#f77717', height: Metrics.HEIGHT(625)}}>
+        <View style={{height: Metrics.HEIGHT(50),backgroundColor: '#e6e7e8', borderTopLeftRadius: Metrics.WIDTH(28),    borderTopEndRadius: Metrics.WIDTH(28), alignItems: 'center', justifyContent: 'center',}}>
+            <Text style={{  fontSize: Fonts.size.h6, fontFamily: Fonts.type.base,   textAlign: 'center'}}>
+                223525235235
+            </Text>
         </View>
+        <View style={{height: Metrics.HEIGHT(73),alignItems: 'center', justifyContent: 'center',backgroundColor: '#ecc200'}}>
+            <Text style={{ fontSize: Fonts.size.h2, color: 'white', fontFamily: Fonts.type.bigItalic,   textAlign: 'center'}}>
+                KOT
+            </Text>
+        </View>
+        <View style={{height: Metrics.HEIGHT(225),alignItems: 'center', justifyContent: 'center',backgroundColor: '#ffffff'}}>
+            <Image resizeMode='stretch' style={{marginRight: Metrics.WIDTH(20), width: Metrics.WIDTH(235), height: Metrics.HEIGHT(194)}} source={Images.pixel_cat}/>
+        </View>
+        <View style={{height: Metrics.HEIGHT(50),alignItems: 'center', justifyContent: 'center',backgroundColor: '#ffffff'}}>
+            <Text style={{ fontSize: Fonts.size.h2, color: '#244063', fontFamily: Fonts.type.bigItalic,   textAlign: 'center'}}>
+                200 {' '}
+                <Text style={{  fontSize: Fonts.size.h6, color: '#244063', fontFamily: Fonts.type.base,   textAlign: 'center'}}>
+                    BAT
+                </Text>
+            </Text>
+        </View>
+
+        <View style={{flexDirection: 'row',  marginTop: Metrics.HEIGHT(100), alignItems: 'center', justifyContent: 'center'}}>
+            <Image resizeMode='stretch' style={{marginRight: Metrics.WIDTH(20), width: Metrics.WIDTH(20), height: Metrics.HEIGHT(17)}} source={Images.left_arrow}/>
+            <Text style={{  fontSize: Fonts.size.h6, color: '#244063', fontFamily: Fonts.type.base,   textAlign: 'center'}}>память 1/8</Text>
+            <Image resizeMode='stretch' style={{marginLeft: Metrics.WIDTH(20), width: Metrics.WIDTH(20), height: Metrics.HEIGHT(17)}} source={Images.right_arrow}/>
+        </View>
+        <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+            <Image resizeMode='stretch' style={{marginRight: Metrics.WIDTH(20), width: Metrics.WIDTH(20), height: Metrics.HEIGHT(17)}} source={Images.left_arrow}/>
+            <Text style={{  fontSize: Fonts.size.h6, color: '#244063', fontFamily: Fonts.type.base,   textAlign: 'center'}}>память 1/8</Text>
+            <Image resizeMode='stretch' style={{marginLeft: Metrics.WIDTH(20), width: Metrics.WIDTH(20), height: Metrics.HEIGHT(17)}} source={Images.right_arrow}/>
+        </View>
+        
+        <ImageBackground resizeMode='stretch' style={{marginTop: Metrics.HEIGHT(10),alignSelf: 'center', alignItems: 'center', justifyContent: 'center', width: Metrics.WIDTH(299), height: Metrics.HEIGHT(11)}} source={Images.grey_line}>
+            <TouchableOpacity>
+                <ImageBackground resizeMode='stretch' style={{alignItems: 'center', justifyContent: 'center', width: Metrics.WIDTH(136), height: Metrics.HEIGHT(101)}} source={Images.green_button}>
+                <Text style={{  fontSize: Fonts.size.h6, color: '#244063', fontFamily: Fonts.type.base,   textAlign: 'center'}}>+</Text>
+                </ImageBackground>
+            </TouchableOpacity>
+        </ImageBackground>
+        
       </View>
     )
   }
@@ -184,6 +209,18 @@ class LoginScreen extends Component {
             {this.state.curTime}
           </Text>
       </ImageBackground>
+    )
+  }
+  renderInput() {
+    return (
+    <ImageBackground resizeMode='stretch' source={Images.button} style={styles.product_input}>
+        <Text style={[Fonts.style.h4, { fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
+            цена: 
+        </Text>
+        <Text>
+          TEKCT TEKCT TEKCT
+        </Text>
+    </ImageBackground>
     )
   }
 
@@ -256,20 +293,26 @@ class LoginScreen extends Component {
       </ImageBackground>
     )
   }
-
+  renderConfirmButton () {
+    return (
+        <TouchableOpacity>
+            <ImageBackground resizeMode='stretch' source={Images.confirm_button} style={styles.confirm_button}>
+                <Text style={[Fonts.style.h4, { color: 'black', fontFamily: Fonts.type.bigItalic }]}>
+                    сохранить
+                </Text>
+            </ImageBackground>
+        </TouchableOpacity>
+    )
+  }
   render () {
     return (
-    <SafeAreaView style={styles.whiteContent}>
+    <SafeAreaView style={styles.leftSideView}>
       <Container>
         <ScrollView scrollEnabled={false}>
-          <View style={{ height: Metrics.screenHeight * 143 / 964 }}>
-            {this.renderHeader()}
-          </View>
-          <View style={{ height: Metrics.screenHeight * 405 / 964 }}>
-            {this.renderForm()}
-          </View>
-          {this.renderSend()}
-          {this.renderTimeBar()}
+          {this.renderHeader()}
+          {this.renderInput()}
+          {this.renderInput()}
+          {this.renderConfirmButton()}
         </ScrollView>
       </Container>
     </SafeAreaView>

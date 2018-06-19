@@ -34,6 +34,12 @@ const images = {
   placeholder: require('../Images/placeholder.png'),
   cog_black: require('../Images/GajkaBlack.png'),
   cog_green: require('../Images/GajkaGreen.png'),
+  pixel_cat: require('../Images/PixelCat.png'),
+  left_arrow: require('../Images/LeftBlackArrow.png'),
+  right_arrow: require('../Images/RightBlackArrow.png'),
+  grey_line: require('../Images/GreyLine.png'),
+  green_button: require('../Images/GreenButton.png'),
+  confirm_button: require('../Images/confirm_btn.png')
 }
 
 export default images
