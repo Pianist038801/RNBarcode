@@ -210,8 +210,8 @@ class LoginScreen extends Component {
             onChangeText={this.onChangeNumber}
             fontSize={Fonts.size.regular}
             fontFamily={Fonts.type.emphasis}
-            placeholderTextColor='gray'                     
-            returnKeyType='done'                
+            placeholderTextColor='gray'
+            returnKeyType='done'
             autoCapitalize='none'
             autoCorrect={false}
             underlineColorAndroid='transparent'

@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { View, ImageBackground, Image, SafeAreaView, Text, ScrollView, TouchableOpacity} from 'react-native'
+import { View, Modal, ImageBackground, Image, SafeAreaView, Text, ScrollView, TouchableOpacity} from 'react-native'
 import { connect } from 'react-redux'
 import { Images, Colors, Metrics, Fonts } from '../Themes'
-import { Container, Content, Form, Item, Input, Spinner, Toast } from 'native-base';
+import { Container, Content, Form, CheckBox, Item, Input, Spinner, Toast, ListItem, Body } from 'native-base';
 import AuthActions from '../Redux/AuthRedux'
 import FullButton from '../Components/FullButton'
 import ModalDropdown from 'react-native-modal-dropdown';
+import PopupDialog,  { SlideAnimation, DialogTitle } from 'react-native-popup-dialog';
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 
@@ -20,7 +21,7 @@ type LoginScreenProps = {
   error: string
 }
 
-class LoginScreen extends Component {
+class LeftSideBar extends Component {
 
   props: LoginScreenProps
 
@@ -31,6 +32,8 @@ class LoginScreen extends Component {
     editable: boolean,
     number: string,
     code: string,
+    modalVisible: boolean,
+    modalCheck: boolean,
   }
 
   isAttempting: boolean
@@ -40,12 +43,16 @@ class LoginScreen extends Component {
     super(props)
     console.log('uhaha');
     this.state = {
+      modalCheck: false,
       passcode : '',
       loading: false,
       error: '',
       editable: true,
       number: props.phone_number,
       code: '',
+      modalVisible: false,
+      attributeName: '',
+      attributeValue: '',
   },
 
   this.isAttempting = false
@@ -140,7 +147,7 @@ class LoginScreen extends Component {
         </View>
         
         <ImageBackground resizeMode='stretch' style={{marginTop: Metrics.HEIGHT(10),alignSelf: 'center', alignItems: 'center', justifyContent: 'center', width: Metrics.WIDTH(299), height: Metrics.HEIGHT(11)}} source={Images.grey_line}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>this.popupDialog.show()}>
                 <ImageBackground resizeMode='stretch' style={{alignItems: 'center', justifyContent: 'center', width: Metrics.WIDTH(136), height: Metrics.HEIGHT(101)}} source={Images.green_button}>
                 <Text style={{  fontSize: Fonts.size.h6, color: '#244063', fontFamily: Fonts.type.base,   textAlign: 'center'}}>+</Text>
                 </ImageBackground>
@@ -304,6 +311,78 @@ class LoginScreen extends Component {
         </TouchableOpacity>
     )
   }
+  renderModal() {
+      return(
+        <PopupDialog
+          width={Metrics.sideBarWidth}
+          dialogStyle={{borderRadius: Metrics.WIDTH(30)}}
+          height={Metrics.HEIGHT(279)}
+          containerStyle = {{width: Metrics.sideBarWidth, borderRadius: Metrics.WIDTH(30)}}
+          ref={(popupDialog) => { this.popupDialog = popupDialog; }}
+        >
+          <View style={{flex:1, borderRadius: Metrics.WIDTH(30),borderWidth: 2, backgroundColor: 'white',  borderColor: '#f77717'}}>
+            <ImageBackground resizeMode='stretch' source={Images.button} style={styles.modalInput}>
+              <Input
+                maxLength={12}
+                placeholder={'наименование атрибута: '}
+                style={{marginLeft: 30}}
+                textAlign={'left'}
+                value={this.state.attributeName}
+                onChangeText={attributeName=>this.setState({attributeName})}
+                fontSize={Fonts.size.regular}
+                fontFamily={Fonts.type.emphasis}
+                placeholderTextColor='gray'
+                returnKeyType='done'
+                autoCapitalize='none'
+                autoCorrect={false}
+                underlineColorAndroid='transparent'
+                onSubmitEditing={() => {}}
+              />
+            </ImageBackground> 
+            <ImageBackground resizeMode='stretch' source={Images.button} style={styles.modalInput}>
+              <Input
+                maxLength={12}
+                placeholder={'значение атрибута:  '}
+                style={{marginLeft: 30}}
+                textAlign={'left'}
+                value={this.state.attributeValue}
+                onChangeText={attributeValue=>this.setState({attributeValue})}
+                fontSize={Fonts.size.regular}
+                fontFamily={Fonts.type.emphasis}
+                placeholderTextColor='gray'
+                returnKeyType='done'
+                autoCapitalize='none'
+                autoCorrect={false}
+                underlineColorAndroid='transparent'
+                onSubmitEditing={() => {}}
+              />
+            </ImageBackground> 
+            <View style={{flexDirection: 'row', marginTop: Metrics.HEIGHT(20), alignItems: 'center', justifyContent: 'center'}}>
+              <CheckBox checked={this.state.modalCheck} color='#f77717' onPress={()=>this.setState({modalCheck: !this.state.modalCheck})}/>
+              <Text style={{ marginLeft: Metrics.WIDTH(20), fontSize: Fonts.size.h6, color: '#244063', fontFamily: Fonts.type.base}}>
+                атрибут для сравнения
+              </Text> 
+            </View>
+            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}}>
+              <TouchableOpacity>
+                <ImageBackground resizeMode='stretch' source={Images.confirm_button} style={styles.modal_button}>
+                    <Text style={[Fonts.style.h6, { color: 'white', fontFamily: Fonts.type.bigItalic }]}>
+                      добавить
+                    </Text>
+                </ImageBackground>
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <ImageBackground resizeMode='stretch' source={Images.confirm_button} style={styles.modal_button}>
+                    <Text style={[Fonts.style.h6, { color: 'white', fontFamily: Fonts.type.bigItalic }]}>
+                      закрыть
+                    </Text>
+                </ImageBackground>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </PopupDialog>
+      )
+  }
   render () {
     return (
     <SafeAreaView style={styles.leftSideView}>
@@ -312,6 +391,7 @@ class LoginScreen extends Component {
           {this.renderHeader()}
           {this.renderInput()}
           {this.renderInput()}
+          {this.renderModal()}
           {this.renderConfirmButton()}
         </ScrollView>
       </Container>
@@ -337,4 +417,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(LeftSideBar)

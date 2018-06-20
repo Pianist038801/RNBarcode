@@ -85,6 +85,13 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center',
   },
+  modal_button: {
+    width: Metrics.WIDTH(179),
+    height: Metrics.HEIGHT(79),
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+  },
   sideButtons: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -126,6 +133,12 @@ export default StyleSheet.create({
   loginForm: {
     width: Metrics.screenWidth,
     height: Metrics.screenHeight * 435 / 970,
+  },
+  modalInput: {
+    alignSelf: 'center',
+    width: Metrics.WIDTH(297),
+    height: Metrics.HEIGHT(58),
+    marginTop: Metrics.HEIGHT(15),
   },
   numberButton: {
     width: Metrics.WIDTH(421),
