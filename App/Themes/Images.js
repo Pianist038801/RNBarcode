@@ -39,7 +39,8 @@ const images = {
   right_arrow: require('../Images/RightBlackArrow.png'),
   grey_line: require('../Images/GreyLine.png'),
   green_button: require('../Images/GreenButton.png'),
-  confirm_button: require('../Images/confirm_btn.png')
+  confirm_button: require('../Images/confirm_btn.png'),
+  icons: require('../Images/icons.png')
 }
 
 export default images

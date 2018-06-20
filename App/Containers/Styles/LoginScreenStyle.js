@@ -74,7 +74,7 @@ export default StyleSheet.create({
     width: Metrics.WIDTH(330),
     height: Metrics.HEIGHT(60),
     paddingHorizontal: Metrics.WIDTH(20),
-    marginVertical: Metrics.HEIGHT(15),
+    marginVertical: Metrics.HEIGHT(10),
     alignSelf: 'center',
     flex: 1,
   },
