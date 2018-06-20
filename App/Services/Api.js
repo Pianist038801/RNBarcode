@@ -1,6 +1,5 @@
 // a library to wrap and simplify api calls
 import apisauce from 'apisauce'
-import Config from 'react-native-config'
 import { requestUrl } from '../Config/RequestUrl';
 
 // our "constructor"
