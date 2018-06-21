@@ -12,7 +12,7 @@ import ModalDropdown from 'react-native-modal-dropdown';
 // Styles
 import styles from './Styles/LoginScreenStyle'
 
-type LoginScreenProps = {
+type PROPS = {
   dispatch: () => any,
   fetching: boolean,
   attemptLogin: () => void,
@@ -20,9 +20,9 @@ type LoginScreenProps = {
   error: string
 }
 
-class LoginScreen extends Component {
+class SendCode extends Component {
 
-  props: LoginScreenProps
+  props: PROPS
 
   state: {
     passcode: number,
@@ -34,7 +34,7 @@ class LoginScreen extends Component {
 
   isAttempting: boolean
 
-  constructor (props: LoginScreenProps) {
+  constructor (props: PROPS) {
 
     super(props)
 
@@ -51,10 +51,13 @@ class LoginScreen extends Component {
 
 }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps= (nextProps) => {
     console.log('SendCodeNextProps=', nextProps);
+    console.log('This.PROPS=', this.props);
+    console.log('This=', this);
     if(this.props.fetching === true && nextProps.fetching === false && nextProps.error === null)
     {
+      console.log('GO_TO_LOGIN');
       this.props.navigation.dispatch({
         type: 'ReplaceCurrentScreen',
         routeName: 'LoginScreen',
@@ -63,6 +66,7 @@ class LoginScreen extends Component {
     }
     if(this.props.fetching === true && nextProps.fetching === false && nextProps.error !== null)
     {
+      console.log('ERROR_IN_FIRST');
       this.setState({typing: false})
     }
   }
@@ -262,4 +266,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(SendCode)

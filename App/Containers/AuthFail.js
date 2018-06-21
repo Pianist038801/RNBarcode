@@ -12,7 +12,7 @@ import ModalDropdown from 'react-native-modal-dropdown';
 // Styles
 import styles from './Styles/LoginScreenStyle'
 
-type LoginScreenProps = {
+type AuthFailProps = {
   dispatch: () => any,
   fetching: boolean,
   attemptLogin: () => void,
@@ -20,9 +20,9 @@ type LoginScreenProps = {
   error: string
 }
 
-class LoginScreen extends Component {
+class AuthFail extends Component {
 
-  props: LoginScreenProps
+  props: AuthFailProps
 
   state: {
     passcode: number,
@@ -34,7 +34,7 @@ class LoginScreen extends Component {
 
   isAttempting: boolean
 
-  constructor (props: LoginScreenProps) {
+  constructor (props: AuthFailProps) {
 
     super(props)
 
@@ -54,7 +54,7 @@ class LoginScreen extends Component {
 
     if(this.props.fetching === true && nextProps.fetching === false && nextProps.error === null)
     {
-      this.props.navigation.navigate('LoginScreen');
+      this.props.navigation.navigate('AuthFail');
     }
     if(this.props.fetching === true && nextProps.fetching === false && nextProps.error !== null)
     {
@@ -144,7 +144,7 @@ class LoginScreen extends Component {
   }
 
   gotoLogin = () => {
-    this.props.navigation.navigate('LoginScreen');
+    this.props.navigation.navigate('AuthFail');
   }
 
   renderSend(){
@@ -256,4 +256,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(AuthFail)

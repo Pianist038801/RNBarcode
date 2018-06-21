@@ -60,56 +60,10 @@ class LeftSideBar extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-
-    if(this.props.fetching === true && nextProps.fetching === false && nextProps.error === null)
-    {
-      this.props.navigation.dispatch({
-        type: 'ReplaceCurrentScreen',
-        routeName: 'Main',
-      }); 
-    }
-    if(this.props.fetching === true && nextProps.fetching === false && nextProps.error !== null)
-    {
-      this.props.navigation.dispatch({
-        type: 'ReplaceCurrentScreen',
-        routeName: 'AuthFail',
-      }); 
-    }
+    console.log('LEFT_SIDE_BAR_NEW_PROPS')
+ 
   }
-
-  componentDidMount() {
-    setInterval( () => {
-      const _hour = new Date().getHours();
-      const _minute = new Date().getMinutes();
-      const _second = new Date().getSeconds();
-      function f(value){return value<10?('0'+value):value}
-      const curTime=f(_hour) + ':' + f(_minute) + ':' + f(_second)
-      this.setState({
-        curTime
-      })
-    },1000)
-  }
-
-  handleChangePasscode = value => this.setState({ passcode: value });
-
-  handleLogin = () => {
-
-    if(this.state.passcode.length < 4 || this.state.passcode === ''){
-      Toast.show({
-        text: 'Enter valid passcode',
-        position: 'bottom',
-        buttonText: 'Okay',
-        type: 'danger',
-        duration: 5000
-      });
-    }else{
-      this.setState({ loading: true , editable: false}, () => {
-        this.isAttempting = true;
-        this.props.attemptLogin(this.state.passcode);
-      })
-    }
-  }
-
+  
   renderHeader() {
     return (
       <View style={{width: Metrics.sideBarWidth,  borderWidth: 2, borderRadius: Metrics.WIDTH(30), borderColor: '#f77717', height: Metrics.HEIGHT(625)}}>
@@ -172,52 +126,8 @@ class LeftSideBar extends Component {
       <View style={{height:1, backgroundColor: '#e9eef5'}}/>
     </View>)
   }
+ 
 
-  onChangeNumber = number => {
-    this.setState({number})
-  }
-
-  onChangeCode = code => {
-    this.setState({code})
-  }
-
-  onLogin = () => {
-    this.props.logIn(this.props.lang, this.state.number, this.state.code);
-  }
-
-  renderSend(){
-    return(
-      <ImageBackground resizeMode='stretch' source={Images.button} style={styles.sendButton}>
-        <TouchableOpacity onPress={this.onLogin}>
-          <View style={{flexDirection:'row', alignItems: 'center'}}>
-            <Text style={[Fonts.style.h6, { fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
-              войти
-            </Text>
-            <Image resizeMode='stretch' style={{marginRight: Metrics.WIDTH(20), width: Metrics.WIDTH(23), height: Metrics.HEIGHT(18)}} source={Images.check}/>
-          </View>
-        </TouchableOpacity>
-      </ImageBackground>
-    )
-  }
-
-  _onSelect=(id, data)=>{
-    console.log('Data=', data);
-    this.props.setLang(data);
-  }
-  renderTimeBar(){
-    return(
-      <ImageBackground resizeMode='stretch' source={Images.bottomBar} style={styles.bottomBar}>
-         <View style={{height: Metrics.HEIGHT(70)}}/>
-         
-          <Text style={[Fonts.style.description, {textAlign: 'center', fontFamily: Fonts.type.emphasis, marginHorizontal: 10, marginBottom: 3 }]}>
-            время
-          </Text>
-          <Text style={[Fonts.style.h6, {textAlign: 'center', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
-            {this.state.curTime}
-          </Text>
-      </ImageBackground>
-    )
-  }
   renderInput() {
     return (
     <ImageBackground resizeMode='stretch' source={Images.button} style={styles.product_input}>
@@ -231,75 +141,6 @@ class LeftSideBar extends Component {
     )
   }
 
-  renderForm() {
-    const flag = Images[`flag_${this.props.lang}`];
-    const dropOptions = ['ru', 'de', 'eng', 'esp', 'fr', 'he', 'it'].filter(x=>x!=this.props.lang);
-    // const dropOptions = ['ru', 'de', 'eng']
-    return (
-      <ImageBackground resizeMode='stretch' source={Images.loginForm} style={styles.loginForm}>
-        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: Metrics.HEIGHT(8) }}>
-          <View style={{flex:1}}/>
-          <Image resizeMode='stretch' style={{width: Metrics.screenWidth*30/460, height: Metrics.screenHeight * 20 / 970}} source={flag}/>
-          <Text style={[Fonts.style.h6, {color: Colors.textSecondary, textAlign: 'center', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
-            {this.props.lang.toUpperCase()}
-          </Text>
-        </View>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <View style={{flex:1}}/>
-          <ModalDropdown options={dropOptions} onSelect={this._onSelect} renderRow={this._renderDropRow}
-            dropdownStyle={styles.dropDown} onDropdownWillHide={()=>{  return true;}}>
-            <Image style={{width: Metrics.WIDTH(15), height: Metrics.HEIGHT(10), marginTop: Metrics.HEIGHT(10), marginRight: Metrics.WIDTH(15)}} resizeMode='stretch' source={Images.triangle}/>
-          </ModalDropdown>
-        </View>
-        <Text style={[Fonts.style.h3, { textAlign: 'right', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
-          ваш номер
-        </Text>
-        <Text style={[Fonts.style.h3, {marginTop: -10, textAlign: 'right', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
-          телефона
-        </Text> 
-        <View style={{height: Metrics.HEIGHT(20)}}/>
-        <Text style={[Fonts.style.description, { textAlign: 'right', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
-          {''}
-        </Text>
-        <ImageBackground resizeMode='stretch' source={Images.button} style={styles.numberButton}>
-          <Input
-            maxLength={12}
-            placeholder={'Enter Phone Number'}
-            style={{marginLeft: 30}}
-            textAlign={'left'}
-            value={this.state.number}
-            onChangeText={this.onChangeNumber}
-            fontSize={Fonts.size.regular}
-            fontFamily={Fonts.type.emphasis}
-            placeholderTextColor='gray'                     
-            returnKeyType='done'                
-            autoCapitalize='none'
-            autoCorrect={false}
-            underlineColorAndroid='transparent'
-            onSubmitEditing={() => {}}
-          />
-        </ImageBackground>
-        <ImageBackground resizeMode='stretch' source={Images.button} style={styles.codeButton}>
-          <Input
-            maxLength={12}
-            placeholder={'Enter Code'}
-            style={{marginLeft: 30}}
-            textAlign={'left'}
-            value={this.state.code}
-            onChangeText={this.onChangeCode}
-            fontSize={Fonts.size.regular}
-            fontFamily={Fonts.type.emphasis}
-            placeholderTextColor='gray'                     
-            returnKeyType='done'                
-            autoCapitalize='none'
-            autoCorrect={false}
-            underlineColorAndroid='transparent'
-            onSubmitEditing={() => {}}
-          />
-        </ImageBackground> 
-      </ImageBackground>
-    )
-  }
   renderConfirmButton () {
     return (
         <TouchableOpacity>
@@ -403,17 +244,12 @@ class LeftSideBar extends Component {
 const mapStateToProps = (state) => {
   return {
     fetching:state.auth.fetching,
-    error:state.auth.error,
-    passcode:state.auth.passcode,
-    lang: state.auth.lang,
-    phone_number: state.auth.phone_number,
+    error:state.auth.error
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    logIn: (lang, phone_number, code) => dispatch(AuthActions.loginRequest(lang, phone_number, code)),
-    setLang: lang => dispatch(AuthActions.setLang(lang))
+  return { 
   }
 }
 

@@ -53,7 +53,7 @@ class LoginScreen extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-
+    console.log('LoginScreen NEW_PROPS');
     if(this.props.fetching === true && nextProps.fetching === false && nextProps.error === null)
     {
       this.props.navigation.dispatch({

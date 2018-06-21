@@ -14,7 +14,7 @@ import Camera from 'react-native-camera'
 // Styles
 import styles from './Styles/LoginScreenStyle'
 
-type LoginScreenProps = {
+type ProductsUploaderProps = {
   dispatch: () => any,
   fetching: boolean,
   attemptLogin: () => void,
@@ -24,7 +24,7 @@ type LoginScreenProps = {
 
 class ProductsUploader extends Component {
 
-  props: LoginScreenProps
+  props: ProductsUploaderProps
 
   state: {
     passcode: number,
@@ -37,7 +37,7 @@ class ProductsUploader extends Component {
 
   isAttempting: boolean
 
-  constructor (props: LoginScreenProps) {
+  constructor (props: ProductsUploaderProps) {
 
     super(props)
     console.log('uhaha');
@@ -55,7 +55,7 @@ class ProductsUploader extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-
+    console.log('PRODUCTS_UPLOADER_NEW_PROPS')
     if(this.props.fetching === true && nextProps.fetching === false && nextProps.error === null)
     {
       this.props.navigation.dispatch({

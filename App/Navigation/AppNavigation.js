@@ -10,6 +10,7 @@ import AuthFail from '../Containers/AuthFail'
 import ProductsUploader from '../Containers/ProductsUploader';
 import LeftSideMenu from '../Containers/LeftSideBar';
 import RightSideMenu from '../Containers/RightSideBar';
+
 const HomeStack = StackNavigator({
   LoginScreen: { screen: LoginScreen },
   SendCode: { screen: SendCode },

@@ -12,17 +12,16 @@ import ModalDropdown from 'react-native-modal-dropdown';
 // Styles
 import styles from './Styles/LoginScreenStyle'
 
-type LoginScreenProps = {
+type MainProps = {
   dispatch: () => any,
   fetching: boolean,
-  attemptLogin: () => void,
   passcode: number,
   error: string
 }
 
-class LoginScreen extends Component {
+class Main extends Component {
 
-  props: LoginScreenProps
+  props: MainProps
 
   state: {
     passcode: number,
@@ -33,7 +32,7 @@ class LoginScreen extends Component {
 
   isAttempting: boolean
 
-  constructor (props: LoginScreenProps) {
+  constructor (props: MainProps) {
     super(props)
     this.state = {
       passcode : '',
@@ -131,6 +130,7 @@ class LoginScreen extends Component {
   }
 
   uploadProducts = () => {
+    console.log('MAIN_NEW_PROPS')
     this.props.navigation.dispatch({
       type: 'ReplaceCurrentScreen',
       routeName: 'ProductsUploader',
@@ -231,4 +231,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(Main)

@@ -34,11 +34,12 @@ export function * verifyPhoneNumber (api, action) {
   console.log('Response=', response);
   if (response.status === 200 && response.data.result === 'done') {
     // do data conversion here if needed
-    
+    console.log('VerifySuccess');
     yield put(AuthActions.verifySuccess())
   } 
   else
   {
+    console.log('VerifyFailure');
     if (response.status === 200 && response.data.result === 'error') {
       yield put(AuthActions.verifyFailure(response.data.errors.phone_number))
     }
@@ -57,7 +58,7 @@ export function * logIn (api, action) {
   if (response.status === 200 && response.data.result === 'done') {
     // do data conversion here if needed
     yield put(AuthActions.loginSuccess(response.data.token))
-  } 
+  }
   else
   {
     if (response.status === 200 && response.data.result === 'error') {
