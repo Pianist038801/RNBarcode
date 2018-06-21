@@ -147,7 +147,7 @@ class RightSideBar extends Component {
  
   renderConfirmButton () {
     return (
-        <TouchableOpacity>
+      <TouchableOpacity onPress={()=>this.props.navigation.navigate('RightSideMenuClose')}>
             <ImageBackground resizeMode='stretch' source={Images.confirm_button} style={styles.confirm_button}>
                 <Text style={[Fonts.style.h4, { color: 'white', fontFamily: Fonts.type.bigItalic }]}>
                     сохранить

@@ -209,7 +209,15 @@ class ProductsUploader extends Component {
     />
     )
   }
-
+  goBack = () => {
+    this.props.navigation.dispatch({
+      type: 'ReplaceCurrentScreen',
+      routeName: 'Main',
+    }); 
+  }
+  goFurther = () => {
+    alert('Next Screen');
+  }
   renderSideButtons() {
     return (
       <View style={styles.sideButtons}>
@@ -230,21 +238,23 @@ class ProductsUploader extends Component {
   }
 
   renderBottomBar() {  
-    return (
-      <TouchableOpacity onPress={()=>alert('Right_Pane')}  style={styles.bottomProductView}>
+    return ( 
         <ImageBackground resizeMode='stretch' source={Images.big_shop_ellipse} style={styles.bottomProductBar}>
-          <View style={styles.back_btn_wrapper}>
-            <ImageBackground resizeMode='stretch' source={Images.back_arrow} style={styles.back_btn}>
-            </ImageBackground>
-          </View>
+          <TouchableOpacity onPress={this.goBack}>
+            <View style={styles.back_btn_wrapper}>
+              <ImageBackground resizeMode='stretch' source={Images.back_arrow} style={styles.back_btn}>
+              </ImageBackground>
+            </View>
+          </TouchableOpacity>
           <ImageBackground resizeMode='stretch' source={Images.big_shop_ellipse} style={styles.bottomProductRightBtn}>
             <Text style={[Fonts.style.h6, { width: Metrics.WIDTH(200), fontWeight: 'bold', fontFamily: Fonts.type.emphasis }]}>
             добавьте товар {'\n'} в магазин
             </Text>
-            <ImageBackground resizeMode='stretch' source={Images.arrow_sjop} style={styles.back_btn}/>  
+            <TouchableOpacity onPress={this.goFurther}>
+              <ImageBackground resizeMode='stretch' source={Images.arrow_sjop} style={styles.back_btn}/>  
+            </TouchableOpacity>
           </ImageBackground>
-        </ImageBackground>
-      </TouchableOpacity>
+        </ImageBackground> 
     )
   }
   renderProductNames() {

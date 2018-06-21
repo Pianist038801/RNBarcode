@@ -143,7 +143,7 @@ class LeftSideBar extends Component {
 
   renderConfirmButton () {
     return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={()=>this.props.navigation.navigate('LeftSideMenuClose')}>
             <ImageBackground resizeMode='stretch' source={Images.confirm_button} style={styles.confirm_button}>
                 <Text style={[Fonts.style.h4, { color: 'black', fontFamily: Fonts.type.bigItalic }]}>
                     сохранить
