@@ -21,7 +21,7 @@ const HomeStack = StackNavigator({
   navigationOptions: {
     headerVisible: false,
   },
-  initialRouteName: 'ProductsUploader'
+  initialRouteName: 'SendCode'
 });
 
 const prevGetStateForActionHomeStack = HomeStack.router.getStateForAction;

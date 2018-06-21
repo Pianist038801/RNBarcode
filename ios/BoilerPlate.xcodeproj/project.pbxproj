@@ -15,7 +15,6 @@
 		00E356F31AD99517003FC87E /* BoilerPlateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* BoilerPlateTests.m */; };
 		04084D1D2C2F4176979537FD /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 212C15AFB5194FF58A76BA8E /* Entypo.ttf */; };
 		0B0F8B12B13F49ABAEBCC80A /* libjschelpers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 963BF1A3699945DC89EDD02B /* libjschelpers.a */; };
-		10528510C1194D668CA32409 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2F5CF3918C744A29E2452DB /* libReactNativeConfig.a */; };
 		133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
 		139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
@@ -509,6 +508,7 @@
 		E82B6A0620DB41BD00C34C53 /* FuturaPTCond-BookObl.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "FuturaPTCond-BookObl.otf"; path = "../../App/Fonts/FuturaPTCond-BookObl.otf"; sourceTree = "<group>"; };
 		E82B6A0720DB41BD00C34C53 /* FuturaPTCond-ExtraBoldObl.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "FuturaPTCond-ExtraBoldObl.otf"; path = "../../App/Fonts/FuturaPTCond-ExtraBoldObl.otf"; sourceTree = "<group>"; };
 		E82B6A0820DB41BD00C34C53 /* FuturaPT-BoldObl.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "FuturaPT-BoldObl.otf"; path = "../../App/Fonts/FuturaPT-BoldObl.otf"; sourceTree = "<group>"; };
+		E82B6A1F20DB455E00C34C53 /* BoilerPlate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = BoilerPlate.entitlements; path = BoilerPlate/BoilerPlate.entitlements; sourceTree = "<group>"; };
 		E85C038120BFDC5300CF5975 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		E85C038920BFDCB800CF5975 /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
 		E85C038A20BFDCB800CF5975 /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EvilIcons.ttf; sourceTree = "<group>"; };
@@ -556,7 +556,6 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
-				10528510C1194D668CA32409 /* libReactNativeConfig.a in Frameworks */,
 				76721190A7FB46BE82E5263C /* libyoga.a in Frameworks */,
 				F1D1D79576BE413CB15B4FCC /* libcxxreact.a in Frameworks */,
 				0B0F8B12B13F49ABAEBCC80A /* libjschelpers.a in Frameworks */,
@@ -670,6 +669,7 @@
 		13B07FAE1A68108700A75B9A /* BoilerPlate */ = {
 			isa = PBXGroup;
 			children = (
+				E82B6A1F20DB455E00C34C53 /* BoilerPlate.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -1033,6 +1033,11 @@
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = B9ASDNFL56;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1676,6 +1681,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = BoilerPlate/BoilerPlate.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1705,6 +1711,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = BoilerPlate/BoilerPlate.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;

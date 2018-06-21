@@ -60,6 +60,7 @@ class LoginScreen extends Component {
         type: 'ReplaceCurrentScreen',
         routeName: 'Main',
       }); 
+      //this.props.navigation.navigate('Main');
     }
     if(this.props.fetching === true && nextProps.fetching === false && nextProps.error !== null)
     {
@@ -67,6 +68,7 @@ class LoginScreen extends Component {
         type: 'ReplaceCurrentScreen',
         routeName: 'AuthFail',
       }); 
+      //this.props.navigation.navigate('AuthFail');
     }
   }
 
