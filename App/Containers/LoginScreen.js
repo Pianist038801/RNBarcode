@@ -38,7 +38,7 @@ class LoginScreen extends Component {
   constructor (props: LoginScreenProps) {
 
     super(props)
-    console.log('uhaha');
+    
     this.state = {
       passcode : '',
       loading: false,

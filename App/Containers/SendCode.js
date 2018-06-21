@@ -12,29 +12,25 @@ import ModalDropdown from 'react-native-modal-dropdown';
 // Styles
 import styles from './Styles/LoginScreenStyle'
 
-type PROPS = {
+type SendCodeProps = {
   dispatch: () => any,
   fetching: boolean,
-  attemptLogin: () => void,
-  passcode: number,
   error: string
 }
 
 class SendCode extends Component {
 
-  props: PROPS
+  props: SendCodeProps
 
   state: {
-    passcode: number,
     loading: boolean,
     error: string,
-    editable: boolean,
     number: string,
   }
 
   isAttempting: boolean
 
-  constructor (props: PROPS) {
+  constructor (props: SendCodeProps) {
 
     super(props)
 
@@ -42,7 +38,6 @@ class SendCode extends Component {
       passcode : '',
       loading: false,
       error: null,
-      editable: true,
       number: '',
       typing: false
   },
@@ -51,13 +46,10 @@ class SendCode extends Component {
 
 }
 
-  componentWillReceiveProps= (nextProps) => {
+ componentWillReceiveProps(nextProps) {
     console.log('SendCodeNextProps=', nextProps);
-    console.log('This.PROPS=', this.props);
-    console.log('This=', this);
     if(this.props.fetching === true && nextProps.fetching === false && nextProps.error === null)
     {
-      console.log('GO_TO_LOGIN');
       this.props.navigation.dispatch({
         type: 'ReplaceCurrentScreen',
         routeName: 'LoginScreen',
@@ -125,10 +117,6 @@ class SendCode extends Component {
 
   onChangeNumber = number => {
     this.setState({number, typing: true})
-  }
-
-  gotoLogin = () => {
-    this.props.navigation.navigate('LoginScreen');
   }
 
   renderSend(){
@@ -254,7 +242,6 @@ const mapStateToProps = (state) => {
   return {
     fetching:state.auth.fetching,
     error:state.auth.error,
-    passcode:state.auth.passcode,
     lang: state.auth.lang,
   }
 }

@@ -224,7 +224,7 @@ class ProductsUploader extends Component {
             <ImageBackground resizeMode='stretch' source={Images.cog_green} style={styles.cog_icon}>
             </ImageBackground>
           </ImageBackground>
-        </TouchableOpacity> 
+        </TouchableOpacity>
       </View>
     )
   }
