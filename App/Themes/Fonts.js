@@ -1,7 +1,7 @@
 import COLOR from './Colors';
 
 const type = {
-  base: 'FuturePT-Book',
+  base: 'FuturaPT-Book',
   bold: 'FuturaPT-Bold',
   emphasis: 'FuturaPT-BookObl',
   bigItalic: 'FuturaPT-ExtraBoldObl',

@@ -364,14 +364,14 @@ class LeftSideBar extends Component {
               </Text> 
             </View>
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={()=>this.popupDialog.dismiss()}>
                 <ImageBackground resizeMode='stretch' source={Images.confirm_button} style={styles.modal_button}>
                     <Text style={[Fonts.style.h6, { color: 'white', fontFamily: Fonts.type.bigItalic }]}>
                       добавить
                     </Text>
                 </ImageBackground>
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={()=>this.popupDialog.dismiss()}>
                 <ImageBackground resizeMode='stretch' source={Images.confirm_button} style={styles.modal_button}>
                     <Text style={[Fonts.style.h6, { color: 'white', fontFamily: Fonts.type.bigItalic }]}>
                       закрыть

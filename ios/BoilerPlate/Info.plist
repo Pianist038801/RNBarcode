@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>BoilerPlate</string>
+	<string>B2SOnlineLoader</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -17,11 +17,13 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>2.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -35,10 +37,17 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Your message to user when the camera is accessed for the first time</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Your message to user when the photo library is accessed for the first time</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Your message to user when the photo library is accessed for the first time</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string></string>
 		<string>Entypo.ttf</string>
 		<string>EvilIcons.ttf</string>
 		<string>FontAwesome.ttf</string>
@@ -53,28 +62,28 @@
 		<string>Zocial.ttf</string>
 		<string>MaterialCommunityIcons.ttf</string>
 		<string>Feather.ttf</string>
-		<string>FuturaPTBold.otf</string>
-		<string>FuturaPTBoldOblique.otf</string>
-		<string>FuturaPTBook.otf</string>
-		<string>FuturaPTBookOblique.otf</string>
-		<string>FuturaPTCondBold.otf</string>
-		<string>FuturaPTCondBoldOblique.otf</string>
-		<string>FuturaPTCondBook.otf</string>
-		<string>FuturaPTCondBookOblique.otf</string>
-		<string>FuturaPTCondExtraBold.otf</string>
-		<string>FuturaPTCondExtraBoldOblique.otf</string>
-		<string>FuturaPTCondMedium.otf</string>
-		<string>FuturaPTCondMediumOblique.otf</string>
-		<string>FuturaPTDemi.otf</string>
-		<string>FuturaPTDemiOblique.otf</string>
-		<string>FuturaPTExtraBold.otf</string>
-		<string>FuturaPTExtraBoldOblique.otf</string>
-		<string>FuturaPTHeavy.otf</string>
-		<string>FuturaPTHeavyOblique.otf</string>
-		<string>FuturaPTLight.otf</string>
-		<string>FuturaPTLightOblique.otf</string>
-		<string>FuturaPTMedium.otf</string>
-		<string>FuturaPTMediumOblique.otf</string>
+		<string>FuturaPT-Bold.otf</string>
+		<string>FuturaPT-BoldObl.otf</string>
+		<string>FuturaPT-Book.otf</string>
+		<string>FuturaPT-BookObl.otf</string>
+		<string>FuturaPTCond-Bold.otf</string>
+		<string>FuturaPTCond-BoldObli.otf</string>
+		<string>FuturaPTCond-Book.otf</string>
+		<string>FuturaPTCond-BookObl.otf</string>
+		<string>FuturaPTCond-ExtraBold.otf</string>
+		<string>FuturaPTCond-ExtraBoldObl.otf</string>
+		<string>FuturaPTCond-Medium.otf</string>
+		<string>FuturaPTCond-MediumObl.otf</string>
+		<string>FuturaPT-Demi.otf</string>
+		<string>FuturaPT-DemiObl.otf</string>
+		<string>FuturaPT-ExtraBold.otf</string>
+		<string>FuturaPT-ExtraBoldObl.otf</string>
+		<string>FuturaPT-Heavy.otf</string>
+		<string>FuturaPT-HeavyObl.otf</string>
+		<string>FuturaPT-Light.otf</string>
+		<string>FuturaPT-LightObl.otf</string>
+		<string>FuturaPT-Medium.otf</string>
+		<string>FuturaPT-MediumObl.otf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
@@ -85,8 +94,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
