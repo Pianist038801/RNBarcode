@@ -214,7 +214,19 @@ class SendCode extends Component {
   
   renderTimeBar(){
     return(
-      <ImageBackground resizeMode='stretch' source={Images.bottomBar} style={styles.bottomBar}>
+      <ImageBackground resizeMode='stretch' source={Images.bottomBar} style={[styles.fixedBottomBar]}>
+        <View style={{position: 'absolute', top:Metrics.HEIGHT(50), width: Metrics.screenWidth, paddingHorizontal: Metrics.marginHorizontal*2, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+          <TouchableOpacity onPress={this.goBack}>
+            <View style={styles.plus_btn_wrapper}>
+              <ImageBackground resizeMode='stretch' source={Images.leftArrow} style={styles.leftArrow}/>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.goBack}>
+            <View style={styles.plus_btn_wrapper}>
+              <ImageBackground resizeMode='stretch' source={Images.cancel} style={styles.cancel}/>
+            </View>
+          </TouchableOpacity>
+        </View>
         <View style={{height: Metrics.HEIGHT(70)}}/>
         <Text style={[Fonts.style.description, {textAlign: 'center', fontFamily: Fonts.type.emphasis, marginHorizontal: 10, marginBottom: 3 }]}>
           время
@@ -229,7 +241,7 @@ class SendCode extends Component {
   renderOptions(){
     return(
       <ImageBackground resizeMode='stretch' source={Images.categoryBoard} style={styles.categoryBoard}>
-        <ScrollView style={{height: Metrics.HEIGHT(536)}}>
+        <ScrollView style={{height: Metrics.HEIGHT(436)}}>
           <Accordion
             touchableComponent={TouchableOpacity}
             sections={SECTIONS}
@@ -241,18 +253,43 @@ class SendCode extends Component {
     )
   }
 
+  renderBottomBar() {  
+    return (
+      <View style={{backgroundColor: '#e6e7e8', alignItems: 'center', justifyContent: 'center', marginHorizontal: Metrics.marginHorizontal, height: Metrics.HEIGHT(130), borderBottomLeftRadius: 30, borderBottomRightRadius: 30}}>
+        <ImageBackground resizeMode='stretch' source={Images.big_shop_ellipse} style={styles.bottomProductBar}>
+          <TouchableOpacity onPress={this.goBack}>
+            <View style={styles.plus_btn_wrapper}>
+              <ImageBackground resizeMode='stretch' source={Images.plus} style={styles.back_btn}>
+              </ImageBackground>
+            </View>
+          </TouchableOpacity>
+          <Text style={{color: '#244063', width: Metrics.WIDTH(73), marginLeft: 10,  lineHeight: 17, fontSize: 16}}>
+            добавить еще товар
+          </Text>
+          <View style={styles.bottomProductUploadRightBtn}>
+            <Text style={[Fonts.style.h6, { width: Metrics.WIDTH(200), color: 'white', fontWeight: 'bold',lineHeight: 20, fontFamily: Fonts.type.emphasis }]}>
+            добавьте товар {'\n'} в магазин
+            </Text>
+            <TouchableOpacity onPress={this.goFurther}>
+              <ImageBackground resizeMode='stretch' source={Images.whiteArrow} style={styles.back_btn}/>  
+            </TouchableOpacity>
+          </View>
+        </ImageBackground> 
+      </View>
+    )
+  }
+
   render () {
     return (
     <SafeAreaView style={styles.whiteContent}>
-      <Container>
-        <ScrollView scrollEnabled={false}>
+        <ScrollView scrollEnabled={false} style={{height: Metrics.screenHeight}}>
           
             {this.renderHeader()}
  
             {this.renderOptions()}  
-          {this.renderTimeBar()}  
-          </ScrollView>  
-      </Container>
+            {this.renderBottomBar()}
+            {this.renderTimeBar()}  
+        </ScrollView>
     </SafeAreaView>
     )
   }

@@ -10,8 +10,8 @@ export default StyleSheet.create({
   },
   categoryBoard: {
     flex: 1,
-    margin: Metrics.marginHorizontal,
-    height: Metrics.HEIGHT(536),
+    marginHorizontal: Metrics.marginHorizontal,
+    height: Metrics.HEIGHT(436),
     padding: Metrics.marginHorizontal,
   },
   greenLeft: {
@@ -38,7 +38,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     alignSelf: 'center',
-    paddingHorizontal: Metrics.WIDTH(20),
+    paddingHorizontal: Metrics.WIDTH(10),
     
   },
   bottomProductView: {
@@ -58,11 +58,33 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: Metrics.WIDTH(20),
   },
+  bottomProductUploadRightBtn: {
+    borderColor: '#f77717', 
+    backgroundColor: '#29b911', 
+    borderWidth: 1, 
+    borderRadius: 30,
+    flexDirection: 'row',
+    width: Metrics.WIDTH(260),
+    height: Metrics.HEIGHT(60),
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: Metrics.WIDTH(20),
+  },
   back_btn_wrapper: {
     width: Metrics.WIDTH(60),
     height: Metrics.WIDTH(60),
     borderRadius: Metrics.WIDTH(30),
     backgroundColor: '#f77717',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  plus_btn_wrapper: {
+    width: Metrics.WIDTH(60),
+    height: Metrics.WIDTH(60),
+    borderRadius: Metrics.WIDTH(30),
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: '#f77717', 
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -233,6 +255,14 @@ export default StyleSheet.create({
     alignItems: 'center',
     marginTop: Metrics.HEIGHT(180),
   },
+  fixedBottomBar: {
+    width: Metrics.WIDTH(980),
+    height: Metrics.HEIGHT(689),
+    alignSelf: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: -Metrics.HEIGHT(720),
+  },
   bottomMainBar: {
     width: Metrics.WIDTH(980),
     height: Metrics.HEIGHT(689),
@@ -252,5 +282,13 @@ export default StyleSheet.create({
     height: Metrics.HEIGHT(56),
     resizeMode: 'stretch',
     marginLeft: Metrics.WIDTH(46),
-  }
+  },
+  leftArrow: {
+    width: Metrics.WIDTH(16),
+    height: Metrics.HEIGHT(30),
+  },
+  cancel: {
+    width: Metrics.WIDTH(29),
+    height: Metrics.HEIGHT(29),
+  },
 })
