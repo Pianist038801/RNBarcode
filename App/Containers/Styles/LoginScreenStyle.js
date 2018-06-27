@@ -260,8 +260,9 @@ export default StyleSheet.create({
     height: Metrics.HEIGHT(689),
     alignSelf: 'center',
     alignItems: 'center',
-    position: 'absolute',
-    bottom: -Metrics.HEIGHT(720),
+    marginTop: Metrics.HEIGHT(50)
+    // position: 'absolute',
+    // bottom: -Metrics.HEIGHT(720),
   },
   bottomMainBar: {
     width: Metrics.WIDTH(980),

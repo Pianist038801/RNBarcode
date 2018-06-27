@@ -216,7 +216,10 @@ class ProductsUploader extends Component {
     }); 
   }
   goFurther = () => {
-    alert('Next Screen');
+    this.props.navigation.dispatch({
+      type: 'ReplaceCurrentScreen',
+      routeName: 'DemoShop',
+    });
   }
   renderSideButtons() {
     return (

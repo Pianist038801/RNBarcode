@@ -7,7 +7,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
-
+        classpath 'com.google.gms:google-services:3.0.0'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -22,18 +22,31 @@ allprojects {
             url "$rootDir/../node_modules/react-native/android"
         }
         maven { url "https://jitpack.io" }
-        google()
-        maven { url "https://maven.google.com" }
+//        google()
+        maven {
+            url "https://maven.google.com"
+            name 'Google'
+        }
     }
 }
 
 subprojects {
-  project.configurations.all {
-     resolutionStrategy.eachDependency { details ->
-        if (details.requested.group == 'com.android.support'
-              && !details.requested.name.contains('multidex') ) {
-           details.useVersion "27.1.0"
+    project.configurations.all {
+        resolutionStrategy.eachDependency { details ->
+            if (details.requested.group == 'com.android.support'
+                    && !details.requested.name.contains('multidex') ) {
+                details.useVersion "27.1.1"
+            }
         }
-     }
-  }
+    }
+    afterEvaluate {
+        android {
+            compileSdkVersion 27
+            buildToolsVersion "27.0.3"
+
+            defaultConfig {
+                targetSdkVersion 27
+            }
+        }
+    }
 }

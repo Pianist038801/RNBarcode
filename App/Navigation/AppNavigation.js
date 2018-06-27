@@ -24,7 +24,7 @@ const HomeStack = StackNavigator({
   navigationOptions: {
     headerVisible: false,
   },
-  initialRouteName: 'DemoShop'
+  initialRouteName: 'SendCode'
 });
 
 const prevGetStateForActionHomeStack = HomeStack.router.getStateForAction;

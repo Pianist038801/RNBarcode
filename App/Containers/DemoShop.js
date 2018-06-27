@@ -211,7 +211,14 @@ class SendCode extends Component {
   onChangeNumber = number => {
     this.setState({number, typing: true})
   }
-  
+
+  goBack = () => {
+    this.props.navigation.dispatch({
+      type: 'ReplaceCurrentScreen',
+      routeName: 'ProductsUploader',
+    }); 
+  }
+
   renderTimeBar(){
     return(
       <ImageBackground resizeMode='stretch' source={Images.bottomBar} style={[styles.fixedBottomBar]}>
@@ -257,7 +264,7 @@ class SendCode extends Component {
     return (
       <View style={{backgroundColor: '#e6e7e8', alignItems: 'center', justifyContent: 'center', marginHorizontal: Metrics.marginHorizontal, height: Metrics.HEIGHT(130), borderBottomLeftRadius: 30, borderBottomRightRadius: 30}}>
         <ImageBackground resizeMode='stretch' source={Images.big_shop_ellipse} style={styles.bottomProductBar}>
-          <TouchableOpacity onPress={this.goBack}>
+          <TouchableOpacity>
             <View style={styles.plus_btn_wrapper}>
               <ImageBackground resizeMode='stretch' source={Images.plus} style={styles.back_btn}>
               </ImageBackground>
@@ -281,8 +288,8 @@ class SendCode extends Component {
 
   render () {
     return (
-    <SafeAreaView style={styles.whiteContent}>
-        <ScrollView scrollEnabled={false} style={{height: Metrics.screenHeight}}>
+    //<SafeAreaView style={styles.whiteContent}>
+        <ScrollView scrollEnabled={false} style={{height: Metrics.screenHeight, backgroundColor: 'white', flex: 1}}>
           
             {this.renderHeader()}
  
@@ -290,7 +297,7 @@ class SendCode extends Component {
             {this.renderBottomBar()}
             {this.renderTimeBar()}  
         </ScrollView>
-    </SafeAreaView>
+    //</SafeAreaView>
     )
   }
 }
