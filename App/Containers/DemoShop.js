@@ -7,7 +7,7 @@ import AuthActions from '../Redux/AuthRedux'
 import FullButton from '../Components/FullButton'
 import ModalDropdown from 'react-native-modal-dropdown';
 import Accordion from 'react-native-collapsible/Accordion';
-
+import CheckBox from 'react-native-checkbox';
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 
@@ -26,6 +26,39 @@ const SECTIONS = [
     content: [
       'Second111111',
       'Second22222',]
+  },
+  {
+    title: 'Second',
+    content: [
+      'Second111111',
+      'Second22222',]
+  },
+  {
+    title: 'Second',
+    content: [
+      'Second111111',
+      'Second22222',]
+  },
+  {
+    title: 'Second',
+    content: [
+      'Second111111',
+      'Second22222',]
+  },
+  {
+    title: 'Second',
+    content: [
+      'Second111111',
+      'Second22222',
+    3,
+  4,
+5,
+6,
+7,
+7,
+8,
+8,
+4]
   }
 ];
 
@@ -57,7 +90,8 @@ class SendCode extends Component {
       loading: false,
       error: null,
       number: '',
-      typing: false
+      typing: false,
+      check: {},
   },
 
   this.isAttempting = false
@@ -100,18 +134,60 @@ class SendCode extends Component {
     );
   }
 
-  _renderHeader(section) {
-    return (
-      <View style={styles.header}>
-        <Text style={styles.headerText}>{section.title}</Text>
+  _renderHeader= (content, index, isActive, sections) => {
+    var _newCheck = {...this.state.check};
+    _newCheck[`${index}_`] = !_newCheck[`${index}_`]
+
+    return ( 
+      <View style={{borderBottomWidth: 1, borderColor: '#f77817', flexDirection: 'row', alignItems: 'center', height: Metrics.HEIGHT(40)}}>
+        {this.state.check[`${index}_`] ?
+        <TouchableOpacity style={styles.checkBox} onPress={()=>this.setState({check: _newCheck})}>
+          <Image resizeMode='stretch' source={Images.checkBox} style={styles.checkBox}/>
+        </TouchableOpacity>
+          :
+        <TouchableOpacity style={styles.greenCheck} onPress={()=>this.setState({check: _newCheck})}>
+          <Image resizeMode='stretch' source={Images.greenCheck} style={styles.greenCheck}/>
+        </TouchableOpacity>
+        }
+        <Text style={{color: '#244063', marginLeft: Metrics.WIDTH(20), fontFamily: Fonts.type.emphasis, fontSize: 16}}>соки натуральные</Text>
+        <View style={{flex: 1}}/>
+        {isActive
+        ?
+        <Image resizeMode='stretch' source={Images.greenLeft} style={styles.greenLeft}/>
+        :
+        <Image resizeMode='stretch' source={Images.greenDown} style={styles.greenDown}/>
+        }
       </View>
     );
   }
 
-  _renderContent(section) {
+  _renderContent = (section, index) => {
+    const _contents = [];
+    for(let i = 0; i<section.content.length; i++)
+    {
+      let _newCheck = {...this.state.check};
+      _newCheck[`${index}_${i}`] = !_newCheck[`${index}_${i}`]
+      _contents.push(
+        <View style={{borderBottomWidth: 1, paddingLeft: Metrics.WIDTH(17), borderColor: '#f77817', flexDirection: 'row', alignItems: 'center', height: Metrics.HEIGHT(40)}}>
+          {this.state.check[`${index}_${i}`] ?
+          <TouchableOpacity style={styles.checkBox} onPress={()=>this.setState({check: _newCheck})}>
+            <Image resizeMode='stretch' source={Images.checkBox} style={styles.checkBox}/>
+          </TouchableOpacity>
+            :
+          <TouchableOpacity style={styles.greenCheck} onPress={()=>this.setState({check: _newCheck})}>
+            <Image resizeMode='stretch' source={Images.greenCheck} style={styles.greenCheck}/>
+          </TouchableOpacity>
+          }
+          <Text style={{color: '#244063', marginLeft: Metrics.WIDTH(20), fontFamily: Fonts.type.emphasis, fontSize: 16}}>соки натуральные</Text>
+  
+        </View>
+      )
+    }
     return (
-      <View style={styles.content}>
-        <Text>{section.content}</Text>
+      <View style={{flexDirection: 'column'}}>
+      {
+        _contents
+      }
       </View>
     );
   }
@@ -121,7 +197,7 @@ class SendCode extends Component {
       <View style={[styles.headerView, {backgroundColor: '#ffffff'}]}> 
         <Text style={[Fonts.style.description, { fontWeight: 'bold', fontFamily: Fonts.type.bold, margin: 10, marginBottom: Metrics.HEIGHT(30) }]}>
           shop-online loader 2.4
-        </Text>  
+        </Text>
         <Text style={[Fonts.style.h6, {textAlign: 'center', fontWeight: 'bold', fontFamily: Fonts.type.bigItalic, marginBottom:  Metrics.HEIGHT(35),marginHorizontal: 10 }]}>
           SUPER DEMO SHOP
         </Text>
@@ -131,46 +207,11 @@ class SendCode extends Component {
       </View>
     )
   }
-
-  _renderDropRow= (rowData, sectionID, rowID, highlightRow)=>
-  {
-    const flag = Images[`flag_${rowData}`];
-    return( 
-    <View style={{flexDirection:'column'}}>
-      <View style={{padding: Metrics.defaultMargin, backgroundColor: Colors.white, flexDirection: 'row', alignItems: 'center'}}>
-        <Image resizeMode='stretch' style={{marginLeft: Metrics.WIDTH(10), width: Metrics.WIDTH(30), height: Metrics.HEIGHT(20)}} source={flag}/>
-        <Text style={[Fonts.style.h6, {color: Colors.textSecondary, textAlign: 'center', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
-          {rowData.toUpperCase()}
-    
-        </Text>
-      </View>
-      <View style={{height:1, backgroundColor: '#e9eef5'}}/>
-    </View>)
-  }
-
+ 
   onChangeNumber = number => {
     this.setState({number, typing: true})
   }
-
-  renderSend(){
-    return(
-      <ImageBackground resizeMode='stretch' source={Images.button} style={styles.sendButton}>
-        <TouchableOpacity onPress={this.onPressSend}>
-          <View style={{flexDirection:'row', alignItems: 'center'}}>
-            <Text style={[Fonts.style.h6, { fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
-              Отправить
-            </Text>
-            <Image resizeMode='stretch' style={{marginRight: Metrics.WIDTH(20), width: Metrics.WIDTH(23), height: Metrics.HEIGHT(18)}} source={Images.check}/>
-          </View>
-        </TouchableOpacity>
-      </ImageBackground>
-    )
-  }
-
-  _onSelect=(id, data)=>{
-    console.log('Data=', data);
-    this.props.setLang(data);
-  }
+  
   renderTimeBar(){
     return(
       <ImageBackground resizeMode='stretch' source={Images.bottomBar} style={styles.bottomBar}>
@@ -185,80 +226,17 @@ class SendCode extends Component {
     )
   }
 
-  onPressSend = () => {
-    this.props.verifyPhoneNumber(this.props.lang, this.state.number);
-    console.log(this.props.lang, this.state.number)
-  }
-
-  renderForm = () => {
-    const flag = Images[`flag_${this.props.lang}`];
-    const dropOptions = ['ru', 'de', 'eng', 'esp', 'fr', 'he', 'it'].filter(x=>x!=this.props.lang);
-    console.log(this.props)
-    // const dropOptions = ['ru', 'de', 'eng']
-    return (
-      <ImageBackground resizeMode='stretch' source={Images.loginForm} style={styles.loginForm}>
-        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: Metrics.HEIGHT(8) }}>
-          <View style={{flex:1}}/>
-          <TouchableOpacity onPress={()=>this.modal.show()}>
-            <Image resizeMode='stretch' style={{width: Metrics.screenWidth*30/460, height: Metrics.screenHeight * 20 / 970}} source={flag}/>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={()=>this.modal.show()}>
-            <Text style={[Fonts.style.h6, {color: Colors.textSecondary, textAlign: 'center', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
-              {this.props.lang.toUpperCase()}
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <View style={{flex:1}}/>
-          <ModalDropdown ref={c => this.modal = c} options={dropOptions} onSelect={this._onSelect} renderRow={this._renderDropRow}
-            dropdownStyle={styles.dropDown} onDropdownWillHide={()=>{  return true;}}>
-            <Image style={{width: Metrics.WIDTH(15), height: Metrics.HEIGHT(10), marginTop: Metrics.HEIGHT(10), marginRight: Metrics.WIDTH(15)}} resizeMode='stretch' source={Images.triangle}/>
-          </ModalDropdown>
-        </View>
-        <Text style={[Fonts.style.h3, { textAlign: 'right', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
-          ваш номер
-        </Text>
-        <Text style={[Fonts.style.h3, {marginTop: -10, textAlign: 'right', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
-          телефона
-        </Text>
-        <View style={{height: Metrics.HEIGHT(20)}}/>
-        <Text style={[Fonts.style.description, { textAlign: 'right', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
-          {this.props.error !== null && this.state.typing===false ? 'такого телефона нет в нашей базe' : ''}
-        </Text>
-        <ImageBackground resizeMode='stretch' source={Images.button} style={styles.numberButton}>
-          <Input
-            maxLength={12}
-            placeholder={'Enter Phone Number'}
-            style={{marginLeft: 30}}
-            textAlign={'left'}
-            value={this.state.number}
-            onChangeText={this.onChangeNumber}
-            fontSize={Fonts.size.regular}
-            fontFamily={Fonts.type.emphasis}
-            placeholderTextColor='gray'
-            returnKeyType='done'
-            autoCapitalize='none'
-            autoCorrect={false}
-            underlineColorAndroid='transparent'
-            onSubmitEditing={() => {}}
-          />
-        </ImageBackground> 
-        <Text style={[Fonts.style.description, { textAlign: 'right', fontFamily: Fonts.type.emphasis, marginHorizontal: 20 }]}>
-          {this.props.error !== null && this.state.typing===false ? this.props.error : ''}
-        </Text>
-      </ImageBackground>
-    )
-  }
-
   renderOptions(){
     return(
       <ImageBackground resizeMode='stretch' source={Images.categoryBoard} style={styles.categoryBoard}>
-        <Accordion
-          touchableComponent={TouchableOpacity}
-          sections={SECTIONS}
-          renderHeader={this._renderHeader}
-          renderContent={this._renderContent}
-        />
+        <ScrollView style={{height: Metrics.HEIGHT(536)}}>
+          <Accordion
+            touchableComponent={TouchableOpacity}
+            sections={SECTIONS}
+            renderHeader={this._renderHeader}
+            renderContent={this._renderContent}
+          />
+        </ScrollView>
       </ImageBackground>
     )
   }

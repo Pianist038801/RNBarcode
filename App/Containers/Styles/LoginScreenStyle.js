@@ -24,11 +24,12 @@ export default StyleSheet.create({
   },
   greenCheck: {
     width: Metrics.WIDTH(20),
-    height: Metrics.HEIGHT(14),
+    height: Metrics.WIDTH(17),
   },
   checkBox: {
     width: Metrics.WIDTH(14),
-    height: Metrics.HEIGHT(14),
+    height: Metrics.WIDTH(14),
+    marginRight: Metrics.WIDTH(6),
   },
   bottomProductBar: {
     flexDirection: 'row',
