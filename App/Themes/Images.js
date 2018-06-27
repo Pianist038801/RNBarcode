@@ -40,7 +40,16 @@ const images = {
   grey_line: require('../Images/GreyLine.png'),
   green_button: require('../Images/GreenButton.png'),
   confirm_button: require('../Images/confirm_btn.png'),
-  icons: require('../Images/icons.png')
+  icons: require('../Images/icons.png'),
+  categoryBoard: require('../Images/categoryBoard.png'),
+  plus: require('../Images/plus.png'),
+  leftArrow: require('../Images/leftArrow.png'),
+  cancel: require('../Images/Cancel.png'),
+  whiteArrow: require('../Images/whiteArrow.png'),
+  greenCheck: require('../Images/greenCheck.png'),
+  checkBox: require('../Images/checkBox.png'),
+  greenLeft: require('../Images/greenLeft.png'),
+  greenDown: require('../Images/greenDown.png'),
 }
 
 export default images

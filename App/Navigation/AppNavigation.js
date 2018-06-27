@@ -10,19 +10,21 @@ import AuthFail from '../Containers/AuthFail'
 import ProductsUploader from '../Containers/ProductsUploader';
 import LeftSideMenu from '../Containers/LeftSideBar';
 import RightSideMenu from '../Containers/RightSideBar';
+import DemoShop from '../Containers/DemoShop';
 
 const HomeStack = StackNavigator({
   LoginScreen: { screen: LoginScreen },
   SendCode: { screen: SendCode },
   AuthFail: { screen: AuthFail },
   Main: {screen: Main},
-  ProductsUploader: {screen: ProductsUploader}
+  ProductsUploader: {screen: ProductsUploader},
+  DemoShop: {screen: DemoShop},
 }, {
   headerMode: 'none',
   navigationOptions: {
     headerVisible: false,
   },
-  initialRouteName: 'SendCode'
+  initialRouteName: 'DemoShop'
 });
 
 const prevGetStateForActionHomeStack = HomeStack.router.getStateForAction;

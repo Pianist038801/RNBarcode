@@ -8,6 +8,28 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: 'green'
   },
+  categoryBoard: {
+    flex: 1,
+    margin: Metrics.marginHorizontal,
+    height: Metrics.HEIGHT(536),
+    padding: Metrics.marginHorizontal,
+  },
+  greenLeft: {
+    width: Metrics.WIDTH(9),
+    height: Metrics.HEIGHT(10),
+  },
+  greenDown: {
+    width: Metrics.WIDTH(10),
+    height: Metrics.HEIGHT(9),
+  },
+  greenCheck: {
+    width: Metrics.WIDTH(20),
+    height: Metrics.HEIGHT(14),
+  },
+  checkBox: {
+    width: Metrics.WIDTH(14),
+    height: Metrics.HEIGHT(14),
+  },
   bottomProductBar: {
     flexDirection: 'row',
     width: Metrics.WIDTH(421),
