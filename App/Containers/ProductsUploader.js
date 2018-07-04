@@ -40,7 +40,8 @@ class ProductsUploader extends Component {
   constructor (props: ProductsUploaderProps) {
 
     super(props)
-    console.log('uhaha');
+    const {store_id} = props.navigation.state.params
+    this.props.createProductId(store_id)
     this.state = {
       passcode : '',
       loading: false,
@@ -56,20 +57,7 @@ class ProductsUploader extends Component {
 
   componentWillReceiveProps(nextProps) {
     console.log('PRODUCTS_UPLOADER_NEW_PROPS')
-    if(this.props.fetching === true && nextProps.fetching === false && nextProps.error === null)
-    {
-      this.props.navigation.dispatch({
-        type: 'ReplaceCurrentScreen',
-        routeName: 'Main',
-      }); 
-    }
-    if(this.props.fetching === true && nextProps.fetching === false && nextProps.error !== null)
-    {
-      this.props.navigation.dispatch({
-        type: 'ReplaceCurrentScreen',
-        routeName: 'AuthFail',
-      }); 
-    }
+    console.log('NEXTPROPS=', nextProps);
   }
 
   componentDidMount() {
@@ -150,11 +138,7 @@ class ProductsUploader extends Component {
   onChangeCode = code => {
     this.setState({code})
   }
-
-  onLogin = () => {
-    this.props.logIn(this.props.lang, this.state.number, this.state.code);
-  }
-
+ 
   renderCameraButtons(){
     return(
       <View style={styles.cameraButtons}>
@@ -314,19 +298,20 @@ class ProductsUploader extends Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log('Internal_STATE=', state.auth)
   return {
     fetching:state.auth.fetching,
     error:state.auth.error,
     passcode:state.auth.passcode,
     lang: state.auth.lang,
     phone_number: state.auth.phone_number,
+    product_id: state.auth.product_id
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    logIn: (lang, phone_number, code) => dispatch(AuthActions.loginRequest(lang, phone_number, code)),
-    setLang: lang => dispatch(AuthActions.setLang(lang))
+  return { 
+    createProductId: store_id => dispatch(AuthActions.createProductRequest(store_id))
   }
 }
 

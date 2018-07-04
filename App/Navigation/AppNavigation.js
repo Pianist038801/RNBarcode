@@ -13,7 +13,7 @@ import RightSideMenu from '../Containers/RightSideBar';
 import DemoShop from '../Containers/DemoShop';
 
 const HomeStack = StackNavigator({
-  LoginScreen: { screen: LoginScreen },
+  LoginScreen: { screen: LoginScreen},
   SendCode: { screen: SendCode },
   AuthFail: { screen: AuthFail },
   Main: {screen: Main},

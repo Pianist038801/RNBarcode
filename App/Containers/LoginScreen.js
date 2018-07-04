@@ -45,7 +45,8 @@ class LoginScreen extends Component {
       error: '',
       editable: true,
       number: props.phone_number,
-      code: '',
+      code: ''
+      
   },
 
   this.isAttempting = false
@@ -254,7 +255,7 @@ class LoginScreen extends Component {
             underlineColorAndroid='transparent'
             onSubmitEditing={() => {}}
           />
-        </ImageBackground> 
+        </ImageBackground>
       </ImageBackground>
     )
   }
@@ -295,5 +296,4 @@ const mapDispatchToProps = (dispatch) => {
     setLang: lang => dispatch(AuthActions.setLang(lang))
   }
 }
-
 export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)

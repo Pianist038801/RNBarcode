@@ -1,8 +1,9 @@
-import { call, put } from 'redux-saga/effects'
+import { call, put, select } from 'redux-saga/effects'
 import { path } from 'ramda'
 import AuthActions from '../Redux/AuthRedux'
 import { AsyncStorage } from 'react-native'
-
+//import { store } from '../Redux/CreateStore';
+import store from '../Redux';
 export function * checkPasscode (api, action) {
   const { passcode } = action
   // make the call to the api
@@ -79,11 +80,37 @@ export function * getStoreList (api, action) {
   if (response.status === 200 && response.data.result === 'done') {
     // do data conversion here if needed
     yield put(AuthActions.storeSuccess(response.data.name, response.data.stores))
-  } 
+  }
   else
   {
     if (response.status === 200 && response.data.result === 'error') {
       yield put(AuthActions.storeFailure(response.data.report))
+    }
+    else{
+      yield put(AuthActions.storeFailure('Error occured while connecting to server'))
+    }
+  }
+}
+
+export function * createEmptyProduct (api, action) {
+  const { store_id } = action
+  console.log('Store_Id=', store_id);
+  const getToken = (state) => state.auth.token
+  const getLang = (state) => state.auth.lang
+
+  const token = yield select(getToken)
+  const lang = yield select(getLang)
+
+  const response = yield call(api.createProductId, token, lang, store_id)
+  console.log('Response=', response);
+  if (response.status === 200 && response.data.result === 'done') {
+    // do data conversion here if needed
+    yield put(AuthActions.createProductSuccess(response.data.id))
+  }
+  else
+  {
+    if (response.status === 200 && response.data.result === 'error') {
+      yield put(AuthActions.createProductFailure(response.data.report))
     }
     else{
       yield put(AuthActions.storeFailure('Error occured while connecting to server'))

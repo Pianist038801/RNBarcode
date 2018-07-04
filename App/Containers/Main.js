@@ -129,11 +129,12 @@ class Main extends Component {
     )
   }
 
-  uploadProducts = () => {
+  uploadProducts = (store_id) => {
     console.log('MAIN_NEW_PROPS')
     this.props.navigation.dispatch({
       type: 'ReplaceCurrentScreen',
       routeName: 'ProductsUploader',
+      params: {store_id}
     }); 
   }
 
@@ -142,9 +143,9 @@ class Main extends Component {
     let result = [<View key={0} style={{height: 30}}/>];
     for(var i=0; i<this.props.stores.length; i++)
     {
-      let index = i+1
+      let index = this.props.stores[i].id
       result.push(
-      <TouchableOpacity key={index} onPress={this.uploadProducts}>
+      <TouchableOpacity key={index} onPress={()=>this.uploadProducts(index)}>
       <View style={{flexDirection: 'column',}}>
         <View style={{backgroundColor: '#e9e9e9', flexDirection: 'row',  alignItems: 'center'}}>
           <Image resizeMode='stretch' style={styles.menuicon} source={{uri: `https://api.barcode2store.com${this.props.stores[i].logo}`}}/>
