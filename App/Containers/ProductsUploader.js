@@ -181,11 +181,26 @@ class ProductsUploader extends Component {
     )
   }
 
+  _onBarCodeRead= (result)=>{
+    
+    const {data} = result.data
+    console.log('RESULT_BAR_CODE=', result);
+    // if (this.barCodeFlag) {
+    //   this.barCodeFlag = false;
+
+    //   setTimeout(function() {
+    //     $this.props.navigator.pop();
+    //     $this.props.onSucess(result.data);
+    //   }, 1000);
+    // }
+  }
+
   renderCamera() {
     
     return (
       <Camera
       style={{ flex:1 }}
+      onBarCodeRead={this._onBarCodeRead} 
       ref={(cam) => {
         this.camera = cam;
       }}
