@@ -23,6 +23,7 @@ const images = {
   arrow_sjop: require('../Images/ArrowSjop.png'),
   back_arrow: require('../Images/BackArrow.png'),
   big_shop_ellipse: require('../Images/BigShopEllipse.png'),
+  big_shop_ellipse_clicked: require('../Images/BigShopEllipse_Clicked.png'),
   button_scan_code: require('../Images/ButtonScanCode.png'),
   coil_back_arrow: require('../Images/CoilBackArrow.png'),
   ear_right: require('../Images/EarRight-2.png'),

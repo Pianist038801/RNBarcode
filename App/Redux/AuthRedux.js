@@ -19,7 +19,15 @@ const { Types, Creators } = createActions({
   storeSuccess: ['name', 'stores'],
   createProductRequest: ['store_id'],
   createProductSuccess: ['product_id'],
-  createProductFailure: ['error']
+  createProductFailure: ['error'],
+  searchBarcodeRequest: ['barcode'],
+  searchBarcodeSuccess: ['id', 'is_etalon'],
+  searchBarcodeFailure: ['error'],
+  uploadImageRequest: ['good_id', 'pic1', 'pic2'],
+  uploadImageSuccess: ['images'],
+  uploadImageFailure: ['error'],
+  getGoodRequest: ['good_id'],
+  getGoodSuccess: ['good_info']
 })
 
 export const AuthTypes = Types
@@ -39,6 +47,10 @@ export const INITIAL_STATE = Immutable({
   stores: [],
   store_id: null,
   product_id: null,
+  id: null,
+  is_etalon: null,
+  images: null,
+  good_info: null,
 })
 
 /* ------------- Selectors ------------- */
@@ -97,14 +109,32 @@ export const createProductRequest = (state, {store_id}) => {
   return state.merge({ fetching: true, store_id })
 }
 
-export const createProductFailure = (state, {store_id}) => {
-  return state.merge({ fetching: true, store_id })
-}
-
 export const createProductSuccess = (state, {product_id}) => {
   return state.merge({ fetching: false, error: null, product_id })
 }
 
+export const searchBarcodeRequest = (state, {barcode}) => {
+  return state.merge({ fetching: true, barcode })
+}
+ 
+export const searchBarcodeSuccess = (state, {id, is_etalon}) => {
+  return state.merge({ fetching: false, error: null, id, is_etalon })
+}
+
+export const uploadImageRequest = (state, {good_id, pic1, pic2}) => {
+  return state.merge({ fetching: true}) 
+}
+
+export const uploadImageSuccess = (state, {images}) => {
+  return state.merge({ fetching: false, images })
+}
+
+export const getGoodRequest = (state, {good_id}) => {
+  return state.merge({ fetching: true })
+
+export const getGoodSuccess = (state, {good_info}) => {
+  return state.merge({ fetching: false, good_info })
+}
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -123,4 +153,12 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.CREATE_PRODUCT_REQUEST]: createProductRequest,
   [Types.CREATE_PRODUCT_FAILURE]: failure,
   [Types.CREATE_PRODUCT_SUCCESS]: createProductSuccess,
+  [Types.SEARCH_BARCODE_REQUEST]: searchBarcodeRequest,
+  [Types.SEARCH_BARCODE_FAILURE]: failure,
+  [Types.SEARCH_BARCODE_SUCCESS]: searchBarcodeSuccess,
+  [Types.UPLOAD_IMAGE_REQUEST]: uploadImageRequest,
+  [Types.UPLOAD_IMAGE_FAILURE]: failure,
+  [Types.UPLOAD_IMAGE_SUCCESS]: uploadImageSuccess,
+  [Types.GET_GOOD_REQUEST]: getGoodRequest,
+  [Types.GET_GOOD_SUCCESS]: getGoodSuccess,
 })

@@ -6,7 +6,7 @@ import { Container, Content, Form, Item, Input, Spinner, Toast } from 'native-ba
 import AuthActions from '../Redux/AuthRedux'
 import FullButton from '../Components/FullButton'
 import ModalDropdown from 'react-native-modal-dropdown';
-import Camera from 'react-native-camera'
+import { RNCamera } from 'react-native-camera' 
 
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
@@ -49,15 +49,33 @@ class ProductsUploader extends Component {
       editable: true,
       number: props.phone_number,
       code: '',
+      barcodeRead: false,
+      pic1: Images.placeholder,
+      pic2: Images.placeholder,
   },
 
   this.isAttempting = false
 
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps= (nextProps)=> {
     console.log('PRODUCTS_UPLOADER_NEW_PROPS')
-    console.log('NEXTPROPS=', nextProps);
+    if(this.props.fetching === true && nextProps.fetching === false && nextProps.error === null)
+    {
+      // this.props.navigation.dispatch({
+      //   type: 'ReplaceCurrentScreen',
+      //   routeName: 'Main',
+      // }); 
+      if(this.props.images != nextProps.images)
+      this.goFurther();
+      //this.props.navigation.navigate('Main');
+    }
+    if(this.props.fetching === true && nextProps.fetching === false && nextProps.error !== null)
+    {
+      
+      //this.props.navigation.navigate('AuthFail');
+    }
+    //this.setState({loading: nextProps.fetching})
   }
 
   componentDidMount() {
@@ -74,25 +92,7 @@ class ProductsUploader extends Component {
   }
 
   handleChangePasscode = value => this.setState({ passcode: value });
-
-  handleLogin = () => {
-
-    if(this.state.passcode.length < 4 || this.state.passcode === ''){
-      Toast.show({
-        text: 'Enter valid passcode',
-        position: 'bottom',
-        buttonText: 'Okay',
-        type: 'danger',
-        duration: 5000
-      });
-    }else{
-      this.setState({ loading: true , editable: false}, () => {
-        this.isAttempting = true;
-        this.props.attemptLogin(this.state.passcode);
-      })
-    }
-  }
-
+ 
   renderHeader() {
     return (
       <View style={styles.headerView}>
@@ -138,20 +138,29 @@ class ProductsUploader extends Component {
   onChangeCode = code => {
     this.setState({code})
   }
+
+  takePhoto = async () => {
+    const options = { quality: 0.5, base64: true };
+    const data = await this.camera.takePictureAsync(options);
+    //  eslint-disable-next-line
+    console.log('__CAMERA___')
+    this.setState({pic1: this.state.pic2, pic2: {uri: data.uri}});
+    console.log(data);
+  }
  
-  renderCameraButtons(){
+  renderCameraButtons = () => {
     return(
       <View style={styles.cameraButtons}>
-        <TouchableOpacity onPress={()=>alert('Barcode')}>
-          <ImageBackground resizeMode='stretch' source={Images.big_shop_ellipse} style={styles.barcodeButtonView}>
+        <TouchableOpacity onPress={()=>this.setState({barcodeRead: !this.state.barcodeRead})}>
+          <ImageBackground resizeMode='stretch' source={this.state.barcodeRead ? Images.big_shop_ellipse_clicked : Images.big_shop_ellipse} style={styles.barcodeButtonView}>
             <ImageBackground resizeMode='stretch' source={Images.barcode_icon} style={styles.barcodeButton}>
             </ImageBackground>
           </ImageBackground>
         </TouchableOpacity>
         <ImageBackground resizeMode='stretch' source={Images.big_shop_ellipse} style={styles.cameraButtonView}>
-          <Image style={styles.latestImage} source={Images.placeholder}/>
-          <Image style={styles.latestImage} source={Images.placeholder}/>
-          <TouchableOpacity onPress={()=>alert('PHOTO')}>
+          <Image style={styles.latestImage} source={this.state.pic1}/>
+          <Image style={styles.latestImage} source={this.state.pic2}/>
+          <TouchableOpacity onPress={this.takePhoto}>
             <ImageBackground resizeMode='stretch' source={Images.big_shop_ellipse} style={styles.cameraBtnWrapper}>
               <ImageBackground resizeMode='stretch' source={Images.photo_icon} style={styles.barcodeButton}>
               </ImageBackground>
@@ -182,9 +191,11 @@ class ProductsUploader extends Component {
   }
 
   _onBarCodeRead= (result)=>{
-    
-    const {data} = result.data
+    if(!this.state.barcodeRead) return;
+    const {data} = result
     console.log('RESULT_BAR_CODE=', result);
+    this.setState({barcodeNumber: data});
+    this.props.searchBarcode(data);
     // if (this.barCodeFlag) {
     //   this.barCodeFlag = false;
 
@@ -195,16 +206,16 @@ class ProductsUploader extends Component {
     // }
   }
 
-  renderCamera() {
-    
+  renderCamera= () => {
+    // if(this.state.loading)
+    //   return <Spinner style={{marginTop: Metrics.HEIGHT(180)}}/>
     return (
-      <Camera
+      <RNCamera
       style={{ flex:1 }}
       onBarCodeRead={this._onBarCodeRead} 
       ref={(cam) => {
         this.camera = cam;
       }}
-      aspect={Camera.constants.Aspect.fill}
     />
     )
   }
@@ -239,6 +250,10 @@ class ProductsUploader extends Component {
     )
   }
 
+  uploadImage = () => {
+    this.props.uploadImage(this.props.product_id, this.state.pic1, this.state.pic2);
+  }
+
   renderBottomBar() {  
     return ( 
         <ImageBackground resizeMode='stretch' source={Images.big_shop_ellipse} style={styles.bottomProductBar}>
@@ -248,43 +263,91 @@ class ProductsUploader extends Component {
               </ImageBackground>
             </View>
           </TouchableOpacity>
-          <ImageBackground resizeMode='stretch' source={Images.big_shop_ellipse} style={styles.bottomProductRightBtn}>
-            <Text style={[Fonts.style.h6, { width: Metrics.WIDTH(200), fontWeight: 'bold', fontFamily: Fonts.type.emphasis }]}>
-            добавьте товар {'\n'} в магазин
-            </Text>
-            <TouchableOpacity onPress={this.goFurther}>
-              <ImageBackground resizeMode='stretch' source={Images.arrow_sjop} style={styles.back_btn}/>  
-            </TouchableOpacity>
-          </ImageBackground>
+          <TouchableOpacity onPress={this.uploadImage}>
+            <ImageBackground resizeMode='stretch' source={Images.big_shop_ellipse} style={styles.bottomProductRightBtn}>
+              <Text style={[Fonts.style.h6, { width: Metrics.WIDTH(200), fontWeight: 'bold', fontFamily: Fonts.type.emphasis }]}>
+              добавьте товар {'\n'} в магазин
+              </Text>
+              <TouchableOpacity onPress={this.goFurther}>
+                <ImageBackground resizeMode='stretch' source={Images.arrow_sjop} style={styles.back_btn}/>  
+              </TouchableOpacity>
+            </ImageBackground>
+          </TouchableOpacity>
         </ImageBackground> 
     )
   }
+  onChangeProductName = productName => {
+    this.setState({productName})
+  }
+  onChangeBarcodeNumber = barcodeNumber => {
+    this.setState({barcodeNumber})
+  }
+  
+
   renderProductNames() {
     return (
       <View style={{ height: Metrics.HEIGHT(140), marginTop: Metrics.HEIGHT(-35), marginBottom: Metrics.HEIGHT(10)}}>
         <ImageBackground resizeMode='stretch' source={Images.button} style={styles.product_name}>
-          <Text style={[Fonts.style.description, { fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
+          <Text style={[Fonts.style.description, { flex:1, fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
           название товара: 
           </Text>
-          <Text>
-          TEKCT TEKCT TEKCT
-          </Text>
+          <Input
+            maxLength={12}
+            placeholder={'Product Name'}
+            style={{flex:1, marginLeft: 30}}
+            textAlign={'left'}
+            value={this.state.productName}
+            onChangeText={this.onChangeProductName}
+            fontSize={Fonts.size.regular}
+            fontFamily={Fonts.type.emphasis}
+            placeholderTextColor='gray'
+            returnKeyType='done'
+            autoCapitalize='none'
+            autoCorrect={false}
+            underlineColorAndroid='transparent'
+            onSubmitEditing={() => {}}
+          />
         </ImageBackground>
         <ImageBackground resizeMode='stretch' source={Images.button} style={styles.product_name}>
-          <Text style={[Fonts.style.description, { fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
-          название товара: 
+          <Text style={[Fonts.style.description, { flex:1, fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
+          баркод:
           </Text>
-          <Text>
-          TEKCT TEKCT TEKCT
-          </Text>
+          <Input
+            maxLength={12}
+            placeholder={'Barcode Number'}
+            style={{flex:1, marginLeft: 30}}
+            textAlign={'left'}
+            value={this.state.barcodeNumber}
+            onChangeText={this.onChangeBarcodeNumber}
+            fontSize={Fonts.size.regular}
+            fontFamily={Fonts.type.emphasis}
+            placeholderTextColor='gray'
+            returnKeyType='done'
+            autoCapitalize='none'
+            autoCorrect={false}
+            underlineColorAndroid='transparent'
+            onSubmitEditing={() => {}}
+          />
         </ImageBackground>
         <ImageBackground resizeMode='stretch' source={Images.button} style={styles.product_name}>
-          <Text style={[Fonts.style.description, { fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
-          название товара: 
+          <Text style={[Fonts.style.description, { flex:1, fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
+          цена основная:
           </Text>
-          <Text>
-          TEKCT TEKCT TEKCT
-          </Text>
+          <Input
+            maxLength={12}
+            placeholder={'Price'}
+            style={{marginLeft: 30, flex:1}}
+            textAlign={'left'}
+            value={this.state.price}
+            fontSize={Fonts.size.regular}
+            fontFamily={Fonts.type.emphasis}
+            placeholderTextColor='gray'
+            returnKeyType='done'
+            autoCapitalize='none'
+            autoCorrect={false}
+            underlineColorAndroid='transparent'
+            onSubmitEditing={() => {}}
+          />
         </ImageBackground>
       </View>
     )
@@ -326,7 +389,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return { 
-    createProductId: store_id => dispatch(AuthActions.createProductRequest(store_id))
+    createProductId: store_id => dispatch(AuthActions.createProductRequest(store_id)),
+    searchBarcode: barcode => dispatch(AuthActions.searchBarcodeRequest(barcode)),
+    uploadImage: (good_id, pic1, pic2) => dispatch(AuthActions.uploadImageRequest(good_id, pic1, pic2))
   }
 }
 

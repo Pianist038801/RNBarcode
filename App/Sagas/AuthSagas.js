@@ -2,8 +2,7 @@ import { call, put, select } from 'redux-saga/effects'
 import { path } from 'ramda'
 import AuthActions from '../Redux/AuthRedux'
 import { AsyncStorage } from 'react-native'
-//import { store } from '../Redux/CreateStore';
-import store from '../Redux';
+
 export function * checkPasscode (api, action) {
   const { passcode } = action
   // make the call to the api
@@ -37,7 +36,7 @@ export function * verifyPhoneNumber (api, action) {
     // do data conversion here if needed
     console.log('VerifySuccess');
     yield put(AuthActions.verifySuccess())
-  } 
+  }
   else
   {
     console.log('VerifyFailure');
@@ -106,6 +105,66 @@ export function * createEmptyProduct (api, action) {
   if (response.status === 200 && response.data.result === 'done') {
     // do data conversion here if needed
     yield put(AuthActions.createProductSuccess(response.data.id))
+  }
+  else
+  {
+    if (response.status === 200 && response.data.result === 'error') {
+      yield put(AuthActions.createProductFailure(response.data.report))
+    }
+    else{
+      yield put(AuthActions.storeFailure('Error occured while connecting to server'))
+    }
+  }
+}
+
+export function * searchBarcode (api, action) {
+  const { barcode } = action
+  console.log('BARCODE_IN_SAGA=', barcode);
+  const getToken = (state) => state.auth.token
+  const getLang = (state) => state.auth.lang
+  const getStoreId = (state) => state.auth.store_id
+
+  const token = yield select(getToken)
+  const lang = yield select(getLang)
+  const store_id = yield select(getStoreId)
+
+  const response = yield call(api.searchByBarcode, token, lang, store_id, barcode)
+  console.log('SEARCH_BARCODE_RESPONSE=', response);
+  if (response.status === 200 && response.data.result === 'done') {
+    // do data conversion here if needed
+    const goodInfo = yield call(api.getGood, token, lang, store_id, response.data.id)
+    yield put(AuthActions.getGoodSuccess(goodInfo))
+  }
+  else
+  {
+    if (response.status === 200 && response.data.result === 'error') {
+      yield put(AuthActions.createProductFailure(response.data.report))
+    }
+    else{
+      yield put(AuthActions.storeFailure('Error occured while connecting to server'))
+    }
+  }
+}
+
+export function * uploadImage (api, action) {
+  const { good_id, pic1, pic2 } = action
+  
+  console.log('GOOD_ID=', good_id);
+  console.log('pic', pic1);
+  console.log('pic', pic2);
+  const getToken = (state) => state.auth.token
+  const getLang = (state) => state.auth.lang
+  const getStoreId = (state) => state.auth.store_id
+
+  const token = yield select(getToken)
+  const lang = yield select(getLang)
+  const store_id = yield select(getStoreId)
+
+  const response = yield call(api.uploadImage, token, store_id, good_id, pic1, pic2)
+  console.log('SEARCH_BARCODE_RESPONSE=', response);
+  if (response.status === 200 && response.data.result === 'done') {
+    // do data conversion here if needed
+    yield put(AuthActions.uploadImageSuccess(response.data.images))
   }
   else
   {

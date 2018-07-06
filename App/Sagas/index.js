@@ -10,7 +10,13 @@ import { AuthTypes } from '../Redux/AuthRedux'
 /* ------------- Sagas ------------- */
 
 
-import { checkPasscode, verifyPhoneNumber, logIn, getStoreList, createEmptyProduct } from './AuthSagas'
+import { checkPasscode,
+  verifyPhoneNumber,
+  logIn,
+  getStoreList,
+  createEmptyProduct,
+  searchBarcode,
+} from './AuthSagas'
 
 /* ------------- API ------------- */
 
@@ -26,6 +32,7 @@ export default function * root () {
     takeLatest(AuthTypes.VERIFY_REQUEST, verifyPhoneNumber, api),
     takeLatest(AuthTypes.LOGIN_REQUEST, logIn, api),
     takeLatest(AuthTypes.STORE_REQUEST, getStoreList, api),
-    takeLatest(AuthTypes.CREATE_PRODUCT_REQUEST, createEmptyProduct, api)
-  ])
+    takeLatest(AuthTypes.CREATE_PRODUCT_REQUEST, createEmptyProduct, api),
+    takeLatest(AuthTypes.SEARCH_BARCODE_REQUEST, searchBarcode, api),
+  ])  
 }

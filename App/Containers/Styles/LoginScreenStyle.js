@@ -151,7 +151,7 @@ export default StyleSheet.create({
     width: Metrics.screenWidth-4,
     height: Metrics.HEIGHT(381)-4,
     borderWidth: 2,
-    borderColor: '#f77717'
+    borderColor: '#f77717',
   },
   inputContainer: {
     backgroundColor: Colors.snow,

@@ -40,6 +40,11 @@ const create = (baseURL = requestUrl.url) => {
   const logIn = (lang, phone_number, code) => api.post('', {table: "customers", action: "loader_phone_confirm", lang, phone_number, code})
   const getStoreList = (lang, token) => api.post('', {table: "stores", action: "loader_list", lang, token})
   const createProductId = (token, lang, store_id) => api.post('', {table: "common_goods", action: "loader_new_good", token, lang, store_id})
+  const searchByBarcode = (token, lang, store_id, barcode) => api.post('', {table: "common_goods", action: "loader_search_barcode", token, lang, store_id, barcode})
+  const uploadImage = (token, store_id, good_id, pic1, pic2) => api.post('', {table: "common_goods", action: "upload_images", token, good_id, store_id, images: [{file: pic1}, {file: pic2}]})
+  const searchByName = (name, store_id, lang) => api.post('', {action: "etalons_search", table: "common_goods", name, store_id, lang})
+  const chooseReference = (token, lang, store_id, good_id) => api.post('', {action: "loader_good_choose", table: "common_goods", token, lang, store_id, good_id})
+  const getGood = (token, lang, store_id, good_id ) => api.post('', {action: "loader_select", table: "common_goods", token, lang, store_id, good_id})
 
   // ------
   // STEP 3
@@ -59,7 +64,12 @@ const create = (baseURL = requestUrl.url) => {
     verifyPhoneNumber,
     logIn,
     getStoreList,
-    createProductId
+    createProductId,
+    searchByBarcode,
+    uploadImage,
+    searchByName,
+    chooseReference,
+    getGood
   }
 }
 

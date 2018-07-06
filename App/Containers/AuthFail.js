@@ -150,7 +150,7 @@ class AuthFail extends Component {
   renderSend(){
     return(
       <ImageBackground resizeMode='stretch' source={Images.button} style={styles.sendButton}>
-        <TouchableOpacity onPress={this.onPressBack}>
+        <TouchableOpacity onPress={this.gotoLogin}>
           <View style={{flexDirection:'row', alignItems: 'center'}}>
             <Text style={[Fonts.style.h6, { color: 'black', fontFamily: Fonts.type.bigItalic, marginHorizontal: 10 }]}>
               выход
