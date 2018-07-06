@@ -16,6 +16,9 @@ import { checkPasscode,
   getStoreList,
   createEmptyProduct,
   searchBarcode,
+  searchByName,
+  getReference,
+  getGood
 } from './AuthSagas'
 
 /* ------------- API ------------- */
@@ -34,5 +37,8 @@ export default function * root () {
     takeLatest(AuthTypes.STORE_REQUEST, getStoreList, api),
     takeLatest(AuthTypes.CREATE_PRODUCT_REQUEST, createEmptyProduct, api),
     takeLatest(AuthTypes.SEARCH_BARCODE_REQUEST, searchBarcode, api),
+    takeLatest(AuthTypes.SEARCH_NAME_REQUEST, searchByName, api),
+    takeLatest(AuthTypes.GET_REFERENCE_REQUEST, getReference, api),
+    takeLatest(AuthTypes.GET_GOOD_REQUEST, getGood, api)
   ])  
 }

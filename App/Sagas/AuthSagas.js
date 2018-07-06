@@ -132,8 +132,93 @@ export function * searchBarcode (api, action) {
   console.log('SEARCH_BARCODE_RESPONSE=', response);
   if (response.status === 200 && response.data.result === 'done') {
     // do data conversion here if needed
-    const goodInfo = yield call(api.getGood, token, lang, store_id, response.data.id)
-    yield put(AuthActions.getGoodSuccess(goodInfo))
+    const good_info = yield call(api.getGood, token, lang, store_id, response.data.id)
+    yield put(AuthActions.getGoodSuccess(good_info.data))
+  }
+  else
+  {
+    if (response.status === 200 && response.data.result === 'error') {
+      yield put(AuthActions.createProductFailure(response.data.report))
+    }
+    else{
+      yield put(AuthActions.storeFailure('Error occured while connecting to server'))
+    }
+  }
+}
+ 
+export function * getGood (api, action) {
+  const { good_id } = action
+  console.log('good_id=', good_id);
+  const getToken = (state) => state.auth.token
+  const getLang = (state) => state.auth.lang
+  const getStoreId = (state) => state.auth.store_id
+
+  const token = yield select(getToken)
+  const lang = yield select(getLang)
+  const store_id = yield select(getStoreId)
+  
+  const response = yield call(api.getGood, token, lang, store_id, good_id)
+  console.log('GOOD_INFO=', response);
+  if (response.status === 200 && response.data.result === 'done') {
+    // do data conversion here if needed
+    yield put(AuthActions.getGoodSuccess(response.data))
+  }
+  else
+  {
+    if (response.status === 200 && response.data.result === 'error') {
+      yield put(AuthActions.createProductFailure(response.data.report))
+    }
+    else{
+      yield put(AuthActions.storeFailure('Error occured while connecting to server'))
+    }
+  }
+}
+
+export function * getReference (api, action) {
+  const { barcode } = action
+  console.log('BARCODE_IN_SAGA=', barcode);
+  const getToken = (state) => state.auth.token
+  const getLang = (state) => state.auth.lang
+  const getStoreId = (state) => state.auth.store_id
+
+  const token = yield select(getToken)
+  const lang = yield select(getLang)
+  const store_id = yield select(getStoreId)
+
+  const response = yield call(api.searchByBarcode, token, lang, store_id, barcode)
+  console.log('SEARCH_BARCODE_RESPONSE=', response);
+  if (response.status === 200 && response.data.result === 'done') {
+    // do data conversion here if needed
+    const good_info = yield call(api.getGood, token, lang, store_id, response.data.id)
+    yield put(AuthActions.getGoodSuccess(good_info))
+  }
+  else
+  {
+    if (response.status === 200 && response.data.result === 'error') {
+      yield put(AuthActions.createProductFailure(response.data.report))
+    }
+    else{
+      yield put(AuthActions.storeFailure('Error occured while connecting to server'))
+    }
+  }
+}
+
+export function * searchByName (api, action) {
+  const { name } = action
+  console.log('PROD_NAME=', name);
+  const getToken = (state) => state.auth.token
+  const getLang = (state) => state.auth.lang
+  const getStoreId = (state) => state.auth.store_id
+
+  const token = yield select(getToken)
+  const store_id = yield select(getStoreId)
+  const lang = yield select(getLang)
+
+  const response = yield call(api.searchByName, token, name, store_id, lang)
+  console.log('SEARCH_By_NAME_RESPONSE=', response);
+  if (response.status === 200 && response.data.result === 'done') {
+    console.log('Goods are retriedved');
+    yield put(AuthActions.searchNameSuccess(response.data.goods))
   }
   else
   {

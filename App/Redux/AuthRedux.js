@@ -27,7 +27,11 @@ const { Types, Creators } = createActions({
   uploadImageSuccess: ['images'],
   uploadImageFailure: ['error'],
   getGoodRequest: ['good_id'],
-  getGoodSuccess: ['good_info']
+  getGoodSuccess: ['good_info'],
+  searchNameRequest: ['name'],
+  searchNameSuccess: ['goods'],
+  getReferenceRequest: ['good_id'],
+  
 })
 
 export const AuthTypes = Types
@@ -51,6 +55,7 @@ export const INITIAL_STATE = Immutable({
   is_etalon: null,
   images: null,
   good_info: null,
+  goods:null,
 })
 
 /* ------------- Selectors ------------- */
@@ -131,10 +136,24 @@ export const uploadImageSuccess = (state, {images}) => {
 
 export const getGoodRequest = (state, {good_id}) => {
   return state.merge({ fetching: true })
+}
 
 export const getGoodSuccess = (state, {good_info}) => {
   return state.merge({ fetching: false, good_info })
 }
+
+export const searchNameRequest = (state, {name}) => {
+  return state.merge({ fetching: true })
+}
+
+export const searchNameSuccess = (state, {goods}) => {
+  return state.merge({ fetching: false, goods })
+}
+
+export const getReferenceRequest = (state, {good_id}) => {
+  return state.merge({ fetching: true })
+}
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -161,4 +180,7 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.UPLOAD_IMAGE_SUCCESS]: uploadImageSuccess,
   [Types.GET_GOOD_REQUEST]: getGoodRequest,
   [Types.GET_GOOD_SUCCESS]: getGoodSuccess,
+  [Types.SEARCH_NAME_REQUEST]: searchNameRequest,
+  [Types.SEARCH_NAME_SUCCESS]: searchNameSuccess,
+  [Types.GET_REFERENCE_REQUEST]: getReferenceRequest,
 })

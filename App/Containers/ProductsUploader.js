@@ -52,6 +52,7 @@ class ProductsUploader extends Component {
       barcodeRead: false,
       pic1: Images.placeholder,
       pic2: Images.placeholder,
+      showModal: false,
   },
 
   this.isAttempting = false
@@ -60,20 +61,30 @@ class ProductsUploader extends Component {
 
   componentWillReceiveProps= (nextProps)=> {
     console.log('PRODUCTS_UPLOADER_NEW_PROPS')
+    console.log(this.props);
+    console.log(nextProps);
     if(this.props.fetching === true && nextProps.fetching === false && nextProps.error === null)
     {
-      // this.props.navigation.dispatch({
-      //   type: 'ReplaceCurrentScreen',
-      //   routeName: 'Main',
-      // }); 
       if(this.props.images != nextProps.images)
-      this.goFurther();
-      //this.props.navigation.navigate('Main');
+        this.goFurther();
+      if(this.props.good_info != nextProps.good_info)
+      {
+        const {name, barcode, price_usual} = nextProps.good_info
+        this.setState({productName: name, barcodeNumber: barcode, price: price_usual});
+      }
+      if(this.props.goods != nextProps.goods)
+      {
+        console.log('GOODS are changed')
+        this.setState({showModal: true});
+        if(nextProps.goods.length > 0)
+        {
+          this.modal.show();
+        }
+      }
     }
     if(this.props.fetching === true && nextProps.fetching === false && nextProps.error !== null)
     {
       
-      //this.props.navigation.navigate('AuthFail');
     }
     //this.setState({loading: nextProps.fetching})
   }
@@ -171,10 +182,6 @@ class ProductsUploader extends Component {
     )
   }
 
-  _onSelect=(id, data)=>{
-    console.log('Data=', data);
-    this.props.setLang(data);
-  }
   renderTimeBar(){
     return(
       <ImageBackground resizeMode='stretch' source={Images.bottomBar} style={styles.bottomBar}>
@@ -278,16 +285,46 @@ class ProductsUploader extends Component {
   }
   onChangeProductName = productName => {
     this.setState({productName})
+    this.props.searchByName(productName)
   }
   onChangeBarcodeNumber = barcodeNumber => {
     this.setState({barcodeNumber})
   }
   
+  _onSelect=(id, data)=>{
+    console.log('Data=', data);
+    this.setState({showModal: false})
+    this.props.getGood(data.id);
+  }
+
+  _renderDropRow= (rowData, sectionID, rowID, highlightRow)=>
+  {
+    
+    return( 
+    <View style={{flexDirection:'column'}}>
+      <View style={{padding: Metrics.defaultMargin, backgroundColor: Colors.white, flexDirection: 'row', alignItems: 'center'}}>
+        <Text>
+          {rowData.barcode}
+        </Text>
+        <Text style={[Fonts.style.h6, {color: Colors.textSecondary, textAlign: 'center', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
+          {rowData.name}
+        </Text>
+      </View>
+      <View style={{height:1, backgroundColor: '#e9eef5'}}/>
+    </View>)
+  }
 
   renderProductNames() {
     return (
       <View style={{ height: Metrics.HEIGHT(140), marginTop: Metrics.HEIGHT(-35), marginBottom: Metrics.HEIGHT(10)}}>
         <ImageBackground resizeMode='stretch' source={Images.button} style={styles.product_name}>
+          {
+            this.state.showModal?
+          <ModalDropdown defaultValue='' ref={c => this.modal = c} options={this.props.goods} onSelect={this._onSelect} renderRow={this._renderDropRow}
+            onDropdownWillHide={()=>{  return true;}}>
+          </ModalDropdown>
+          :null
+          }
           <Text style={[Fonts.style.description, { flex:1, fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
           название товара: 
           </Text>
@@ -383,7 +420,9 @@ const mapStateToProps = (state) => {
     passcode:state.auth.passcode,
     lang: state.auth.lang,
     phone_number: state.auth.phone_number,
-    product_id: state.auth.product_id
+    product_id: state.auth.product_id,
+    good_info: state.auth.good_info,
+    goods: state.auth.goods
   }
 }
 
@@ -391,7 +430,9 @@ const mapDispatchToProps = (dispatch) => {
   return { 
     createProductId: store_id => dispatch(AuthActions.createProductRequest(store_id)),
     searchBarcode: barcode => dispatch(AuthActions.searchBarcodeRequest(barcode)),
-    uploadImage: (good_id, pic1, pic2) => dispatch(AuthActions.uploadImageRequest(good_id, pic1, pic2))
+    uploadImage: (good_id, pic1, pic2) => dispatch(AuthActions.uploadImageRequest(good_id, pic1, pic2)),
+    searchByName: name => dispatch(AuthActions.searchNameRequest(name)),
+    getGood: good_id => dispatch(AuthActions.getGoodRequest(good_id)),
   }
 }
 
