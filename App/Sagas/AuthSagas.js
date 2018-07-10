@@ -159,7 +159,7 @@ export function * getGood (api, action) {
   const store_id = yield select(getStoreId)
   const {data:{id}} = yield call(api.getReference, token, lang, store_id, good_id)
   const response = yield call(api.getGood, token, lang, store_id, id)
-  console.log('GOOD_INFO=', response);
+  console.log('GET_GOOD->GOOD_INFO=', response);
   if (response.status === 200 && response.data.result === 'done') {
     // do data conversion here if needed
     yield put(AuthActions.getGoodSuccess(response.data))
@@ -278,9 +278,12 @@ export function * saveLeftInfoRequest (api, action) {
   const store_id = yield select(getStoreId)
 
   const response = yield call(api.saveLeftInfo, store_id, lang, token, good_id, price_usual, price_mode, properties)
-  console.log('SAVE_LEFT_INFO_REQUEST=', response);
+  console.log('SAVE_LEFT_INFO_RESPONSE=', response);
   if (response.status === 200 && response.data.result === 'done') {
     // do data conversion here if needed
+    console.log('GET_GOOD_AFTER_UPDATE with good_id=', good_id)
+    yield put(AuthActions.getGoodRequest(good_id))
+
     yield put(AuthActions.saveLeftinfoSuccess(response.data.changes))
   }
   else

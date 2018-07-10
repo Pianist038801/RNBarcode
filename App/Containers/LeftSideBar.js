@@ -68,7 +68,7 @@ class LeftSideBar extends Component {
 
   componentWillReceiveProps(nextProps) {
     console.log('LEFT_SIDE_BAR_NEW_PROPS')
-    if(nextProps.good_info!=null && nextProps.good_info.properties != null)
+    if(nextProps.good_info!=null && nextProps.good_info.properties != null && nextProps.good_info !== this.props.good_info)
     {
       this.setState({properties: nextProps.good_info.properties,
         price: nextProps.good_info.price_usual,
@@ -128,6 +128,7 @@ class LeftSideBar extends Component {
       </View>
     )
   }
+  
   showPropertyModal = (if_add,id) => {
     console.log('Show_Property_Modal');
     if(if_add)

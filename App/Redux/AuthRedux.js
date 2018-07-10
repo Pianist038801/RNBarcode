@@ -140,7 +140,7 @@ export const getGoodRequest = (state, {good_id}) => {
 }
 
 export const getGoodSuccess = (state, {good_info}) => {
-  return state.merge({ fetching: false, good_info })
+  return state.merge({ fetching: false, good_info})
 }
 
 export const searchNameRequest = (state, {name}) => {

@@ -44,11 +44,16 @@ const create = (baseURL = requestUrl.url) => {
   const uploadImage = (token, store_id, good_id, pic1, pic2) => api.post('', {table: "common_goods", action: "upload_images", token, good_id, store_id, images: [{file: pic1}, {file: pic2}]})
   const searchByName = (token, name, store_id, lang) => api.post('', {action: "etalons_search",token, table: "common_goods", name, store_id, lang})
   const getReference = (token, lang, store_id, good_id) => api.post('', {action: "loader_good_choose", table: "common_goods", token, lang, store_id, good_id})
-  const getGood = (token, lang, store_id, good_id ) => api.post('', {action: "loader_select", table: "common_goods", token, lang, store_id, good_id})
+  const getGood = (token, lang, store_id, good_id ) => 
+  {
+    console.log('GET_GOOD_RESPONSE=');
+    console.log({action: "loader_select", table: "common_goods", token, lang, store_id, good_id})
+    return api.post('', {action: "loader_select", table: "common_goods", token, lang, store_id, good_id})
+  }
   const saveLeftInfo = (store_id, lang, token, good_id, price_usual, price_mode, properties) => 
   {
     console.log('SAVE_LEFT_INFO_REQUEST=');
-    console.log(JSON.stringify({table: "common_goods", action: "update", store_id, lang, token, good_id, price_usual, price_mode, properties}))
+    console.log({table: "common_goods", action: "update", store_id, lang, token, good_id, price_usual, price_mode, properties})
     return api.post('', {table: "common_goods", action: "update", store_id, lang, token, good_id, price_usual, price_mode, properties})
   }
 
