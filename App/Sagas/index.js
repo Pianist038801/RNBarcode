@@ -18,7 +18,8 @@ import { checkPasscode,
   searchBarcode,
   searchByName,
   getReference,
-  getGood
+  getGood,
+  saveLeftInfoRequest
 } from './AuthSagas'
 
 /* ------------- API ------------- */
@@ -39,6 +40,7 @@ export default function * root () {
     takeLatest(AuthTypes.SEARCH_BARCODE_REQUEST, searchBarcode, api),
     takeLatest(AuthTypes.SEARCH_NAME_REQUEST, searchByName, api),
     takeLatest(AuthTypes.GET_REFERENCE_REQUEST, getReference, api),
-    takeLatest(AuthTypes.GET_GOOD_REQUEST, getGood, api)
+    takeLatest(AuthTypes.GET_GOOD_REQUEST, getGood, api),
+    takeLatest(AuthTypes.SAVE_LEFTINFO_REQUEST, saveLeftInfoRequest, api)
   ])  
 }

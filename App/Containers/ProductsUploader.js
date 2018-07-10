@@ -63,6 +63,7 @@ class ProductsUploader extends Component {
     console.log('PRODUCTS_UPLOADER_NEW_PROPS')
     console.log(this.props);
     console.log(nextProps);
+    console.log('Modal Var = ', this.modal);
     if(this.props.fetching === true && nextProps.fetching === false && nextProps.error === null)
     {
       if(this.props.images != nextProps.images)
@@ -78,6 +79,7 @@ class ProductsUploader extends Component {
         this.setState({showModal: true});
         if(nextProps.goods.length > 0)
         {
+          console.log('THIS.MODAL=', this.modal)
           this.modal.show();
         }
       }
@@ -289,6 +291,7 @@ class ProductsUploader extends Component {
   }
   onChangeBarcodeNumber = barcodeNumber => {
     this.setState({barcodeNumber})
+    this.props.searchBarcode(barcodeNumber);
   }
   
   _onSelect=(id, data)=>{
@@ -314,8 +317,7 @@ class ProductsUploader extends Component {
     </View>)
   }
 
-  renderProductNames() {
-    return (
+  renderProductNames= () =>(
       <View style={{ height: Metrics.HEIGHT(140), marginTop: Metrics.HEIGHT(-35), marginBottom: Metrics.HEIGHT(10)}}>
         <ImageBackground resizeMode='stretch' source={Images.button} style={styles.product_name}>
           {
@@ -329,9 +331,9 @@ class ProductsUploader extends Component {
           название товара: 
           </Text>
           <Input
-            maxLength={12}
+            maxLength={20}
             placeholder={'Product Name'}
-            style={{flex:1, marginLeft: 30}}
+            style={{flex:2, marginLeft: 30}}
             textAlign={'left'}
             value={this.state.productName}
             onChangeText={this.onChangeProductName}
@@ -349,10 +351,10 @@ class ProductsUploader extends Component {
           <Text style={[Fonts.style.description, { flex:1, fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
           баркод:
           </Text>
-          <Input
-            maxLength={12}
+          <Input 
+            maxLength={20}
             placeholder={'Barcode Number'}
-            style={{flex:1, marginLeft: 30}}
+            style={{flex:2, marginLeft: 30}}
             textAlign={'left'}
             value={this.state.barcodeNumber}
             onChangeText={this.onChangeBarcodeNumber}
@@ -371,9 +373,9 @@ class ProductsUploader extends Component {
           цена основная:
           </Text>
           <Input
-            maxLength={12}
+            maxLength={20}
             placeholder={'Price'}
-            style={{marginLeft: 30, flex:1}}
+            style={{marginLeft: 30, flex:2}}
             textAlign={'left'}
             value={this.state.price}
             fontSize={Fonts.size.regular}
@@ -388,7 +390,6 @@ class ProductsUploader extends Component {
         </ImageBackground>
       </View>
     )
-  }
 
   render () {
     return (

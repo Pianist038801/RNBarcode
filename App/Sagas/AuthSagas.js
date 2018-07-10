@@ -132,7 +132,8 @@ export function * searchBarcode (api, action) {
   console.log('SEARCH_BARCODE_RESPONSE=', response);
   if (response.status === 200 && response.data.result === 'done') {
     // do data conversion here if needed
-    const good_info = yield call(api.getGood, token, lang, store_id, response.data.id)
+    const {data:{id}} = yield call(api.getReference, token, lang, store_id, response.data.id)
+    const good_info = yield call(api.getGood, token, lang, store_id, id)
     yield put(AuthActions.getGoodSuccess(good_info.data))
   }
   else
@@ -156,8 +157,8 @@ export function * getGood (api, action) {
   const token = yield select(getToken)
   const lang = yield select(getLang)
   const store_id = yield select(getStoreId)
-  
-  const response = yield call(api.getGood, token, lang, store_id, good_id)
+  const {data:{id}} = yield call(api.getReference, token, lang, store_id, good_id)
+  const response = yield call(api.getGood, token, lang, store_id, id)
   console.log('GOOD_INFO=', response);
   if (response.status === 200 && response.data.result === 'done') {
     // do data conversion here if needed
@@ -233,7 +234,6 @@ export function * searchByName (api, action) {
 
 export function * uploadImage (api, action) {
   const { good_id, pic1, pic2 } = action
-  
   console.log('GOOD_ID=', good_id);
   console.log('pic', pic1);
   console.log('pic', pic2);
@@ -261,3 +261,36 @@ export function * uploadImage (api, action) {
     }
   }
 }
+
+export function * saveLeftInfoRequest (api, action) {
+  const { price_usual, price_mode, properties } = action
+  console.log('price_usual=', price_usual);
+  console.log('price_mode=', price_mode);
+  console.log('properties=', properties);
+  const getToken = (state) => state.auth.token
+  const getLang = (state) => state.auth.lang
+  const getStoreId = (state) => state.auth.store_id
+  const goodId = (state) => state.auth.good_info.id
+
+  const good_id = yield select(goodId)
+  const token = yield select(getToken)
+  const lang = yield select(getLang)
+  const store_id = yield select(getStoreId)
+
+  const response = yield call(api.saveLeftInfo, store_id, lang, token, good_id, price_usual, price_mode, properties)
+  console.log('SAVE_LEFT_INFO_REQUEST=', response);
+  if (response.status === 200 && response.data.result === 'done') {
+    // do data conversion here if needed
+    yield put(AuthActions.saveLeftinfoSuccess(response.data.changes))
+  }
+  else
+  {
+    if (response.status === 200 && response.data.result === 'error') {
+      yield put(AuthActions.createProductFailure(response.data.report))
+    }
+    else{
+      yield put(AuthActions.storeFailure('Error occured while connecting to server'))
+    }
+  }
+}
+

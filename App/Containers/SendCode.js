@@ -38,7 +38,7 @@ class SendCode extends Component {
       passcode : '',
       loading: false,
       error: null,
-      number: '',
+      number: '11234567890',
       typing: false
   },
 

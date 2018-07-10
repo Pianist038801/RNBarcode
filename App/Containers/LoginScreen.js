@@ -45,7 +45,7 @@ class LoginScreen extends Component {
       error: '',
       editable: true,
       number: props.phone_number,
-      code: ''
+      code: '1123'
       
   },
 

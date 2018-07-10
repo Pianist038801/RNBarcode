@@ -31,7 +31,8 @@ const { Types, Creators } = createActions({
   searchNameRequest: ['name'],
   searchNameSuccess: ['goods'],
   getReferenceRequest: ['good_id'],
-  
+  saveLeftinfoRequest: ['price_usual', 'price_mode', 'properties'],
+  saveLeftinfoSuccess: ['data'],
 })
 
 export const AuthTypes = Types
@@ -154,6 +155,14 @@ export const getReferenceRequest = (state, {good_id}) => {
   return state.merge({ fetching: true })
 }
 
+export const saveLeftinfoRequest = (state, action) => {
+  return state.merge({ fetching: true })
+}
+
+export const saveLeftinfoSuccess = (state, action) => {
+  return state.merge({ fetching: false  })
+}
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -183,4 +192,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.SEARCH_NAME_REQUEST]: searchNameRequest,
   [Types.SEARCH_NAME_SUCCESS]: searchNameSuccess,
   [Types.GET_REFERENCE_REQUEST]: getReferenceRequest,
+  [Types.SAVE_LEFTINFO_REQUEST]: saveLeftinfoRequest
 })
