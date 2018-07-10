@@ -79,16 +79,16 @@ class LeftSideBar extends Component {
   
   renderHeader() {
     let properties = []
-    properties = this.state.properties.map(property =>
+    properties = this.state.properties.map((property, id) =>
       property.chek == '1' ?
-      <View style={{flexDirection: 'row',  marginTop: Metrics.HEIGHT(10), alignItems: 'center', justifyContent: 'center'}}>
+      <TouchableOpacity onPress={()=>this.showPropertyModal(false, id)} style={{flexDirection: 'row',  marginTop: Metrics.HEIGHT(10), alignItems: 'center', justifyContent: 'center'}}>
         <Image resizeMode='stretch' style={{marginRight: Metrics.WIDTH(20), width: Metrics.WIDTH(20), height: Metrics.HEIGHT(17)}} source={Images.left_arrow}/>
         <Text style={{  fontSize: Fonts.size.h6, color: '#244063', fontFamily: Fonts.type.base,   textAlign: 'center'}}>{property.name} {property.value}</Text>
         <Image resizeMode='stretch' style={{marginLeft: Metrics.WIDTH(20), width: Metrics.WIDTH(20), height: Metrics.HEIGHT(17)}} source={Images.right_arrow}/>
-      </View> :
-      <View style={{flexDirection: 'row',  marginTop: Metrics.HEIGHT(10), alignItems: 'center', justifyContent: 'center'}}>
+      </TouchableOpacity> :
+      <TouchableOpacity onPress={()=>this.showPropertyModal(false, id)} style={{flexDirection: 'row',  marginTop: Metrics.HEIGHT(10), alignItems: 'center', justifyContent: 'center'}}>
         <Text style={{  fontSize: Fonts.size.h6, color: '#244063', fontFamily: Fonts.type.base,   textAlign: 'center'}}>{property.name} {property.value}</Text>
-      </View>
+      </TouchableOpacity>
       )
     console.log('PROPERTIES=, p', properties);
     return (
@@ -118,7 +118,7 @@ class LeftSideBar extends Component {
         {properties}
         
         <ImageBackground resizeMode='stretch' style={{marginTop: Metrics.HEIGHT(20),alignSelf: 'center', alignItems: 'center', justifyContent: 'center', width: Metrics.WIDTH(299), height: Metrics.HEIGHT(11)}} source={Images.grey_line}>
-            <TouchableOpacity onPress={()=>this.popupDialog.show()}>
+            <TouchableOpacity onPress={()=>this.showPropertyModal(true)}>
                 <ImageBackground resizeMode='stretch' style={{alignItems: 'center', justifyContent: 'center', width: Metrics.WIDTH(136), height: Metrics.HEIGHT(101)}} source={Images.green_button}>
                 <Text style={{  fontSize: Fonts.size.h6, color: '#244063', fontFamily: Fonts.type.base,   textAlign: 'center'}}>+</Text>
                 </ImageBackground>
@@ -128,7 +128,19 @@ class LeftSideBar extends Component {
       </View>
     )
   }
-
+  showPropertyModal = (if_add,id) => {
+    console.log('Show_Property_Modal');
+    if(if_add)
+    {
+      console.log({if_add_prop: if_add, attributeName: '', attributeValue: ''})
+      this.setState({if_add_prop: if_add, attributeName: '', attributeValue: ''}, ()=>this.popupDialog.show())
+    }
+    else
+    {
+      console.log({if_add_prop: if_add, propertyIndex: id, attributeName: this.state.properties[id].name, attributeValue: this.state.properties[id].value})
+      this.setState({if_add_prop: if_add, propertyIndex: id, attributeName: this.state.properties[id].name, attributeValue: this.state.properties[id].value}, () => this.popupDialog.show())
+    }
+  }
   _renderDropRow= (rowData, sectionID, rowID, highlightRow)=>
   {
     const flag = Images[`flag_${rowData}`];
@@ -247,11 +259,19 @@ class LeftSideBar extends Component {
 
   addProperty = () => {
     let properties = [...this.state.properties.slice(0)];
-    properties.push({
+    if(this.state.if_add_prop)
+      properties.push({
+          name: this.state.attributeName,
+          value: this.state.attributeValue,
+          chek: this.state.modalCheck ? "1" : "0"
+      })
+    else
+      properties[this.state.propertyIndex] = {
         name: this.state.attributeName,
         value: this.state.attributeValue,
         chek: this.state.modalCheck ? "1" : "0"
-    })
+      }
+
     this.setState({properties}, ()=>{this.popupDialog.dismiss()})
   }
 
