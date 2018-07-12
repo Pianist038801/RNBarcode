@@ -250,7 +250,7 @@ class ProductsUploader extends Component {
           </ImageBackground>
         </TouchableOpacity>
         <TouchableOpacity onPress={()=>this.props.navigation.navigate('RightSideMenu')}>
-          <ImageBackground resizeMode='stretch' source={Images.ear_right} style={styles.ear_left}>
+          <ImageBackground resizeMode='stretch' source={Images.ear_right} style={styles.ear_right}>
             <ImageBackground resizeMode='stretch' source={Images.cog_green} style={styles.cog_icon}>
             </ImageBackground>
           </ImageBackground>
@@ -318,7 +318,7 @@ class ProductsUploader extends Component {
   }
 
   renderProductNames= () =>(
-      <View style={{ height: Metrics.HEIGHT(140), marginTop: Metrics.HEIGHT(-35), marginBottom: Metrics.HEIGHT(10)}}>
+      <View style={{ marginTop: Metrics.HEIGHT(-50), marginBottom: Metrics.HEIGHT(10)}}>
         <ImageBackground resizeMode='stretch' source={Images.button} style={styles.product_name}>
           {
             this.state.showModal?
@@ -327,13 +327,13 @@ class ProductsUploader extends Component {
           </ModalDropdown>
           :null
           }
-          <Text style={[Fonts.style.description, { flex:1, fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
+          <Text style={[Fonts.style.h6, { flex:1, fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
           название товара: 
           </Text>
           <Input
             maxLength={20}
             placeholder={'Product Name'}
-            style={{flex:2, marginLeft: 30}}
+            style={{flex:1, marginLeft: 30}}
             textAlign={'left'}
             value={this.state.productName}
             onChangeText={this.onChangeProductName}
@@ -348,13 +348,13 @@ class ProductsUploader extends Component {
           />
         </ImageBackground>
         <ImageBackground resizeMode='stretch' source={Images.button} style={styles.product_name}>
-          <Text style={[Fonts.style.description, { flex:1, fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
-          баркод:
+        <Text style={[Fonts.style.h6, { flex:1, fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
+            баркод:
           </Text>
           <Input 
             maxLength={20}
             placeholder={'Barcode Number'}
-            style={{flex:2, marginLeft: 30}}
+            style={{flex:1, marginLeft: 30}}
             textAlign={'left'}
             value={this.state.barcodeNumber}
             onChangeText={this.onChangeBarcodeNumber}
@@ -369,13 +369,13 @@ class ProductsUploader extends Component {
           />
         </ImageBackground>
         <ImageBackground resizeMode='stretch' source={Images.button} style={styles.product_name}>
-          <Text style={[Fonts.style.description, { flex:1, fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
+          <Text style={[Fonts.style.h6, { flex:1, fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
           цена основная:
           </Text>
           <Input
             maxLength={20}
             placeholder={'Price'}
-            style={{marginLeft: 30, flex:2}}
+            style={{marginLeft: 30, flex:1}}
             textAlign={'left'}
             value={this.state.price}
             fontSize={Fonts.size.regular}
