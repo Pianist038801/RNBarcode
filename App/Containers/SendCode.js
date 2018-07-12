@@ -140,16 +140,11 @@ class SendCode extends Component {
   }
 
   onLayout = (x, y, width, height) => {
-    console.log('POS=');
+    console.log('IMAGE_VIEW_POS=');
     console.log(x, y, width, height);
-    console.log(Metrics.FROM_WIDTH(y));
+    console.log(Metrics.FROM_HEIGHT(y));
   }
-
-  onLayout1 = (x, y, width, height) => {
-    console.log('TEXT_POS=');
-    console.log(x, y, width, height);
-    console.log(Metrics.FROM_WIDTH(y) - 70);
-  }
+ 
 
   renderTimeBar=()=>{
     return(
@@ -168,10 +163,9 @@ class SendCode extends Component {
   }
 
   onPressSend = () => {
-    console.log('this.timer');
-    console.log(this.timer);
-    this.timer.measureInWindow(this.onLayout);
-    this.text.measureInWindow(this.onLayout1);
+    // console.log('this.timer');
+    // console.log(this.timer);
+    //this.timer.measureInWindow(this.onLayout);
     this.props.verifyPhoneNumber(this.props.lang, this.state.number);
     console.log(this.props.lang, this.state.number)
   }

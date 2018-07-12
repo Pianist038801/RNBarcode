@@ -114,19 +114,17 @@ class Main extends Component {
     this.props.setLang(data);
   }
 
-  renderTimeBar(){
-    return(
-      <ImageBackground resizeMode='stretch' source={Images.bottomBar} style={[styles.bottomMainBar,{position: 'absolute', top: Metrics.HEIGHT(733.7221929762098)}]}>
+  renderTimeBar = ()=>(
+      <ImageBackground resizeMode='stretch' source={Images.bottomBar} style={[styles.bottomMainBar,{position: 'absolute', top: Metrics.HEIGHT(804)}]}>
          <View style={{height: Metrics.HEIGHT(70)}}/>
-          <Text style={[Fonts.style.description, {textAlign: 'center', fontFamily: Fonts.type.emphasis, marginHorizontal: 10, marginBottom: 3 }]}>
-            время
-          </Text>
-          <Text style={[Fonts.style.h6, {textAlign: 'center', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
-            {this.state.curTime}
-          </Text>
+        <Text style={[Fonts.style.description, {textAlign: 'center', fontFamily: Fonts.type.emphasis, marginHorizontal: 10, marginBottom: 3 }]}>
+          время
+        </Text>
+        <Text style={[Fonts.style.h6, {textAlign: 'center', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
+          {this.state.curTime}
+        </Text>
       </ImageBackground>
     )
-  }
 
   uploadProducts = (store_id) => {
     console.log('MAIN_NEW_PROPS')
@@ -197,7 +195,6 @@ class Main extends Component {
     return (
     <SafeAreaView style={styles.whiteContent}>
       <Container>
-        <ScrollView scrollEnabled={false}>
           <View style={{ height: Metrics.screenHeight * 143 / 964 }}>
             {this.renderHeader()}
           </View>
@@ -205,8 +202,7 @@ class Main extends Component {
             {this.renderForm()}
           </View>
           {this.renderMenus()}
-          {this.renderTimeBar()}
-        </ScrollView>
+          {this.renderTimeBar()} 
       </Container>
     </SafeAreaView>
     )

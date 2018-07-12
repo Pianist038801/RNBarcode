@@ -265,13 +265,10 @@ export default StyleSheet.create({
     // bottom: -Metrics.HEIGHT(720),
   },
   bottomMainBar: {
-    position: 'absolute',
-    top: 40,
     width: Metrics.WIDTH(980),
     height: Metrics.HEIGHT(689),
     alignSelf: 'center',
     alignItems: 'center',
-    marginTop: Metrics.HEIGHT(20),
   },
   dog: {
     position: 'absolute',

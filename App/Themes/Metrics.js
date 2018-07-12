@@ -16,7 +16,7 @@ const metrics = {
   horizontalLineHeight: 1,
   screenWidth,
   screenHeight,
-  WIDTH:  x => x * screenWidth / 460, 
+  WIDTH:  x => x * screenWidth / 460,
   HEIGHT:  y => y * screenHeight / 970,
   FROM_WIDTH:  x => x * 460 / screenWidth,
   FROM_HEIGHT:  y => y * 970 / screenHeight,
