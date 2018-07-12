@@ -93,8 +93,8 @@ export default StyleSheet.create({
     height: Metrics.WIDTH(40),
   },
   ear_left: {
-    width: Metrics.WIDTH(74),
-    height: Metrics.HEIGHT(164),
+    width: Metrics.WIDTH(77),
+    height: Metrics.HEIGHT(183),
     alignItems: 'center',
     justifyContent: 'center',
   },
