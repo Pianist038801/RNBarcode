@@ -138,21 +138,40 @@ class SendCode extends Component {
     console.log('Data=', data);
     this.props.setLang(data);
   }
-  renderTimeBar(){
+
+  onLayout = (x, y, width, height) => {
+    console.log('POS=');
+    console.log(x, y, width, height);
+    console.log(Metrics.FROM_WIDTH(y));
+  }
+
+  onLayout1 = (x, y, width, height) => {
+    console.log('TEXT_POS=');
+    console.log(x, y, width, height);
+    console.log(Metrics.FROM_WIDTH(y) - 70);
+  }
+
+  renderTimeBar=()=>{
     return(
-      <ImageBackground resizeMode='stretch' source={Images.bottomBar} style={styles.bottomBar}>
-        <View style={{height: Metrics.HEIGHT(70)}}/>
-        <Text style={[Fonts.style.description, {textAlign: 'center', fontFamily: Fonts.type.emphasis, marginHorizontal: 10, marginBottom: 3 }]}>
-          время
-        </Text>
-        <Text style={[Fonts.style.h6, {textAlign: 'center', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
-          {this.state.curTime}
-        </Text>
-      </ImageBackground>
+      <View ref={t => this.timer = t} renderToHardwareTextureAndroid={true}>
+        <ImageBackground resizeMode='stretch' source={Images.bottomBar} style={styles.bottomBar}>
+          <View style={{height: Metrics.HEIGHT(70)}}/>
+          <Text ref={t => this.text = t} style={[Fonts.style.description, {textAlign: 'center', fontFamily: Fonts.type.emphasis, marginHorizontal: 10, marginBottom: 3 }]}>
+            время
+          </Text>
+          <Text style={[Fonts.style.h6, {textAlign: 'center', fontWeight: 'bold', fontFamily: Fonts.type.emphasis, marginHorizontal: 10 }]}>
+            {this.state.curTime}
+          </Text> 
+        </ImageBackground>
+      </View>
     )
   }
 
   onPressSend = () => {
+    console.log('this.timer');
+    console.log(this.timer);
+    this.timer.measureInWindow(this.onLayout);
+    this.text.measureInWindow(this.onLayout1);
     this.props.verifyPhoneNumber(this.props.lang, this.state.number);
     console.log(this.props.lang, this.state.number)
   }

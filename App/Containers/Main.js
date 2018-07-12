@@ -116,9 +116,8 @@ class Main extends Component {
 
   renderTimeBar(){
     return(
-      <ImageBackground resizeMode='stretch' source={Images.bottomBar} style={styles.bottomMainBar}>
+      <ImageBackground resizeMode='stretch' source={Images.bottomBar} style={[styles.bottomMainBar,{position: 'absolute', top: Metrics.HEIGHT(733.7221929762098)}]}>
          <View style={{height: Metrics.HEIGHT(70)}}/>
-         
           <Text style={[Fonts.style.description, {textAlign: 'center', fontFamily: Fonts.type.emphasis, marginHorizontal: 10, marginBottom: 3 }]}>
             время
           </Text>

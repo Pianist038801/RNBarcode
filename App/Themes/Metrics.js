@@ -18,6 +18,8 @@ const metrics = {
   screenHeight,
   WIDTH:  x => x * screenWidth / 460, 
   HEIGHT:  y => y * screenHeight / 970,
+  FROM_WIDTH:  x => x * 460 / screenWidth,
+  FROM_HEIGHT:  y => y * 970 / screenHeight,
   sideBarWidth: screenWidth * 36 / 46,
   navBarHeight: (Platform.OS === 'ios') ? 64 : 54,
   buttonRadius: 4,

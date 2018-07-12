@@ -265,6 +265,8 @@ export default StyleSheet.create({
     // bottom: -Metrics.HEIGHT(720),
   },
   bottomMainBar: {
+    position: 'absolute',
+    top: 40,
     width: Metrics.WIDTH(980),
     height: Metrics.HEIGHT(689),
     alignSelf: 'center',
@@ -279,8 +281,8 @@ export default StyleSheet.create({
     top: Metrics.HEIGHT(103)
   },
   menuicon: {
-    width: Metrics.WIDTH(56),
-    height: Metrics.HEIGHT(56),
+    width: Metrics.HEIGHT(50),
+    height: Metrics.HEIGHT(50),
     resizeMode: 'stretch',
     marginLeft: Metrics.WIDTH(46),
   },
