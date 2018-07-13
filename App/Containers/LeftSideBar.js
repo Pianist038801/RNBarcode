@@ -117,7 +117,7 @@ class LeftSideBar extends Component {
         
         {properties}
         
-        <ImageBackground resizeMode='stretch' style={{marginTop: Metrics.HEIGHT(20),alignSelf: 'center', alignItems: 'center', justifyContent: 'center', width: Metrics.WIDTH(299), height: Metrics.HEIGHT(11)}} source={Images.grey_line}>
+        <ImageBackground resizeMode='stretch' style={{marginTop: Metrics.HEIGHT(40),alignSelf: 'center', alignItems: 'center', justifyContent: 'center', width: Metrics.WIDTH(299), height: Metrics.HEIGHT(11)}} source={Images.grey_line}>
             <TouchableOpacity onPress={()=>this.showPropertyModal(true)}>
                 <ImageBackground resizeMode='stretch' style={{alignItems: 'center', justifyContent: 'center', width: Metrics.WIDTH(136), height: Metrics.HEIGHT(101)}} source={Images.green_button}>
                 <Text style={{  fontSize: Fonts.size.h6, color: '#244063', fontFamily: Fonts.type.base,   textAlign: 'center'}}>+</Text>

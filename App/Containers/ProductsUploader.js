@@ -261,9 +261,10 @@ class ProductsUploader extends Component {
 
   uploadImage = () => {
     this.props.uploadImage(this.props.product_id, this.state.pic1, this.state.pic2);
+    this.goFurther();
   }
 
-  renderBottomBar() {  
+  renderBottomBar() {
     return ( 
         <ImageBackground resizeMode='stretch' source={Images.big_shop_ellipse} style={styles.bottomProductBar}>
           <TouchableOpacity onPress={this.goBack}>
@@ -277,7 +278,7 @@ class ProductsUploader extends Component {
               <Text style={[Fonts.style.h6, { width: Metrics.WIDTH(200), fontWeight: 'bold', fontFamily: Fonts.type.emphasis }]}>
               добавьте товар {'\n'} в магазин
               </Text>
-              <TouchableOpacity onPress={this.goFurther}>
+              <TouchableOpacity onPress={this.uploadImage}>
                 <ImageBackground resizeMode='stretch' source={Images.arrow_sjop} style={styles.back_btn}/>  
               </TouchableOpacity>
             </ImageBackground>
