@@ -48,7 +48,6 @@ export default StyleSheet.create({
     alignItems: 'center', 
     alignSelf: 'center',
     paddingHorizontal: Metrics.WIDTH(20),
-    
   },
   bottomProductRightBtn: {
     flexDirection: 'row',
@@ -127,13 +126,15 @@ export default StyleSheet.create({
     width: Metrics.WIDTH(330),
     height: Metrics.HEIGHT(60),
     paddingHorizontal: Metrics.WIDTH(20),
-    marginVertical: Metrics.HEIGHT(10),
+    marginVertical: Metrics.HEIGHT(4),
     alignSelf: 'center',
     flex: 1,
   },
   confirm_button: {
-    width: Metrics.WIDTH(258),
-    height: Metrics.HEIGHT(135),
+    width: Metrics.WIDTH(196),
+    height: Metrics.HEIGHT(74),
+    marginTop: Metrics.HEIGHT(20),
+    resizeMode: 'stretch',
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center',

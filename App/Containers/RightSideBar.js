@@ -66,7 +66,7 @@ class RightSideBar extends Component {
  
   renderHeader() {
     return (
-      <View style={{width: Metrics.sideBarWidth,  borderWidth: 2, borderRadius: Metrics.WIDTH(30), padding: Metrics.WIDTH(5), borderColor: '#f77717', height: Metrics.HEIGHT(230)}}>
+      <View style={{width: Metrics.sideBarWidth - Metrics.WIDTH(20),  borderWidth: 2, marginTop: Metrics.HEIGHT(10), borderRadius: Metrics.WIDTH(30), padding: Metrics.WIDTH(5), marginHorizontal: Metrics.WIDTH(10), borderColor: '#f77717', height: Metrics.HEIGHT(230)}}>
         <View style={{height: Metrics.HEIGHT(160), flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',}}>
             <Image source={Images.background} style={{width: Metrics.WIDTH(81), height: Metrics.HEIGHT(141)}} resizeMode='stretch'>
             </Image>
@@ -173,6 +173,9 @@ class RightSideBar extends Component {
       <Container>
         <ScrollView scrollEnabled={false}>
           {this.renderHeader()}
+          <View style={{height: Metrics.HEIGHT(20)}}/>
+          {this.renderInput()}
+          {this.renderInput()}
           {this.renderInput()}
           {this.renderInput()}
           {this.renderInput()}
