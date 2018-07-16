@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import { View, Modal, ImageBackground, Image, SafeAreaView, Text, ScrollView, TouchableOpacity} from 'react-native'
 import { connect } from 'react-redux'
 import { Images, Colors, Metrics, Fonts } from '../Themes'
-import { Container, Content, Form, CheckBox, Item, Input, Spinner, Toast, ListItem, Body } from 'native-base';
+import { Container, Content, Form, Item, Input, Spinner, Toast, ListItem, Body } from 'native-base';
 import AuthActions from '../Redux/AuthRedux'
 import FullButton from '../Components/FullButton'
 import ModalDropdown from 'react-native-modal-dropdown';
 import PopupDialog,  { SlideAnimation, DialogTitle } from 'react-native-popup-dialog';
 import { requestUrl } from '../Config/RequestUrl';
-
+import { CheckBox } from 'react-native-elements'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 
@@ -20,8 +20,7 @@ type LoginScreenProps = {
   fetching: boolean,
   attemptLogin: () => void,
   passcode: number,
-  error: string,
-  
+  error: string
 }
 
 class LeftSideBar extends Component {
@@ -42,7 +41,7 @@ class LeftSideBar extends Component {
 
   isAttempting: boolean
 
-  constructor (props: LoginScreenProps) { 
+  constructor (props: LoginScreenProps) {
 
     super(props)
     console.log('uhaha');
@@ -323,10 +322,26 @@ class LeftSideBar extends Component {
               />
             </ImageBackground> 
             <View style={{flexDirection: 'row', marginTop: Metrics.HEIGHT(20), alignItems: 'center', justifyContent: 'center'}}>
-              <CheckBox checked={this.state.modalCheck} color='#f77717' onPress={()=>this.setState({modalCheck: !this.state.modalCheck})}/>
-              <Text style={{ marginLeft: Metrics.WIDTH(20), fontSize: Fonts.size.h6, color: '#244063', fontFamily: Fonts.type.base}}>
+              <CheckBox 
+                checkedIcon='dot-circle-o'
+                uncheckedIcon='circle-o'
+                checked={this.state.modalCheck}
+                checkedColor='#f77717'
+                uncheckedColor='#f77717'
+                title='атрибут для сравнения'
+                containerStyle={{
+                  borderWidth: 0,
+                  borderRadius: 0,
+                  backgroundColor: '#fafafa',
+                  borderColor: '#ededed',
+                  backgroundColor: 'transparent',
+                  margin: 0,
+                  padding: 0,
+                }}
+                onPress={()=>this.setState({modalCheck: !this.state.modalCheck})}/>
+              {/* <Text style={{ marginLeft: Metrics.WIDTH(20), fontSize: Fonts.size.h6, color: '#244063', fontFamily: Fonts.type.base}}>
                 атрибут для сравнения
-              </Text> 
+              </Text>  */}
             </View>
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}}>
               <TouchableOpacity onPress={this.addProperty}>

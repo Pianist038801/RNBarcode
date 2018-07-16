@@ -140,7 +140,7 @@ export default StyleSheet.create({
   },
   modal_button: {
     width: Metrics.WIDTH(179),
-    height: Metrics.HEIGHT(79),
+    height: Metrics.HEIGHT(89),
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center',
